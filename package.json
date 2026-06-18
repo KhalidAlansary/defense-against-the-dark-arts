@@ -1,5 +1,4 @@
 {
-
   "name": "defense-against-the-dark-arts",
   "type": "module",
   "private": true,
@@ -18,5 +17,3 @@
     "@biomejs/biome": "2.5.0"
   }
 }
-
-
