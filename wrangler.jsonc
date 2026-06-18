@@ -1,0 +1,12 @@
+{
+	"$schema": "https://unpkg.com/wrangler@4.101.0/config-schema.json",
+	"name": "defense-against-the-dark-arts",
+	"compatibility_date": "2026-01-22",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "single-page-application"
+	},
+	"observability": {
+		"enabled": true
+	}
+}
