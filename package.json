@@ -7,10 +7,8 @@
     "dev": "slidev --open",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "export": "slidev export",
-    "deploy": "rm -f dist/_redirects && wrangler deploy"
+    "export": "slidev export"
   },
-  "packageManager": "pnpm@11.8.0",
   "dependencies": {
     "@slidev/cli": "^52.16.0",
     "@slidev/theme-default": "latest",
@@ -21,5 +19,6 @@
     "oxfmt": "^0.55.0",
     "playwright-chromium": "^1.61.0",
     "wrangler": "^4.102.0"
-  }
+  },
+  "packageManager": "pnpm@11.8.0"
 }
