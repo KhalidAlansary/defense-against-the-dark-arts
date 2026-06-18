@@ -8,3 +8,7 @@ allowBuilds:
   playwright-chromium: true
   sharp: false
   workerd: false
+
+minimumReleaseAgeExclude:
+  - miniflare@4.20260617.0
+  - wrangler@4.102.0
