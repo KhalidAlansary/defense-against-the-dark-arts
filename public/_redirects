@@ -1,0 +1,4 @@
+# SPA fallback is handled by Cloudflare Workers via
+# not_found_handling: "single-page-application" in wrangler.jsonc.
+# This file exists to suppress Slidev's auto-generated `/* /index.html 200`
+# rule, which fails Cloudflare's loop validation (code 100324).
