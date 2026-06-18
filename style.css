@@ -1,0 +1,115 @@
+/*
+ * Zenith brand theming for the Slidev deck.
+ * Mirrors apps/web/src/app/globals.css — coral-edge accent on quantum-black.
+ */
+
+:root {
+  /* Zenith brand palette */
+  --quantum-black: #0c0c0c;
+  --coral-edge: #f9996c;
+  --watusi: #ffd8cc;
+  --hit-pink: #fbae8c;
+  --wax-flower: #fdc3ac;
+  --aurora-teal: #95b9ba;
+  --deep-signal-blue: #799bb2;
+  --soft-tech-violet: #ac97bf;
+
+  /* Slidev theme hooks */
+  --slidev-theme-primary: #f9996c;
+}
+
+/* Dark-mode background = the brand's subtle coral-into-black gradient */
+html.dark .slidev-layout,
+.slidev-layout {
+  background: linear-gradient(43.07deg, #1a100c 0%, #120c0a 18%, #0c0c0c 40%, #0c0c0c 100%);
+  color: #ffffff;
+}
+
+/* Section / statement / center layouts: keep the same dark canvas */
+.slidev-layout.section,
+.slidev-layout.statement,
+.slidev-layout.center,
+.slidev-layout.cover,
+.slidev-layout.end,
+.slidev-layout.intro {
+  background: linear-gradient(43.07deg, #1a100c 0%, #120c0a 18%, #0c0c0c 40%, #0c0c0c 100%);
+}
+
+/* Force geometric sans on headings (seriph defaults them to serif) so the
+   deck reads like the Zenith product, not a journal. */
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout h4 {
+  font-family: var(--slidev-theme-fonts-sans, "Space Grotesk", system-ui, sans-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Accent the primary h1 with the coral edge, like the brand's headings */
+.slidev-layout h1 {
+  color: #ffffff;
+}
+.slidev-layout h1 + p {
+  color: var(--coral-edge);
+  opacity: 0.95;
+}
+
+/* Coral underline accent under section headings */
+.slidev-layout.section h1 {
+  color: var(--coral-edge);
+}
+
+/* Links + inline accents */
+.slidev-layout a {
+  color: var(--coral-edge);
+  text-decoration-color: rgba(249, 153, 108, 0.4);
+}
+
+/* Tables: warm borders + coral header, matching tara-report styling */
+.slidev-layout table {
+  font-size: 0.95em;
+}
+.slidev-layout th {
+  color: var(--watusi);
+  border-bottom: 1px solid rgba(249, 153, 108, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8em;
+}
+.slidev-layout td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.slidev-layout tr:last-child td {
+  border-bottom: none;
+}
+
+/* Strong text in result tables picks up the coral accent */
+.slidev-layout td strong {
+  color: var(--coral-edge);
+}
+
+/* Inline code + code blocks: warm-tinted surface */
+.slidev-layout :not(pre) > code {
+  color: var(--wax-flower);
+  background: rgba(249, 153, 108, 0.1);
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+}
+
+/* Blockquote / callout bars already use the coral util class in slides.md;
+   nudge the default blockquote toward the brand too. */
+.slidev-layout blockquote {
+  border-left-color: var(--coral-edge);
+}
+
+/* Code block rounding to match brand radius (0.625rem) */
+.slidev-layout pre {
+  border-radius: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Slide progress / accent bar */
+#slidev-page-root .slidev-page {
+  --slidev-theme-primary: #f9996c;
+}

@@ -1,662 +1,693 @@
 ---
-# try also 'default' to start simple
+# Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: 'Thesis Title Goes Here: A Concise, Descriptive Subtitle'
+titleTemplate: '%s — Thesis Defense'
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
+  ## Thesis Defense
+  Doctoral / Master's thesis defense presentation.
 
-  Learn more at [Sli.dev](https://sli.dev)
-# apply UnoCSS classes to the current slide
+  Built with [Slidev](https://sli.dev).
+author: Your Name
+keywords: thesis,defense,research
+# Apply unocss classes to the current slide
 class: text-center
 # https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
+# slide transition: https://sli.dev/guide/animations#slide-transitions
 transition: slide-left
-# enable Comark Syntax: https://comark.dev/syntax/markdown
-comark: true
-# duration of the presentation
-duration: 35min
+# enable MDC Syntax: https://sli.dev/features/mdc
+mdc: true
+# Show line numbers in code blocks
+lineNumbers: false
+# Match the Zenith brand: dark (quantum-black) by default
+colorSchema: dark
+# Zenith uses a geometric grotesque (New Science); Space Grotesk is the closest
+# freely-available analog. Headings forced to sans in style.css.
+fonts:
+  sans: Space Grotesk
+  serif: Space Grotesk
+  mono: Fira Code
+# Aspect ratio of the slides
+aspectRatio: 16/9
+# Enable presenter mode notes
+download: true
+exportFilename: thesis-defense
+hideInToc: false
 ---
 
-# Welcome to Slidev
+# Thesis Title Goes Here
 
-Presentation slides for developers
+A Concise, Descriptive Subtitle
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-  Press Space for next page <carbon:arrow-right />
+<div class="pt-12">
+  <span class="text-xl">
+    <b>Your Name</b>
+  </span>
 </div>
 
-<div class="abs-br m-6 text-xl">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="slidev-icon-btn">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
+<div class="abs-bl m-6 text-sm opacity-70 text-left">
+  <div>Advisor: Prof. Advisor Name</div>
+  <div>Committee: Dr. A, Dr. B, Dr. C</div>
+  <div>Department · University · {{ new Date().getFullYear() }}</div>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <a href="https://github.com/yourname" target="_blank" class="slidev-icon-btn">
     <carbon:logo-github />
   </a>
 </div>
 
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+Presenter notes:
+- Welcome the committee and audience.
+- Thank advisor and committee for their time.
+- State your name and the title clearly.
+- ~30 seconds. Take a breath before the next slide.
 -->
 
 ---
 transition: fade-out
+layout: default
 ---
 
-# What is Slidev?
+# Outline
 
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - themes can be shared and re-used as npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embed Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export to PDF, PPTX, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - virtually anything that's possible on a webpage is possible in Slidev
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
+<Toc minDepth="1" maxDepth="1" columns="2" />
 
 <!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/features/slide-scope-style
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
+Roadmap of the talk. Keep it brief — point to the major sections.
+Tell them roughly how long you'll spend and when you'll take questions.
 -->
 
 ---
-transition: slide-up
-level: 2
+layout: section
 ---
 
-# Navigation
+# 1. Motivation & Problem
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
+The gap this thesis addresses
 
-## Keyboard Shortcuts
+---
+layout: default
+---
 
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
+# Motivation
 
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+<v-clicks>
+
+- **The big picture.** Why does this domain matter? One sentence of context.
+- **The pain point.** What problem do practitioners / researchers face today?
+- **Why now.** What makes this problem tractable or urgent at this moment?
+
+</v-clicks>
+
+<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
+
+> A short, memorable framing of the problem the audience should carry through the whole talk.
+
+</div>
+
+<!--
+Spend real time here. The committee needs to feel the problem before they
+care about the solution. Use a concrete example or anecdote if you have one.
+-->
 
 ---
 layout: two-cols
-layoutClass: gap-16
+layoutClass: gap-8
 ---
 
-# Table of contents
+# The Gap
 
-You can use the `Toc` component to generate a table of contents for your slides:
+<v-clicks>
 
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
+**What exists today**
 
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
+- Prior approach A — and its limitation
+- Prior approach B — and its limitation
+- Prior approach C — and its limitation
+
+</v-clicks>
 
 ::right::
 
-<Toc text-sm minDepth="1" maxDepth="2" />
+<div class="mt-14" />
 
----
-layout: image-right
-image: https://cover.sli.dev
----
+<v-clicks>
 
-# Code
+**What's missing**
 
-Use code snippets and get the highlighting directly, and even types hover!
+- The unsolved sub-problem
+- The unmet requirement
+- The unexplored regime
 
-```ts [filename-example.ts] {all|4|6|6-7|9|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-import { computed, ref } from 'vue'
+</v-clicks>
 
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="342" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>`, `<BlueSky/>`, and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
+<div v-click class="mt-6 text-[#f9996c] font-semibold">
+→ This thesis closes that gap.
 </div>
-<div>
 
-```html
-<Tweet id="1390115482657726468" />
-```
+---
+layout: default
+---
 
-<Tweet id="1390115482657726468" scale="0.65" />
+# Research Questions
 
+<div class="grid grid-cols-1 gap-4 mt-6">
+
+<div v-click class="p-4 rounded-lg bg-gray-400/10 flex gap-4 items-start">
+  <div class="text-3xl font-bold text-[#f9996c]">RQ1</div>
+  <div>
+    <div class="font-semibold">First research question</div>
+    <div class="opacity-70 text-sm">A one-line elaboration of what you investigate.</div>
+  </div>
 </div>
+
+<div v-click class="p-4 rounded-lg bg-gray-400/10 flex gap-4 items-start">
+  <div class="text-3xl font-bold text-[#f9996c]">RQ2</div>
+  <div>
+    <div class="font-semibold">Second research question</div>
+    <div class="opacity-70 text-sm">A one-line elaboration of what you investigate.</div>
+  </div>
+</div>
+
+<div v-click class="p-4 rounded-lg bg-gray-400/10 flex gap-4 items-start">
+  <div class="text-3xl font-bold text-[#f9996c]">RQ3</div>
+  <div>
+    <div class="font-semibold">Third research question</div>
+    <div class="opacity-70 text-sm">A one-line elaboration of what you investigate.</div>
+  </div>
+</div>
+
 </div>
 
 <!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
+Keep RQs to 2-4. Each should map to a contribution and (ideally) a chapter.
+Point at these again in the conclusion to show you answered them.
 -->
 
 ---
-class: px-20
+layout: statement
 ---
 
-# Themes
+# Thesis Statement
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
+<div class="text-2xl leading-relaxed max-w-3xl mx-auto opacity-90">
+State, in one or two sentences, the central claim your thesis defends.
+This is the single thing the committee should remember.
 </div>
 
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
+---
+layout: section
 ---
 
-# Clicks Animations
+# 2. Background & Related Work
 
-You can add `v-click` to elements to add a click animation.
+Standing on the shoulders of giants
+
+---
+layout: default
+---
+
+# Background
+
+Key concepts the rest of the talk depends on.
+
+<div class="grid grid-cols-2 gap-6 mt-6">
 
 <div v-click>
 
-This shows up when you press <kbd>space</kbd> or <kbd>right</kbd>, or click outside the slide on the right.
+### Concept A
+A compact definition. Add a small diagram or equation if it clarifies.
 
-```html
-<div v-click>This shows up when you trigger a click animation.</div>
+$$ f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\, e^{2\pi i x \xi} \, d\xi $$
+
+</div>
+
+<div v-click>
+
+### Concept B
+A compact definition. Tie it back to the problem you introduced.
+
+</div>
+
+</div>
+
+<!--
+Only include background the audience needs to follow YOUR contribution.
+Resist the urge to teach the whole field.
+-->
+
+---
+layout: default
+---
+
+# Related Work
+
+| Approach | Year | Strength | Limitation |
+|----------|------|----------|------------|
+| Method A | 20XX | …        | …          |
+| Method B | 20XX | …        | …          |
+| Method C | 20XX | …        | …          |
+| **This thesis** | **20XX** | **…** | **—** |
+
+<div v-click class="mt-6 opacity-80">
+Position your work against the closest competitors. The last row is you.
+</div>
+
+---
+layout: section
+---
+
+# 3. Approach & Methods
+
+How the problem is solved
+
+---
+layout: two-cols
+layoutClass: gap-4
+---
+
+# Overview of Approach
+
+<v-clicks>
+
+- **Step 1** — what goes in
+- **Step 2** — the core mechanism
+- **Step 3** — what comes out
+
+</v-clicks>
+
+<div v-click class="mt-4 text-sm opacity-70">
+The narrative thread: input → transformation → result.
+</div>
+
+::right::
+
+```mermaid {scale: 0.7}
+flowchart TD
+  A[Input Data] --> B[Preprocessing]
+  B --> C{Core Method}
+  C --> D[Output]
+  C --> E[Evaluation]
+  E --> F[Results]
+  style C fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+```
+
+<!--
+Walk the diagram left-to-right / top-to-bottom. This is the spine of your
+contribution — make sure every box is something you can defend in depth.
+-->
+
+---
+layout: default
+---
+
+# Method: The Core Idea
+
+<div class="grid grid-cols-5 gap-6">
+
+<div class="col-span-3">
+
+The key technical contribution, explained at the level your committee expects.
+
+```python
+def core_method(x, theta):
+    """The essential algorithm in a few readable lines."""
+    z = encode(x)
+    for _ in range(theta.iterations):
+        z = refine(z, theta)
+    return decode(z)
 ```
 
 </div>
 
-<p v-click>
-You can also add modifiers to change the animation:
-</p>
+<div class="col-span-2">
 
-<div class="grid gap-3 mt-4 text-sm" style="grid-template-columns: repeat(3, 1fr) 1.5fr 1fr">
-  <div v-after.up class="p-3 rounded border border-primary/20 bg-primary/10">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.up</div>
-    <div>Slide from bottom</div>
-  </div>
-  <div v-click.fade-in class="p-3 rounded border border-primary/30 bg-primary/15">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.fade-in</div>
-    <div>Fade in</div>
-  </div>
-  <div v-click.fade class="p-3 rounded border border-primary/40 bg-primary/20">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.fade</div>
-    <div>Dim (0.5 opacity)</div>
-  </div>
-  <div v-click.fade.right.scale class="p-3 rounded border border-primary/50 bg-primary/25">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.fade.right.scale</div>
-    <div>Composed</div>
-  </div>
-  <div v-click.none class="p-3 rounded border border-primary/60 bg-primary/30">
-    <div class="font-mono text-xs opacity-60 mb-1">v-click.none</div>
-    <div>No transition</div>
-  </div>
+<v-clicks>
+
+**Why it works**
+
+- Property 1
+- Property 2
+- Property 3
+
+</v-clicks>
+
 </div>
-
-<v-click>
-
-The <span v-mark.red="7"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="8">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div v-click mt-12>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
 
 </div>
 
 ---
-
-# Motions
-
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
-
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
+layout: default
 ---
 
-# $\LaTeX$
+# Formalization
 
-$\LaTeX$ is supported out-of-box. Powered by [$\KaTeX$](https://katex.org/).
+The problem, stated precisely:
 
-<div h-3 />
+<div class="my-6">
 
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
+$$
+\min_{\theta \in \Theta} \; \mathbb{E}_{(x,y)\sim\mathcal{D}}
+\big[\, \mathcal{L}(f_\theta(x),\, y) \,\big]
+\;+\; \lambda\, \mathcal{R}(\theta)
 $$
 
-[Learn more](https://sli.dev/features/latex)
+</div>
+
+<v-clicks>
+
+- $\mathcal{L}$ — the loss capturing the task objective
+- $\mathcal{R}$ — the regularizer encoding our prior / constraint
+- $\lambda$ — controls the trade-off (ablated in §4)
+
+</v-clicks>
+
+<!--
+If your committee is theory-leaning, be ready to derive or justify each term.
+Know your assumptions cold — that's where the hard questions come from.
+-->
 
 ---
+layout: section
+---
 
-# Diagrams
+# 4. Experiments & Results
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
+Evidence for the claims
 
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
+---
+layout: default
+---
 
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
+# Experimental Setup
 
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
+<div class="grid grid-cols-3 gap-4 mt-4">
 
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
+<div class="p-4 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold mb-2">Datasets</div>
+  <ul class="text-sm opacity-80 list-disc list-inside">
+    <li>Dataset A (N=…)</li>
+    <li>Dataset B (N=…)</li>
+  </ul>
+</div>
 
-```plantuml {scale: 0.7}
-@startuml
+<div class="p-4 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold mb-2">Baselines</div>
+  <ul class="text-sm opacity-80 list-disc list-inside">
+    <li>Baseline 1</li>
+    <li>Baseline 2</li>
+    <li>Ours</li>
+  </ul>
+</div>
 
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
+<div class="p-4 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold mb-2">Metrics</div>
+  <ul class="text-sm opacity-80 list-disc list-inside">
+    <li>Metric X</li>
+    <li>Metric Y</li>
+  </ul>
+</div>
 
 </div>
 
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
+<div v-click class="mt-6 text-sm opacity-70">
+State hardware, hyperparameters, and that results are averaged over N seeds (±std).
+Reproducibility matters — mention your code / data release.
+</div>
 
 ---
-foo: bar
-dragPos:
-  square: 691,32,167,_,-16
+layout: default
 ---
 
-# Draggable Elements
+# Main Result
 
-Double-click on the draggable elements to edit their positions.
+<div class="grid grid-cols-2 gap-8 items-center">
 
-<br>
+<div>
 
-###### Directive Usage
+| Method | Metric X ↑ | Metric Y ↓ |
+|--------|:----------:|:----------:|
+| Baseline 1 | 0.71 | 0.42 |
+| Baseline 2 | 0.78 | 0.35 |
+| **Ours** | **0.86** | **0.21** |
 
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
+<div v-click class="mt-4 text-[#f9996c] font-semibold">
++8 points over the strongest baseline.
+</div>
+
+</div>
+
+<div v-click>
+
+```mermaid {scale: 0.6}
+xychart-beta
+  title "Performance vs. Baselines"
+  x-axis [B1, B2, Ours]
+  y-axis "Metric X" 0 --> 1
+  bar [0.71, 0.78, 0.86]
 ```
 
-<br>
+<div class="text-xs opacity-60 text-center mt-2">
+Replace with your real figure in <code>public/images/</code>.
+</div>
 
-###### Component Usage
+</div>
 
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
+</div>
 
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
+<!--
+This is THE slide. Lead with the headline number. Be ready to explain the
+metric, why the gain is significant (statistically and practically), and the
+single most likely objection to it.
+-->
 
 ---
-src: ./pages/imported-slides.md
-hide: false
+layout: image-right
+image: /images/placeholder-figure.svg
+backgroundSize: contain
 ---
 
+# Qualitative Results
+
+<v-clicks>
+
+- What the figure on the right shows
+- The pattern the committee should notice
+- How it corroborates the quantitative result
+
+</v-clicks>
+
+<div v-click class="mt-6 text-sm opacity-70">
+Drop a real figure at <code>public/images/placeholder-figure.svg</code>
+(or change the <code>image:</code> path in this slide's frontmatter).
+</div>
+
+---
+layout: default
 ---
 
-# Monaco Editor
+# Ablation Study
 
-Slidev provides built-in Monaco Editor support.
+Which components actually matter?
 
-Add `{monaco}` to the code block to turn it into an editor:
+| Variant | Metric X ↑ | Δ |
+|---------|:----------:|:---:|
+| Full model | **0.86** | — |
+| − Component A | 0.80 | −0.06 |
+| − Component B | 0.74 | −0.12 |
+| − Both | 0.69 | −0.17 |
 
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
+<div v-click class="mt-6 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
+Component B contributes most. Each piece earns its place — no dead weight.
+</div>
 
-const arr = ref(emptyArray(10))
-```
+<!--
+Ablations are where you prove your design choices were deliberate, not lucky.
+Expect "what if you removed X" — you've already answered it here.
+-->
 
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
+---
+layout: section
+---
 
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
+# 5. Discussion
 
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
+What it means, and where it breaks
+
+---
+layout: two-cols
+layoutClass: gap-8
+---
+
+# Limitations
+
+<v-clicks>
+
+- **Scope.** Where the method does *not* apply.
+- **Assumptions.** What must hold for results to transfer.
+- **Cost.** Compute / data / time trade-offs.
+
+</v-clicks>
+
+::right::
+
+<div class="mt-14" />
+
+# Threats to Validity
+
+<v-clicks>
+
+- **Internal** — confounds you controlled for
+- **External** — generalization beyond your datasets
+- **Construct** — do your metrics measure what you claim?
+
+</v-clicks>
+
+<!--
+Naming limitations first DISARMS the committee. If you raise it, it's a
+strength; if they raise it, it's a weakness. Own them confidently.
+-->
+
+---
+layout: default
+---
+
+# Contributions
+
+Mapping back to the research questions.
+
+<div class="grid grid-cols-1 gap-3 mt-4">
+
+<div v-click class="flex gap-4 items-center p-3 rounded-lg bg-gray-400/10">
+  <carbon:checkmark-filled class="text-[#f9996c] text-2xl shrink-0" />
+  <div><b>C1 (→ RQ1):</b> The first concrete contribution and its evidence.</div>
+</div>
+
+<div v-click class="flex gap-4 items-center p-3 rounded-lg bg-gray-400/10">
+  <carbon:checkmark-filled class="text-[#f9996c] text-2xl shrink-0" />
+  <div><b>C2 (→ RQ2):</b> The second concrete contribution and its evidence.</div>
+</div>
+
+<div v-click class="flex gap-4 items-center p-3 rounded-lg bg-gray-400/10">
+  <carbon:checkmark-filled class="text-[#f9996c] text-2xl shrink-0" />
+  <div><b>C3 (→ RQ3):</b> The third concrete contribution and its evidence.</div>
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Future Work
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+
+<div v-click class="p-4 rounded-lg border border-gray-400/30">
+  <div class="font-semibold text-[#f9996c]">Short term</div>
+  <p class="text-sm opacity-80 mt-2">Immediate extensions / low-hanging fruit.</p>
+</div>
+
+<div v-click class="p-4 rounded-lg border border-gray-400/30">
+  <div class="font-semibold text-[#f9996c]">Long term</div>
+  <p class="text-sm opacity-80 mt-2">The ambitious direction this opens up.</p>
+</div>
+
+</div>
 
 ---
 layout: center
 class: text-center
 ---
 
-# Learn More
+# Conclusion
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+<div class="max-w-2xl mx-auto mt-6 text-left">
 
-<PoweredBySlidev mt-10 />
+<v-clicks>
+
+- **Problem:** the gap we set out to close
+- **Approach:** the core idea, in one line
+- **Result:** the headline finding
+- **Impact:** why it matters beyond this thesis
+
+</v-clicks>
+
+</div>
+
+<div v-click class="mt-10 text-xl text-[#f9996c] font-semibold">
+The thesis statement holds. ✓
+</div>
+
+<!--
+Land the plane. Restate the thesis statement and confirm you've supported it.
+End cleanly — don't trail off. A confident final sentence sets the Q&A tone.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# Thank You
+
+Questions & Discussion
+
+<div class="pt-8 opacity-70 text-sm">
+  <div>Your Name · your.email@university.edu</div>
+  <div>Slides, code & data: github.com/yourname/thesis</div>
+</div>
+
+<!--
+Pause. Smile. Take questions one at a time. It's fine to say
+"that's a great question, let me think" — and to use the backup slides.
+-->
+
+---
+layout: section
+---
+
+# Backup Slides
+
+Anticipated questions
+
+---
+layout: default
+hideInToc: true
+---
+
+# Backup: Anticipated Question 1
+
+Prepare full answers to the questions you *know* are coming — extra derivations,
+larger result tables, additional baselines, hyperparameter sensitivity, etc.
+
+```text
+Keep one backup slide per likely question. Jump here directly with the
+slide-overview (press `o`) or by typing the slide number during Q&A.
+```
+
+---
+layout: default
+hideInToc: true
+---
+
+# Backup: Additional Results
+
+| Setting | Metric X | Metric Y | Notes |
+|---------|:--------:|:--------:|-------|
+| Config 1 | … | … | … |
+| Config 2 | … | … | … |
+| Config 3 | … | … | … |
+
+<div class="mt-6 opacity-70 text-sm">
+Detailed numbers you'd cite if pressed, but that don't belong in the main flow.
+</div>
+
+---
+layout: end
+hideInToc: true
+---
