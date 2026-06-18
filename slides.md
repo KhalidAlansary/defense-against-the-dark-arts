@@ -46,6 +46,7 @@ A Concise, Descriptive Subtitle
 </div>
 
 <div class="abs-bl m-6 text-sm opacity-70 text-left">
+  <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
   <div>Cairo Motive · {{ new Date().getFullYear() }}</div>
 </div>
 
