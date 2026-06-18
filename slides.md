@@ -1,8 +1,8 @@
 ---
 # Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
-title: 'Project Title Goes Here: A Concise Subtitle'
-titleTemplate: '%s — Cairo Motive'
+title: "Project Title Goes Here: A Concise Subtitle"
+titleTemplate: "%s — Cairo Motive"
 info: |
   ## Project Presentation
   Architecture rework & new features overview.
@@ -58,8 +58,10 @@ Presenter notes:
 -->
 
 ---
+
 transition: fade-out
 layout: default
+
 ---
 
 # Outline
@@ -71,31 +73,29 @@ Roadmap of the talk. Point to the major sections and roughly how long each takes
 -->
 
 ---
-layout: section
----
+
+## layout: section
 
 # 1. Team Members
 
 The people behind the work
 
 ---
-layout: default
----
+
+## layout: default
 
 # The Team
 
 <div class="max-w-xl mx-auto mt-10">
 
-
-
-| Name | ID |
-|------|----|
-| Farah Abdelrahman Kamalo| 2000901 |
-| Khalid Ayman Alansary   | 2100259 |
-| Maryam Yasser Mohammed | 2100730 |
-| Mohamed Ashraf Mohamed  | 2100514 |
+| Name                     | ID      |
+| ------------------------ | ------- |
+| Farah Abdelrahman Kamalo | 2000901 |
+| Khalid Ayman Alansary    | 2100259 |
+| Maryam Yasser Mohammed   | 2100730 |
+| Mohamed Ashraf Mohamed   | 2100514 |
 | Omar Abdelgaber Elsayed  | 2101048 |
-| Salma Hamed Shaaban   | 2100636 |
+| Salma Hamed Shaaban      | 2100636 |
 
 </div>
 
@@ -105,16 +105,16 @@ who to direct questions to.
 -->
 
 ---
-layout: section
----
+
+## layout: section
 
 # 2. Intro
 
 What this project is, and why it matters
 
 ---
-layout: default
----
+
+## layout: default
 
 # Introduction
 
@@ -137,16 +137,16 @@ Set context before diving into specifics. Keep it tight — the detail comes lat
 -->
 
 ---
-layout: section
----
+
+## layout: section
 
 # 3. Architecture Rework
 
 What changed under the hood, and why
 
 ---
-layout: default
----
+
+## layout: default
 
 # Architecture Rework — Overview
 
@@ -172,8 +172,8 @@ Frame the rework as a whole before drilling into each piece.
 -->
 
 ---
-layout: default
----
+
+## layout: default
 
 # Architecture · 3.1 — First Change
 
@@ -211,8 +211,8 @@ Speaker notes for the first architectural change.
 -->
 
 ---
-layout: default
----
+
+## layout: default
 
 # Architecture · 3.2 — Second Change
 
@@ -250,8 +250,8 @@ Speaker notes for the second architectural change.
 -->
 
 ---
-layout: default
----
+
+## layout: default
 
 # Architecture · 3.3 — Third Change
 
@@ -289,16 +289,16 @@ Speaker notes for the third architectural change.
 -->
 
 ---
-layout: section
----
+
+## layout: section
 
 # 4. New Features
 
 What we shipped, and what it unlocks
 
 ---
-layout: default
----
+
+## layout: default
 
 # New Features — Overview
 
@@ -319,8 +319,10 @@ Connect the features to the architecture rework: the rework is what made them po
 -->
 
 ---
+
 layout: two-cols
 layoutClass: gap-8
+
 ---
 
 # Feature · 4.1 — First Feature
@@ -354,8 +356,10 @@ Demo hook: if there's a live demo for this feature, this is where to run it.
 -->
 
 ---
+
 layout: two-cols
 layoutClass: gap-8
+
 ---
 
 # Feature · 4.2 — Second Feature
@@ -389,8 +393,10 @@ Demo hook for the second feature.
 -->
 
 ---
+
 layout: two-cols
 layoutClass: gap-8
+
 ---
 
 # Feature · 4.3 — Third Feature
@@ -424,8 +430,10 @@ Demo hook for the third feature.
 -->
 
 ---
+
 layout: center
 class: text-center
+
 ---
 
 # Wrap-up
@@ -448,8 +456,10 @@ Land the plane. Recap the through-line: rework enabled the features.
 -->
 
 ---
+
 layout: center
 class: text-center
+
 ---
 
 # Thank You
@@ -465,6 +475,8 @@ Pause. Take questions one at a time.
 -->
 
 ---
+
 layout: end
 hideInToc: true
+
 ---
