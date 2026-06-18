@@ -1,11 +1,12 @@
 {
   "name": "defense-against-the-dark-arts",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "format": "prettier . --write",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "export": "slidev export",
     "deploy": "rm -f dist/_redirects && wrangler deploy"
   },
@@ -16,8 +17,8 @@
     "vue": "^3.5.38"
   },
   "devDependencies": {
+    "oxfmt": "^0.55.0",
     "playwright-chromium": "^1.61.0",
-    "prettier": "3.8.4",
     "wrangler": "^4.102.0"
   }
 }
