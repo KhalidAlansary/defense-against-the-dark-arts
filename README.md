@@ -9,6 +9,7 @@ To start the slide show:
 Edit the [slides.md](./slides.md) to see the changes.
 
 Learn more about Slidev at the [documentation](https://sli.dev/).
+
 # Thesis Defense — Slidev Template
 
 A clean, presentation-ready [Slidev](https://sli.dev) template for a Master's or
@@ -51,15 +52,15 @@ The template walks the canonical defense arc — replace the placeholder text:
 
 ## Presenting
 
-| Key | Action |
-|-----|--------|
-| `→` / `Space` | next click / slide |
-| `←` | previous |
-| `o` | slide overview (jump anywhere) |
-| `p` | presenter mode (speaker notes + timer) |
-| `d` | toggle dark mode |
-| `g` | go to slide number |
-| `f` | fullscreen |
+| Key           | Action                                 |
+| ------------- | -------------------------------------- |
+| `→` / `Space` | next click / slide                     |
+| `←`           | previous                               |
+| `o`           | slide overview (jump anywhere)         |
+| `p`           | presenter mode (speaker notes + timer) |
+| `d`           | toggle dark mode                       |
+| `g`           | go to slide number                     |
+| `f`           | fullscreen                             |
 
 Speaker notes live in `<!-- ... -->` blocks after each slide and show in
 presenter mode (`p`).

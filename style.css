@@ -21,7 +21,13 @@
 /* Dark-mode background = the brand's subtle coral-into-black gradient */
 html.dark .slidev-layout,
 .slidev-layout {
-  background: linear-gradient(43.07deg, #1a100c 0%, #120c0a 18%, #0c0c0c 40%, #0c0c0c 100%);
+  background: linear-gradient(
+    43.07deg,
+    #1a100c 0%,
+    #120c0a 18%,
+    #0c0c0c 40%,
+    #0c0c0c 100%
+  );
   color: #ffffff;
 }
 
@@ -32,7 +38,13 @@ html.dark .slidev-layout,
 .slidev-layout.cover,
 .slidev-layout.end,
 .slidev-layout.intro {
-  background: linear-gradient(43.07deg, #1a100c 0%, #120c0a 18%, #0c0c0c 40%, #0c0c0c 100%);
+  background: linear-gradient(
+    43.07deg,
+    #1a100c 0%,
+    #120c0a 18%,
+    #0c0c0c 40%,
+    #0c0c0c 100%
+  );
 }
 
 /* Force geometric sans on headings (seriph defaults them to serif) so the
@@ -41,7 +53,12 @@ html.dark .slidev-layout,
 .slidev-layout h2,
 .slidev-layout h3,
 .slidev-layout h4 {
-  font-family: var(--slidev-theme-fonts-sans, "Space Grotesk", system-ui, sans-serif);
+  font-family: var(
+    --slidev-theme-fonts-sans,
+    "Space Grotesk",
+    system-ui,
+    sans-serif
+  );
   font-weight: 600;
   letter-spacing: -0.01em;
 }
