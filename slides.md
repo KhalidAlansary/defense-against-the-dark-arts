@@ -83,43 +83,18 @@ layout: default
 
 # The Team
 
-<div class="grid grid-cols-3 gap-4 mt-8">
+<div class="max-w-xl mx-auto mt-10">
 
-<div class="p-4 rounded-lg bg-gray-400/10 text-center">
-  <div class="text-lg font-semibold">Member One</div>
-  <div class="text-[#f9996c] text-sm mt-1">Role / Title</div>
-  <div class="opacity-70 text-xs mt-2">Area of ownership</div>
-</div>
 
-<div class="p-4 rounded-lg bg-gray-400/10 text-center">
-  <div class="text-lg font-semibold">Member Two</div>
-  <div class="text-[#f9996c] text-sm mt-1">Role / Title</div>
-  <div class="opacity-70 text-xs mt-2">Area of ownership</div>
-</div>
 
-<div class="p-4 rounded-lg bg-gray-400/10 text-center">
-  <div class="text-lg font-semibold">Member Three</div>
-  <div class="text-[#f9996c] text-sm mt-1">Role / Title</div>
-  <div class="opacity-70 text-xs mt-2">Area of ownership</div>
-</div>
-
-<div class="p-4 rounded-lg bg-gray-400/10 text-center">
-  <div class="text-lg font-semibold">Member Four</div>
-  <div class="text-[#f9996c] text-sm mt-1">Role / Title</div>
-  <div class="opacity-70 text-xs mt-2">Area of ownership</div>
-</div>
-
-<div class="p-4 rounded-lg bg-gray-400/10 text-center">
-  <div class="text-lg font-semibold">Member Five</div>
-  <div class="text-[#f9996c] text-sm mt-1">Role / Title</div>
-  <div class="opacity-70 text-xs mt-2">Area of ownership</div>
-</div>
-
-<div class="p-4 rounded-lg bg-gray-400/10 text-center">
-  <div class="text-lg font-semibold">Member Six</div>
-  <div class="text-[#f9996c] text-sm mt-1">Role / Title</div>
-  <div class="opacity-70 text-xs mt-2">Area of ownership</div>
-</div>
+| Name | ID |
+|------|----|
+| Farah Abdelrahman Kamalo| 2000901 |
+| Khalid Ayman Alansary   | 2100259 |
+| Maryam Yasser Mohammed | 2100730 |
+| Mohamed Ashraf Mohamed  | 2100514 |
+| Omar Abdelgaber Elsayed  | 2101048 |
+| Salma Hamed Shaaban   | 2100636 |
 
 </div>
 
