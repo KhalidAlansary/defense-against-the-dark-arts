@@ -5,7 +5,4 @@ dist
 .vite-inspect
 .remote-assets
 components.d.ts
-.env
-.terraform/
-*.tfstate
-*.tfstate.*
+.pnpm-store
