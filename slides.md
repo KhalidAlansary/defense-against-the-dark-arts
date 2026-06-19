@@ -69,25 +69,27 @@ layout: default
 
 # Outline
 
-<Toc minDepth="1" maxDepth="1" columns="2" />
+<div class="grid grid-cols-2 gap-x-10 gap-y-3 mt-10 max-w-3xl">
+
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">1</span><span class="text-lg">Team Members</span></div>
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">2</span><span class="text-lg">Introduction</span></div>
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">3</span><span class="text-lg">System Architecture</span></div>
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">4</span><span class="text-lg">The V-Cycle Workspaces</span></div>
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">5</span><span class="text-lg">Safety &amp; Security</span></div>
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">6</span><span class="text-lg">DevOps &amp; Infrastructure</span></div>
+<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">7</span><span class="text-lg">Results</span></div>
+
+</div>
 
 <!--
 Roadmap of the talk. Point to the major sections and roughly how long each takes.
 -->
 
 ---
-layout: section
----
-
-# 1. Team
-
-The people behind the work
-
----
 layout: default
 ---
 
-# The Team
+# 1. Team Members
 
 <div class="max-w-xl mx-auto mt-10">
 
@@ -102,8 +104,9 @@ layout: default
 
 </div>
 
-<div class="mt-8 text-sm opacity-70 text-center">
-Supervised by Prof. Dr. Hazem Abbas · in collaboration with CairoMotive
+<div class="mt-8 text-sm opacity-70 text-center leading-relaxed">
+  <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
+  <div>In collaboration with CairoMotive</div>
 </div>
 
 <!--
@@ -667,9 +670,9 @@ safety/security analysis that automotive programs require alongside it.
 layout: section
 ---
 
-# 6. Engineering & Operations
+# 6. DevOps & Infrastructure
 
-Type safety, deployment, observability
+Deployment, tooling, and observability
 
 ---
 layout: default
