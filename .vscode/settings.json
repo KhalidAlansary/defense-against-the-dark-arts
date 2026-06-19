@@ -1,4 +1,12 @@
 {
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "slidev.dev-command": "pnpm slidev ${args}"
+  "slidev.dev-command": "pnpm slidev ${args}",
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "slides\\.md$",
+        "cmd": "pnpm exec slidev format ${file}"
+      }
+    ]
+  }
 }

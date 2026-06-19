@@ -3,7 +3,12 @@
   "image": "mcr.microsoft.com/devcontainers/javascript-node",
   "customizations": {
     "vscode": {
-      "extensions": ["antfu.slidev", "bradlc.vscode-tailwindcss", "oxc.oxc-vscode"]
+      "extensions": [
+        "antfu.slidev",
+        "bradlc.vscode-tailwindcss",
+        "oxc.oxc-vscode",
+        "emeraldwalk.RunOnSave"
+      ]
     }
   }
 }

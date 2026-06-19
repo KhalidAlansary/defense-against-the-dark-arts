@@ -5,8 +5,8 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+    "fmt": "node scripts/fmt.mjs",
+    "fmt:check": "node scripts/fmt.mjs --check",
     "export": "slidev export"
   },
   "dependencies": {
