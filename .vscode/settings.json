@@ -1,12 +1,13 @@
 {
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "slidev.dev-command": "pnpm slidev ${args}",
-  "emeraldwalk.runonsave": {
-    "commands": [
-      {
-        "match": "slides\\.md$",
-        "cmd": "pnpm exec slidev format ${file}"
-      }
-    ]
+  "customLocalFormatters.formatters": [
+    {
+      "command": "node scripts/format-md.mjs ${file}",
+      "languages": ["markdown"]
+    }
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "jkillian.custom-local-formatters"
   }
 }
