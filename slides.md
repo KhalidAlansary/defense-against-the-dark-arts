@@ -286,7 +286,6 @@ single shared data layer for consistency and type safety. The AI engine is
 decoupled behind RabbitMQ.
 -->
 
-
 ---
 layout: default
 ---
