@@ -54,8 +54,9 @@ A Self-Hosted Platform for AI-Assisted Software Engineering across the V-Cycle
 <!--
 Presenter notes:
 - Welcome the audience.
-- One line: Zenith brings AI agents to the automotive V-Cycle, self-hosted so
-  proprietary code and requirements never leave the organization.
+- One line: Zenith brings AI agents to the automotive V-Cycle, with flexible
+  deployment — from managed cloud to fully self-hosted — so teams control where
+  their code and requirements live.
 - State what the talk covers: team, problem, architecture, the V-Cycle
   workspaces, safety & security, and results.
 - ~30 seconds.
@@ -128,19 +129,20 @@ layout: default
 
 - **The V-Cycle** is the dominant paradigm in automotive software, formalized by **ASPICE** — every development phase (SWE.1–3) has a matching verification phase (SWE.4–6).
 - Standards like **ISO 26262** (functional safety) and **ISO 21434** (cybersecurity) mandate rigorous **traceability** between requirements, design, code, and tests.
-- **LLM-based AI agents** can now plan, generate, and validate engineering artifacts — but most platforms are **cloud-hosted**.
+- **LLM-based AI agents** can now plan, generate, and validate engineering artifacts — but most platforms are **rigid SaaS** with no control over deployment.
 
 </v-clicks>
 
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
-> Organizations with **proprietary code and confidential requirements** cannot send those artifacts to external clouds — they need AI assistance _inside their own boundary_.
+> Organizations working with **proprietary code and confidential requirements** need **control over where artifacts and inference run** — and the option to keep them inside their own boundary.
 
 </div>
 
 <!--
-Set the stage: V-Cycle + standards demand traceability; AI can help; but
-confidentiality blocks cloud tools. That gap is what Zenith fills.
+Set the stage: V-Cycle + standards demand traceability; AI can help; but teams
+need control over deployment and data governance. That flexibility is what Zenith
+provides.
 -->
 
 ---
@@ -153,19 +155,20 @@ layout: default
 
 - Generating test cases and requirements from documents is **high-effort** and must stay synchronized as requirements evolve.
 - Manual work leads to **inconsistent interpretation**, **incomplete coverage**, and **brittle traceability** between a test and its originating requirement.
-- AI assistance is blocked by **security and compliance** — proprietary artifacts cannot be uploaded to external cloud services.
+- Integrating AI into internal workflows raises **data-governance** concerns — teams need a say in **where** artifacts are stored and inference runs.
 
 </v-clicks>
 
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
-> **The need:** a scalable, _self-hosted_ platform that integrates AI agents into the software lifecycle while preserving security and maintaining traceability.
+> **The need:** a platform that integrates AI agents into the software lifecycle, maintains traceability, and can be deployed flexibly — from managed cloud services to fully self-hosted.
 
 </div>
 
 <!--
-Three pain points. Land the framing: the value is rigor + automation WITHOUT
-giving up data confidentiality.
+Three pain points. Land the framing: the value is rigor + automation + deployment
+flexibility. Cloud services (e.g. LLM inference) are used by default, but every
+component can be swapped for a self-hosted equivalent when policy demands it.
 -->
 
 ---
@@ -182,7 +185,7 @@ layout: default
 
 <v-clicks>
 
-- A **self-hosted** platform that orchestrates AI agents for SE tasks
+- A **self-hostable** platform that orchestrates AI agents for SE tasks
 - A **service-based** architecture with a shared data layer for consistency
 - **End-to-end type-safe** APIs (with language-agnostic OpenAPI)
 - **Asynchronous** AI processing via a message broker
@@ -685,7 +688,7 @@ layout: default
 - Fully containerized via **Docker Compose**
 - Automated init, **health checks**, startup orchestration
 - Secrets via Compose secrets + OpenBao/Varlock
-- Artifacts stay within the org boundary
+- Cloud components swappable for self-hosted equivalents
 
 </v-clicks>
 
@@ -737,7 +740,7 @@ layout: default
 
 - **Unified architecture** — service-based, clear separation of concerns over a shared PostgreSQL + MinIO data layer.
 - **End-to-end type safety** — TypeScript with oRPC contracts, Drizzle schemas, and Zod validation across the whole stack.
-- **Self-hosted deployment** — fully containerized, reproducible, with sensitive artifacts kept under organizational control.
+- **Flexible deployment** — fully containerized and reproducible; runs on managed cloud services or fully self-hosted by swapping in self-hosted components.
 - **Three V-Cycle stages** — SWE.1, SWE.4, SWE.6 with live status, MinIO file management, and async RabbitMQ processing.
 - **Safety & security workspaces** — TARA, SECO, HARA, FMEA, FTA with AI-assisted generation and Excel export.
 - **Scalability foundation** — async message queuing enabling horizontal scaling of AI workloads.
@@ -760,7 +763,7 @@ class: text-center
 
 <v-clicks>
 
-- **Delivered:** a self-hosted platform bringing AI agents to the automotive V-Cycle without sacrificing data sovereignty.
+- **Delivered:** a platform bringing AI agents to the automotive V-Cycle, deployable from managed cloud to fully self-hosted for control over data and inference.
 - **Next:** expand testing infrastructure and CI/CD maturity.
 - **Next:** continuous deployment & release management.
 - **Next:** security & supply-chain hardening.
