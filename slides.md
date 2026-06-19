@@ -286,31 +286,6 @@ single shared data layer for consistency and type safety. The AI engine is
 decoupled behind RabbitMQ.
 -->
 
----
-layout: default
----
-
-# Core Components
-
-<div class="max-w-3xl mx-auto mt-6">
-
-| Component               | Responsibility                                       |
-| ----------------------- | ---------------------------------------------------- |
-| **Web App** (Next.js)   | User interface and client-side workflows             |
-| **API Gateway** (Angie) | Unified entry point, JWT validation, rate limiting   |
-| **Auth Service**        | Authentication, users, organizations, RBAC           |
-| **Project Service**     | Projects, membership, AI request orchestration       |
-| **Resource Service**    | File upload/download, storage abstraction            |
-| **PostgreSQL**          | Shared relational database                           |
-| **MinIO**               | Shared S3-compatible object storage                  |
-| **RabbitMQ**            | Asynchronous AI task queue                           |
-
-</div>
-
-<!--
-Walk the table top to bottom. The gateway does cross-cutting concerns so the
-services stay focused. Resource service hides storage behind presigned URLs.
--->
 
 ---
 layout: default
@@ -622,32 +597,35 @@ Beyond the V-Cycle
 layout: default
 ---
 
-# Cybersecurity & Functional Safety
+# Cybersecurity — ISO/SAE 21434
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="grid grid-cols-2 gap-6 mt-3 text-sm">
 
-<div>
+<div class="p-4 rounded-lg bg-gray-400/10">
+
+<div class="text-[#f9996c] font-semibold text-base">TARA · Threat Analysis & Risk Assessment</div>
+<div class="opacity-60 text-xs mb-3">From threat scenarios to cybersecurity goals</div>
 
 <v-clicks>
 
-**ISO 21434 — Cybersecurity**
-
-- **TARA** — Threat Analysis & Risk Assessment
-- **SECO** — Security Concepts report generation
+- **Full ISO/SAE 21434 chain** — assets, threat scenarios, attack paths and damage, ending in derived **cybersecurity goals**
+- **Forward / backward trace links** connect every threat to its asset, risk, and goal
+- Editable throughout; exports to **Excel**
 
 </v-clicks>
 
 </div>
 
-<div>
+<div class="p-4 rounded-lg bg-gray-400/10">
+
+<div class="text-[#f9996c] font-semibold text-base">SECO · Security Concept</div>
+<div class="opacity-60 text-xs mb-3">The reviewed, sign-off-ready security deliverable</div>
 
 <v-clicks>
 
-**ISO 26262 — Functional Safety**
-
-- **HARA** — Hazard Analysis & Risk Assessment
-- **FMEA** — Failure Mode & Effects Analysis (AIAG/VDA)
-- **FTA** — Fault Tree Analysis with cut-set identification
+- **Document-style editor** — narrative sections with a contents sidebar
+- Cybersecurity **goals & measures** with **goal ↔ measure coverage** matrices
+- Exports to a formatted **Word .docx** from a standardized, agreed-upon template
 
 </v-clicks>
 
@@ -655,15 +633,67 @@ layout: default
 
 </div>
 
-<div v-click class="mt-8 text-sm opacity-80">
-
-Each workspace provides **AI-assisted report generation**, structured data management, and professional **Excel export** with domain-specific formatting.
-
+<div v-click class="mt-5 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying over its cybersecurity goals and system-description document — or independently, from its own uploaded inputs.
 </div>
 
 <!--
-These extend the platform beyond pure V-Cycle development into the
-safety/security analysis that automotive programs require alongside it.
+Two distinct workspaces, each with its own report. TARA: the tabular threat
+analysis (STRIDE → risk → goals), exports Excel. SECO: the document-style
+deliverable — goals, measures, coverage matrices — exports a Word docx from the
+agreed template. Then the link: a SECO can build on a finished TARA (inherits its
+cybersecurity goals + reuses the system-description doc) or run standalone.
+-->
+
+---
+layout: default
+---
+
+# Functional Safety — ISO 26262
+
+<div class="text-sm opacity-80">
+Three <b>separate</b> workspaces — but a deliberately <b>shared UI and flow</b>:
+</div>
+
+<div v-click class="mt-2 mb-5 p-3 rounded bg-gray-400/10 text-sm">
+Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → AI <b>generate</b> (re-run anytime) → multi-view report → <b>export</b>
+</div>
+
+<div class="grid grid-cols-3 gap-4">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">HARA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Hazard Analysis &amp; Risk Assessment</div>
+  <div class="text-xs opacity-80 mt-2">A workspace to explore the hazard analysis — safety goals grouped by <b>ASIL</b> in a hierarchy view, or the full assessment as tables, with the ISO 26262 reference on hand.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">FTA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Fault Tree Analysis</div>
+  <div class="text-xs opacity-80 mt-2">Three linked views of the fault tree — the <b>tree</b> itself, a <b>cross-ASIL</b> coverage audit, and <b>minimal cut sets</b> — to follow how failures lead to a hazard.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">FMEA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Failure Mode &amp; Effects Analysis</div>
+  <div class="text-xs opacity-80 mt-2">An interactive <b>worksheet</b> across three views — <b>Risk Overview</b>, <b>Failure Detail</b>, and <b>Action Summary</b> — with filtering and inline review of each failure mode.</div>
+</div>
+
+</div>
+
+<div v-click class="mt-5 text-sm opacity-70">
+Shared shell across all three — dropzone, progress polling, a segmented view-toggle, and a slide-out legend / reference sheet — so only the analysis inside differs.
+</div>
+
+<div class="absolute bottom-4 left-12 right-12 text-xs opacity-55">
+<span class="text-[#f9996c]">*</span> Scope review is an FTA &amp; FMEA step — HARA generates straight from the upload.
+</div>
+
+<!--
+Three separate workspaces that share components, so the UI and flow feel the same.
+Cards: HARA (ASIL via S×E×C, derives safety goals), FTA (cut sets + cross-ASIL),
+FMEA (RPN + Action Priority). Footnotes carry the two real differences: scope
+review is FTA/FMEA only, and HARA has no export.
 -->
 
 ---
