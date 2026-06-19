@@ -1,15 +1,16 @@
 ---
 # Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
-title: "Project Title Goes Here: A Concise Subtitle"
+title: "Zenith: AI Agents for the Automotive V-Cycle"
 titleTemplate: "%s — Cairo Motive"
 info: |
-  ## Project Presentation
-  Architecture rework & new features overview.
+  ## Zenith — A Self-Hosted Platform for AI-Assisted Software Engineering
+  Orchestrating autonomous AI agents across the V-Cycle (SWE.1 / SWE.4 / SWE.6)
+  with cybersecurity (TARA, SECO) and functional safety (HARA, FMEA, FTA) analysis.
 
   Built with [Slidev](https://sli.dev).
 author: Cairo Motive
-keywords: architecture,features,cairo-motive
+keywords: v-cycle,aspice,iso26262,iso21434,ai-agents,cairo-motive
 # Apply unocss classes to the current slide
 class: text-center
 # https://sli.dev/features/drawing
@@ -37,9 +38,9 @@ exportFilename: cairo-motive-deck
 hideInToc: false
 ---
 
-# Project Title Goes Here
+# Zenith
 
-A Concise, Descriptive Subtitle
+A Self-Hosted Platform for AI-Assisted Software Engineering across the V-Cycle
 
 <div class="pt-10 flex justify-center">
   <img :src="'/images/cairomotive-logo.svg'" alt="Cairo Motive" class="h-20" />
@@ -53,15 +54,16 @@ A Concise, Descriptive Subtitle
 <!--
 Presenter notes:
 - Welcome the audience.
-- State the project and what this talk covers: team, intro, architecture rework, new features.
+- One line: Zenith brings AI agents to the automotive V-Cycle, self-hosted so
+  proprietary code and requirements never leave the organization.
+- State what the talk covers: team, problem, architecture, the V-Cycle
+  workspaces, safety & security, and results.
 - ~30 seconds.
 -->
 
 ---
-
 transition: fade-out
 layout: default
-
 ---
 
 # Outline
@@ -73,16 +75,16 @@ Roadmap of the talk. Point to the major sections and roughly how long each takes
 -->
 
 ---
+layout: section
+---
 
-## layout: section
-
-# 1. Team Members
+# 1. Team
 
 The people behind the work
 
 ---
-
-## layout: default
+layout: default
+---
 
 # The Team
 
@@ -99,93 +101,158 @@ The people behind the work
 
 </div>
 
+<div class="mt-8 text-sm opacity-70 text-center">
+Supervised by Prof. Dr. Hazem Abbas · in collaboration with Cairo Motive
+</div>
+
 <!--
-Introduce the team briefly. Highlight who owns what so the audience knows
-who to direct questions to.
+Introduce the team briefly. Mention the Cairo Motive collaboration and the
+supervising staff.
 -->
 
 ---
-
-## layout: section
-
-# 2. Intro
-
-What this project is, and why it matters
-
+layout: section
 ---
 
-## layout: default
+# 2. Introduction
 
-# Introduction
+What we built, and why it matters
+
+---
+layout: default
+---
+
+# The Context
 
 <v-clicks>
 
-- **What we built.** One sentence describing the product / system at a high level.
-- **The problem.** What pain point or limitation drove this work?
-- **Where we are.** Current status and what this presentation covers.
+- **The V-Cycle** is the dominant paradigm in automotive software, formalized by **ASPICE** — every development phase (SWE.1–3) has a matching verification phase (SWE.4–6).
+- Standards like **ISO 26262** (functional safety) and **ISO 21434** (cybersecurity) mandate rigorous **traceability** between requirements, design, code, and tests.
+- **LLM-based AI agents** can now plan, generate, and validate engineering artifacts — but most platforms are **cloud-hosted**.
 
 </v-clicks>
 
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
-> A short, memorable framing of the project the audience should carry through the talk.
+> Organizations with **proprietary code and confidential requirements** cannot send those artifacts to external clouds — they need AI assistance _inside their own boundary_.
 
 </div>
 
 <!--
-Set context before diving into specifics. Keep it tight — the detail comes later.
+Set the stage: V-Cycle + standards demand traceability; AI can help; but
+confidentiality blocks cloud tools. That gap is what Zenith fills.
 -->
 
 ---
-
-## layout: section
-
-# 3. Architecture Rework
-
-What changed under the hood, and why
-
+layout: default
 ---
 
-## layout: default
-
-# Architecture Rework — Overview
+# The Problem
 
 <v-clicks>
 
-- **Why rework.** What was wrong / limiting about the old architecture?
-- **Goals.** Performance, scalability, maintainability — the targets we set.
-- **At a glance.** The three changes that follow.
+- Generating test cases and requirements from documents is **high-effort** and must stay synchronized as requirements evolve.
+- Manual work leads to **inconsistent interpretation**, **incomplete coverage**, and **brittle traceability** between a test and its originating requirement.
+- AI assistance is blocked by **security and compliance** — proprietary artifacts cannot be uploaded to external cloud services.
 
 </v-clicks>
 
-```mermaid {scale: 0.6}
-flowchart LR
-  A[Old System] --> B{Rework}
-  B --> C[Change 1]
-  B --> D[Change 2]
-  B --> E[Change 3]
-  style B fill:#f9996c,stroke:#c2410c,color:#0c0c0c
-```
+<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
+
+> **The need:** a scalable, _self-hosted_ platform that integrates AI agents into the software lifecycle while preserving security and maintaining traceability.
+
+</div>
 
 <!--
-Frame the rework as a whole before drilling into each piece.
+Three pain points. Land the framing: the value is rigor + automation WITHOUT
+giving up data confidentiality.
 -->
 
 ---
+layout: default
+---
 
-## layout: default
+# Objectives & Scope
 
-# Architecture · 3.1 — First Change
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+**Objectives**
+
+<v-clicks>
+
+- A **self-hosted** platform that orchestrates AI agents for SE tasks
+- A **service-based** architecture with a shared data layer for consistency
+- **End-to-end type-safe** APIs (with language-agnostic OpenAPI)
+- **Asynchronous** AI processing via a message broker
+- **Containerized**, reproducible deployment + CI
+
+</v-clicks>
+
+</div>
+
+<div>
+
+**Scope — three V-Cycle stages**
+
+<v-clicks>
+
+- **SWE.1** — Software Requirements Analysis
+- **SWE.4** — Software Unit Verification
+- **SWE.6** — Software Qualification Testing
+
+Plus security & safety workspaces:
+
+- **TARA · SECO** — ISO 21434 cybersecurity
+- **HARA · FMEA · FTA** — ISO 26262 functional safety
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<!--
+Objectives on the left, scope on the right. Stress that the AI engine itself is
+an external service that consumes queued tasks — the platform orchestrates it.
+-->
+
+---
+layout: section
+---
+
+# 3. System Architecture
+
+How the platform is put together
+
+---
+layout: default
+---
+
+# Architecture — Service-Based
 
 <div class="grid grid-cols-5 gap-6">
 
 <div class="col-span-3">
 
-What this part of the rework addresses, explained at the right level of detail.
+A **service-based architecture**: independently deployable, coarse-grained domain services over a **single shared data layer**.
 
-```text
-Before:  describe the old approach
-After:   describe the new approach
+```mermaid {scale: 0.52}
+flowchart TD
+  UI[Next.js Web App] --> GW[Angie API Gateway]
+  GW --> AUTH[Auth Service]
+  GW --> PROJ[Project Service]
+  GW --> RES[Resource Service]
+  AUTH --> DB[(PostgreSQL)]
+  PROJ --> DB
+  RES --> DB
+  RES --> S3[(MinIO Object Storage)]
+  PROJ -. async .-> MQ[[RabbitMQ]]
+  MQ -. tasks .-> AI[AI Engine]
+  AI -. status .-> MQ
+  style GW fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+  style MQ fill:#f9996c,stroke:#c2410c,color:#0c0c0c
 ```
 
 </div>
@@ -194,11 +261,12 @@ After:   describe the new approach
 
 <v-clicks>
 
-**Impact**
+**Why this style**
 
-- Benefit 1
-- Benefit 2
-- Trade-off / cost
+- Distributed, but far less complex/costly than full microservices
+- Shared **PostgreSQL** ⇒ SQL joins, no data duplication
+- Shared layer enables **end-to-end type safety**
+- Gateway unifies entry; AI engine stays **external & async**
 
 </v-clicks>
 
@@ -207,24 +275,138 @@ After:   describe the new approach
 </div>
 
 <!--
-Speaker notes for the first architectural change.
+Pragmatic middle ground: separation of concerns at the service/API layer, but a
+single shared data layer for consistency and type safety. The AI engine is
+decoupled behind RabbitMQ.
 -->
 
 ---
+layout: default
+---
 
-## layout: default
+# Core Components
 
-# Architecture · 3.2 — Second Change
+<div class="max-w-3xl mx-auto mt-6">
+
+| Component               | Responsibility                                       |
+| ----------------------- | ---------------------------------------------------- |
+| **Web App** (Next.js)   | User interface and client-side workflows             |
+| **API Gateway** (Angie) | Unified entry point, JWT validation, rate limiting   |
+| **Auth Service**        | Authentication, users, organizations, RBAC           |
+| **Project Service**     | Projects, membership, AI request orchestration       |
+| **Resource Service**    | File upload/download, storage abstraction            |
+| **PostgreSQL**          | Shared relational database                           |
+| **MinIO**               | Shared S3-compatible object storage                  |
+| **RabbitMQ**            | Asynchronous AI task queue                           |
+
+</div>
+
+<!--
+Walk the table top to bottom. The gateway does cross-cutting concerns so the
+services stay focused. Resource service hides storage behind presigned URLs.
+-->
+
+---
+layout: default
+---
+
+# Technology Stack
+
+<div class="grid grid-cols-3 gap-6 mt-6">
+
+<div v-click>
+
+**Language & Runtime**
+
+- TypeScript (full-stack)
+- Bun runtime
+- Shared code across FE/BE
+
+</div>
+
+<div v-click>
+
+**API & Data**
+
+- oRPC + OpenAPI contracts
+- Drizzle ORM
+- Zod schema validation
+- Protocol Buffers (queue)
+
+</div>
+
+<div v-click>
+
+**Frontend**
+
+- Next.js (App Router)
+- TanStack Query
+- Tailwind CSS
+- Component library
+
+</div>
+
+<div v-click>
+
+**Auth & Gateway**
+
+- JWT-based auth
+- Angie gateway
+- RBAC + multi-tenancy
+
+</div>
+
+<div v-click>
+
+**Infra & DevOps**
+
+- Docker Compose
+- Dev Containers
+- Turborepo monorepo
+- GitHub Actions CI
+
+</div>
+
+<div v-click>
+
+**Observability**
+
+- Structured logging
+- Centralized aggregation
+- Langfuse AI tracing
+- Health checks
+
+</div>
+
+</div>
+
+<div v-click class="mt-6 text-sm opacity-70 text-center">
+One type-safe contract from database → backend → frontend.
+</div>
+
+<!--
+The through-line: a single TypeScript type system, enforced at every boundary by
+oRPC, Drizzle, and Zod. Protocol Buffers carry the contract across the language
+boundary to the AI engine.
+-->
+
+---
+layout: default
+---
+
+# Asynchronous AI Processing
 
 <div class="grid grid-cols-5 gap-6">
 
 <div class="col-span-3">
 
-What this part of the rework addresses, explained at the right level of detail.
+AI generation is long-running, so the platform **decouples** it from the request/response cycle.
 
 ```text
-Before:  describe the old approach
-After:   describe the new approach
+1. User triggers generation (e.g. SWE.6 test specs)
+2. Project service publishes a typed message → RabbitMQ
+3. AI engine consumes the task, runs the agent
+4. Status + results reported back; UI polls and updates live
 ```
 
 </div>
@@ -233,50 +415,12 @@ After:   describe the new approach
 
 <v-clicks>
 
-**Impact**
+**Why it matters**
 
-- Benefit 1
-- Benefit 2
-- Trade-off / cost
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<!--
-Speaker notes for the second architectural change.
--->
-
----
-
-## layout: default
-
-# Architecture · 3.3 — Third Change
-
-<div class="grid grid-cols-5 gap-6">
-
-<div class="col-span-3">
-
-What this part of the rework addresses, explained at the right level of detail.
-
-```text
-Before:  describe the old approach
-After:   describe the new approach
-```
-
-</div>
-
-<div class="col-span-2">
-
-<v-clicks>
-
-**Impact**
-
-- Benefit 1
-- Benefit 2
-- Trade-off / cost
+- **RabbitMQ** broker for reliable delivery
+- **Protocol Buffers** enforce the message contract across languages
+- Message type ⇒ explicit dispatch & request safety
+- Enables **horizontal scaling** of AI workloads
 
 </v-clicks>
 
@@ -285,55 +429,34 @@ After:   describe the new approach
 </div>
 
 <!--
-Speaker notes for the third architectural change.
+This is what makes the platform responsive and scalable. The protobuf contract
+gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
+comes from per-SWE conditional polling.
 -->
 
 ---
-
-## layout: section
-
-# 4. New Features
-
-What we shipped, and what it unlocks
-
+layout: section
 ---
 
-## layout: default
+# 4. The V-Cycle Workspaces
 
-# New Features — Overview
-
-<v-clicks>
-
-- **Feature 1** — one-line value proposition
-- **Feature 2** — one-line value proposition
-- **Feature 3** — one-line value proposition
-
-</v-clicks>
-
-<div v-click class="mt-8 text-sm opacity-70">
-Built on the reworked architecture from §3 — each feature ties back to a change there.
-</div>
-
-<!--
-Connect the features to the architecture rework: the rework is what made them possible.
--->
+SWE.1 · SWE.4 · SWE.6
 
 ---
-
 layout: two-cols
 layoutClass: gap-8
-
 ---
 
-# Feature · 4.1 — First Feature
+# SWE.1 — Requirements Analysis
 
 <v-clicks>
 
 **What it does**
 
-- Capability 1
-- Capability 2
-- Capability 3
+- Upload **system requirements** documents
+- AI generates **software requirements** for each
+- Status workflow: Draft → In Review → Accepted / Rejected
+- Configurable attributes (ASIL, verification method, status)
 
 </v-clicks>
 
@@ -343,34 +466,34 @@ layoutClass: gap-8
 
 <v-clicks>
 
-**Why it matters**
+**Traceability**
 
-- User-facing benefit
-- Business / technical benefit
-- Metric it moves
+- Each software req shows a **"refines"** link to its system req
+- Click an ID to navigate the trace chain, then return
+- Coverage analysis flags system reqs with **no** software reqs
 
 </v-clicks>
 
 <!--
-Demo hook: if there's a live demo for this feature, this is where to run it.
+Demo hook: show the collapsed system-req list, expand to reveal generated
+software reqs, then click a refines link to walk the traceability chain.
 -->
 
 ---
-
 layout: two-cols
 layoutClass: gap-8
-
 ---
 
-# Feature · 4.2 — Second Feature
+# SWE.4 — Unit Verification
 
 <v-clicks>
 
 **What it does**
 
-- Capability 1
-- Capability 2
-- Capability 3
+- Upload C/C++ code via **zip** or **GitHub import**
+- Browse code in a **file tree** with inline viewing
+- Trigger **unit test generation**
+- Generated tests appear alongside source files
 
 </v-clicks>
 
@@ -380,34 +503,34 @@ layoutClass: gap-8
 
 <v-clicks>
 
-**Why it matters**
+**Coverage reporting**
 
-- User-facing benefit
-- Business / technical benefit
-- Metric it moves
+- Line, branch, and function **coverage %**
+- Real-time generation status at the top of the page
+- Tests organized in the tree next to the code they verify
 
 </v-clicks>
 
 <!--
-Demo hook for the second feature.
+Demo hook: import a small C project, generate tests, then open the coverage
+report tab.
 -->
 
 ---
-
 layout: two-cols
 layoutClass: gap-8
-
 ---
 
-# Feature · 4.3 — Third Feature
+# SWE.6 — Qualification Testing
 
 <v-clicks>
 
 **What it does**
 
-- Capability 1
-- Capability 2
-- Capability 3
+- Upload requirement documents
+- AI generates **test specifications**
+- Specs organized **under their software requirements**
+- Specs appear **incrementally** as they generate
 
 </v-clicks>
 
@@ -417,49 +540,244 @@ layoutClass: gap-8
 
 <v-clicks>
 
-**Why it matters**
+**Detail & traceability**
 
-- User-facing benefit
-- Business / technical benefit
-- Metric it moves
+- Card summary → click for **full spec modal**
+- Traceability matrix maps **test specs → software reqs**
+- **Communication matrix** (FIBEX) validation & chunk mapping
 
 </v-clicks>
 
 <!--
-Demo hook for the third feature.
+Demo hook: upload reqs, watch specs stream in live, open a spec modal, then show
+the traceability matrix tab.
 -->
 
 ---
+layout: default
+---
 
+# Traceability & Validation
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+<v-clicks>
+
+**Traceability Matrix**
+
+- SWE.1: software reqs → system reqs
+- SWE.6: test specs → software reqs
+- End-to-end visibility, requirements → verification
+- Automatic coverage gap detection
+
+</v-clicks>
+
+</div>
+
+<div>
+
+<v-clicks>
+
+**AI Validation**
+
+- Checks clarity, atomicity, consistency
+- Flags redundancies, conflicts, ambiguities
+- Suggests edits and refinements
+- FIBEX communication-matrix quality report
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
+
+> Traceability is maintained **automatically** as artifacts are generated — the core compliance pain point of the V-Cycle.
+
+</div>
+
+<!--
+Tie back to the intro: this is the manual, error-prone work that the standards
+demand and that Zenith automates.
+-->
+
+---
+layout: section
+---
+
+# 5. Safety & Security
+
+Beyond the V-Cycle
+
+---
+layout: default
+---
+
+# Cybersecurity & Functional Safety
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+<v-clicks>
+
+**ISO 21434 — Cybersecurity**
+
+- **TARA** — Threat Analysis & Risk Assessment
+- **SECO** — Security Concepts report generation
+
+</v-clicks>
+
+</div>
+
+<div>
+
+<v-clicks>
+
+**ISO 26262 — Functional Safety**
+
+- **HARA** — Hazard Analysis & Risk Assessment
+- **FMEA** — Failure Mode & Effects Analysis (AIAG/VDA)
+- **FTA** — Fault Tree Analysis with cut-set identification
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<div v-click class="mt-8 text-sm opacity-80">
+
+Each workspace provides **AI-assisted report generation**, structured data management, and professional **Excel export** with domain-specific formatting.
+
+</div>
+
+<!--
+These extend the platform beyond pure V-Cycle development into the
+safety/security analysis that automotive programs require alongside it.
+-->
+
+---
+layout: section
+---
+
+# 6. Engineering & Operations
+
+Type safety, deployment, observability
+
+---
+layout: default
+---
+
+# DevOps & Developer Experience
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+<v-clicks>
+
+**Deployment**
+
+- Fully containerized via **Docker Compose**
+- Automated init, **health checks**, startup orchestration
+- Secrets via Compose secrets + OpenBao/Varlock
+- Artifacts stay within the org boundary
+
+</v-clicks>
+
+</div>
+
+<div>
+
+<v-clicks>
+
+**Developer Experience**
+
+- **Turborepo** monorepo with caching
+- **Dev Containers** for reproducible environments
+- CI checks + container publishing pipelines
+- Mocked AI engine for local development
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<div v-click class="mt-6 text-sm opacity-70">
+
+Observability: structured logging, centralized aggregation, **Langfuse** AI-workflow tracing, and health endpoints.
+
+</div>
+
+<!--
+Self-hosting and reproducibility are the operational backbone. Dev Containers +
+mocked AI engine let the team develop without the real engine running.
+-->
+
+---
+layout: section
+---
+
+# 7. Results
+
+What we delivered
+
+---
+layout: default
+---
+
+# Summary of Achievements
+
+<v-clicks>
+
+- **Unified architecture** — service-based, clear separation of concerns over a shared PostgreSQL + MinIO data layer.
+- **End-to-end type safety** — TypeScript with oRPC contracts, Drizzle schemas, and Zod validation across the whole stack.
+- **Self-hosted deployment** — fully containerized, reproducible, with sensitive artifacts kept under organizational control.
+- **Three V-Cycle stages** — SWE.1, SWE.4, SWE.6 with live status, MinIO file management, and async RabbitMQ processing.
+- **Safety & security workspaces** — TARA, SECO, HARA, FMEA, FTA with AI-assisted generation and Excel export.
+- **Scalability foundation** — async message queuing enabling horizontal scaling of AI workloads.
+
+</v-clicks>
+
+<!--
+This recaps the conclusion's "Summary of Achievements." Each bullet maps to a
+section the audience just saw.
+-->
+
+---
 layout: center
 class: text-center
-
 ---
 
-# Wrap-up
+# Conclusion & Future Work
 
 <div class="max-w-2xl mx-auto mt-6 text-left">
 
 <v-clicks>
 
-- **Team:** who built it
-- **Intro:** what we set out to do
-- **Architecture:** the rework and why it matters
-- **Features:** what it unlocked
+- **Delivered:** a self-hosted platform bringing AI agents to the automotive V-Cycle without sacrificing data sovereignty.
+- **Next:** expand testing infrastructure and CI/CD maturity.
+- **Next:** continuous deployment & release management.
+- **Next:** security & supply-chain hardening.
+- **Next:** further V-Cycle expansion (SWE.2, SWE.3, SWE.5) and deeper safety/security analysis.
 
 </v-clicks>
 
 </div>
 
 <!--
-Land the plane. Recap the through-line: rework enabled the features.
+Land the plane: rigor + automation + confidentiality, with a clear path to
+covering the rest of the V.
 -->
 
 ---
-
 layout: center
 class: text-center
-
 ---
 
 # Thank You
@@ -467,7 +785,8 @@ class: text-center
 Questions & Discussion
 
 <div class="pt-8 opacity-70 text-sm">
-  <div>Cairo Motive</div>
+  <div>Zenith · Cairo Motive</div>
+  <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
 </div>
 
 <!--
@@ -475,8 +794,6 @@ Pause. Take questions one at a time.
 -->
 
 ---
-
 layout: end
 hideInToc: true
-
 ---
