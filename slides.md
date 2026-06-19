@@ -1,10 +1,10 @@
 ---
 # Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
-title: "Arch: AI Agents for the Automotive V-Cycle"
+title: "AI Agents for the Automotive V-Cycle"
 titleTemplate: "%s — CairoMotive"
 info: |
-  ## Arch — A Self-Hosted Platform for AI-Assisted Software Engineering
+  ## A Platform for AI-Assisted Software Engineering
   Orchestrating autonomous AI agents across the V-Cycle (SWE.1 / SWE.4 / SWE.6)
   with cybersecurity (TARA, SECO) and functional safety (HARA, FMEA, FTA) analysis.
 
@@ -22,9 +22,9 @@ transition: slide-left
 mdc: true
 # Show line numbers in code blocks
 lineNumbers: false
-# Match the Arch brand: dark (quantum-black) by default
+# Match the product brand: dark (quantum-black) by default
 colorSchema: dark
-# Arch uses a geometric grotesque (New Science); Space Grotesk is the closest
+# The product uses a geometric grotesque (New Science); Space Grotesk is the closest
 # freely-available analog. Headings forced to sans in style.css.
 fonts:
   sans: Space Grotesk
@@ -34,13 +34,13 @@ fonts:
 aspectRatio: 16/9
 # Enable presenter mode notes
 download: true
-exportFilename: cairo-motive-deck
+exportFilename: defense
 hideInToc: false
 ---
 
-# Arch
+# AI Agents for the Automotive V-Cycle
 
-A Self-Hosted Platform for AI-Assisted Software Engineering across the V-Cycle
+A Platform for AI-Assisted Software Engineering across the V-Cycle
 
 <div class="pt-10 flex justify-center">
   <img :src="'/images/cairomotive-logo.svg'" alt="CairoMotive" class="h-20" />
@@ -54,7 +54,7 @@ A Self-Hosted Platform for AI-Assisted Software Engineering across the V-Cycle
 <!--
 Presenter notes:
 - Welcome the audience.
-- One line: Arch brings AI agents to the automotive V-Cycle, with flexible
+- One line: the platform brings AI agents to the automotive V-Cycle, with flexible
   deployment — from managed cloud to fully self-hosted — so teams control where
   their code and requirements live.
 - State what the talk covers: team, problem, architecture, the V-Cycle
@@ -141,8 +141,8 @@ layout: default
 
 <!--
 Set the stage: V-Cycle + standards demand traceability; AI can help; but teams
-need control over deployment and data governance. That flexibility is what Arch
-provides.
+need control over deployment and data governance. That flexibility is what the
+platform provides.
 -->
 
 ---
@@ -604,7 +604,7 @@ layout: default
 
 <!--
 Tie back to the intro: this is the manual, error-prone work that the standards
-demand and that Arch automates.
+demand and that the platform automates.
 -->
 
 ---
@@ -788,7 +788,7 @@ class: text-center
 Questions & Discussion
 
 <div class="pt-8 opacity-70 text-sm">
-  <div>Arch · CairoMotive</div>
+  <div>CairoMotive</div>
   <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
 </div>
 
