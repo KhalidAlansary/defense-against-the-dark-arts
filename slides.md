@@ -1,15 +1,15 @@
 ---
 # Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
-title: "Zenith: AI Agents for the Automotive V-Cycle"
-titleTemplate: "%s — Cairo Motive"
+title: "Arch: AI Agents for the Automotive V-Cycle"
+titleTemplate: "%s — CairoMotive"
 info: |
-  ## Zenith — A Self-Hosted Platform for AI-Assisted Software Engineering
+  ## Arch — A Self-Hosted Platform for AI-Assisted Software Engineering
   Orchestrating autonomous AI agents across the V-Cycle (SWE.1 / SWE.4 / SWE.6)
   with cybersecurity (TARA, SECO) and functional safety (HARA, FMEA, FTA) analysis.
 
   Built with [Slidev](https://sli.dev).
-author: Cairo Motive
+author: CairoMotive
 keywords: v-cycle,aspice,iso26262,iso21434,ai-agents,cairo-motive
 # Apply unocss classes to the current slide
 class: text-center
@@ -22,9 +22,9 @@ transition: slide-left
 mdc: true
 # Show line numbers in code blocks
 lineNumbers: false
-# Match the Zenith brand: dark (quantum-black) by default
+# Match the Arch brand: dark (quantum-black) by default
 colorSchema: dark
-# Zenith uses a geometric grotesque (New Science); Space Grotesk is the closest
+# Arch uses a geometric grotesque (New Science); Space Grotesk is the closest
 # freely-available analog. Headings forced to sans in style.css.
 fonts:
   sans: Space Grotesk
@@ -38,23 +38,23 @@ exportFilename: cairo-motive-deck
 hideInToc: false
 ---
 
-# Zenith
+# Arch
 
 A Self-Hosted Platform for AI-Assisted Software Engineering across the V-Cycle
 
 <div class="pt-10 flex justify-center">
-  <img :src="'/images/cairomotive-logo.svg'" alt="Cairo Motive" class="h-20" />
+  <img :src="'/images/cairomotive-logo.svg'" alt="CairoMotive" class="h-20" />
 </div>
 
 <div class="abs-bl m-6 text-sm opacity-70 text-left">
   <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
-  <div>Cairo Motive · {{ new Date().getFullYear() }}</div>
+  <div>CairoMotive · {{ new Date().getFullYear() }}</div>
 </div>
 
 <!--
 Presenter notes:
 - Welcome the audience.
-- One line: Zenith brings AI agents to the automotive V-Cycle, with flexible
+- One line: Arch brings AI agents to the automotive V-Cycle, with flexible
   deployment — from managed cloud to fully self-hosted — so teams control where
   their code and requirements live.
 - State what the talk covers: team, problem, architecture, the V-Cycle
@@ -103,11 +103,11 @@ layout: default
 </div>
 
 <div class="mt-8 text-sm opacity-70 text-center">
-Supervised by Prof. Dr. Hazem Abbas · in collaboration with Cairo Motive
+Supervised by Prof. Dr. Hazem Abbas · in collaboration with CairoMotive
 </div>
 
 <!--
-Introduce the team briefly. Mention the Cairo Motive collaboration and the
+Introduce the team briefly. Mention the CairoMotive collaboration and the
 supervising staff.
 -->
 
@@ -141,7 +141,7 @@ layout: default
 
 <!--
 Set the stage: V-Cycle + standards demand traceability; AI can help; but teams
-need control over deployment and data governance. That flexibility is what Zenith
+need control over deployment and data governance. That flexibility is what Arch
 provides.
 -->
 
@@ -185,7 +185,7 @@ layout: default
 
 <v-clicks>
 
-- A **self-hostable** platform that orchestrates AI agents for SE tasks
+- A **self-hosted** platform that orchestrates AI agents for SE tasks
 - A **service-based** architecture with a shared data layer for consistency
 - **End-to-end type-safe** APIs (with language-agnostic OpenAPI)
 - **Asynchronous** AI processing via a message broker
@@ -604,7 +604,7 @@ layout: default
 
 <!--
 Tie back to the intro: this is the manual, error-prone work that the standards
-demand and that Zenith automates.
+demand and that Arch automates.
 -->
 
 ---
@@ -788,7 +788,7 @@ class: text-center
 Questions & Discussion
 
 <div class="pt-8 opacity-70 text-sm">
-  <div>Zenith · Cairo Motive</div>
+  <div>Arch · CairoMotive</div>
   <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
 </div>
 
