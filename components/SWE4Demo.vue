@@ -1,12 +1,19 @@
 <template>
   <div class="mt-2">
     <Transition name="slide-fade" mode="out-in">
-      <div v-if="step === 'intro'" key="intro" class="grid grid-cols-6 gap-4 mt-2 cursor-pointer" @click="step = 'generate'">
+      <div
+        v-if="step === 'intro'"
+        key="intro"
+        class="grid grid-cols-6 gap-4 mt-2 cursor-pointer"
+        @click="step = 'generate'"
+      >
         <div class="col-span-2 pt-8">
           <div class="text-white font-semibold text-base">Upload Code</div>
           <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
             <li>Upload C/C++ source code via zip or GitHub import</li>
-            <li>Uploaded files appear in a file tree and can be viewed in the built-in code viewer</li>
+            <li>
+              Uploaded files appear in a file tree and can be viewed in the built-in code viewer
+            </li>
           </ul>
         </div>
         <div class="col-span-4 flex items-center justify-center mt-2">
@@ -23,38 +30,84 @@
           class="inline-flex items-center justify-center gap-1.5 h-10 rounded-md px-4 text-sm font-medium border border-white/20 bg-[#f9996c] text-[#0c0c0c] shadow-sm cursor-pointer transition-all hover:brightness-110"
           @click="step = 'viewer'"
         >
-          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+          <svg
+            class="w-4 h-4 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+            />
           </svg>
           Generate Unit Tests
         </button>
       </div>
 
-      <div v-else key="viewer" class="flex gap-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] mt-8 mb-6" style="height: 340px">
+      <div
+        v-else
+        key="viewer"
+        class="flex gap-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] mt-8 mb-6"
+        style="height: 340px"
+      >
         <!-- File Tree -->
-        <div class="shrink-0 flex flex-col min-h-0 overflow-hidden border-r border-white/10" style="width: 220px">
+        <div
+          class="shrink-0 flex flex-col min-h-0 overflow-hidden border-r border-white/10"
+          style="width: 220px"
+        >
           <div class="flex-1 min-h-0 overflow-y-auto py-1 swe4-scrollbar">
             <div
               v-for="item in visibleItems"
               :key="item.path"
               class="flex items-center gap-1 cursor-pointer select-none text-xs transition-colors"
-              :style="{ paddingLeft: item.depth * 12 + (item.node.type === 'file' ? 20 : 4) + 'px' }"
-              :class="[selectedPath === item.node.path ? 'bg-[#f9996c]/10 text-[#f9996c]' : 'hover:bg-white/[0.03] text-white/70']"
+              :style="{
+                paddingLeft: item.depth * 12 + (item.node.type === 'file' ? 20 : 4) + 'px',
+              }"
+              :class="[
+                selectedPath === item.node.path
+                  ? 'bg-[#f9996c]/10 text-[#f9996c]'
+                  : 'hover:bg-white/[0.03] text-white/70',
+              ]"
               @click="onNodeClick(item.node)"
             >
               <span v-if="item.node.type === 'folder'" class="flex items-center gap-1 min-w-0 py-1">
                 <svg
                   class="w-3.5 h-3.5 shrink-0 opacity-50 transition-transform duration-150"
                   :class="isOpen(item.node.path) ? 'rotate-90' : ''"
-                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
                 >
                   <path d="m9 18 6-6-6-6" />
                 </svg>
-                <svg class="w-3.5 h-3.5 shrink-0 text-[#f9996c]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" /></svg>
+                <svg
+                  class="w-3.5 h-3.5 shrink-0 text-[#f9996c]/60"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
+                  />
+                </svg>
                 <span class="truncate">{{ item.node.name }}</span>
               </span>
               <span v-else class="flex items-center gap-1.5 min-w-0 py-0.5">
-                <svg class="w-3.5 h-3.5 shrink-0 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z" /><path d="M14 2v6h6" /></svg>
+                <svg
+                  class="w-3.5 h-3.5 shrink-0 opacity-40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z" />
+                  <path d="M14 2v6h6" />
+                </svg>
                 <span class="truncate">{{ item.node.name }}</span>
               </span>
             </div>
@@ -64,12 +117,25 @@
         <!-- Code Viewer -->
         <div class="flex-1 min-w-0 overflow-hidden flex flex-col">
           <div v-if="currentFile" class="flex flex-col h-full">
-            <div class="flex items-center gap-2 px-4 py-1.5 border-b border-white/10 bg-white/[0.02] text-xs text-white/60">
-              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z" /><path d="M14 2v6h6" /></svg>
-              {{ currentFile.path.split('/').pop() }}
+            <div
+              class="flex items-center gap-2 px-4 py-1.5 border-b border-white/10 bg-white/[0.02] text-xs text-white/60"
+            >
+              <svg
+                class="w-3.5 h-3.5 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z" />
+                <path d="M14 2v6h6" />
+              </svg>
+              {{ currentFile.path.split("/").pop() }}
             </div>
             <div class="flex-1 overflow-auto p-0 swe4-scrollbar">
-              <pre class="text-[11px] leading-relaxed font-mono p-4 m-0 bg-transparent"><code v-html="highlightedCode" /></pre>
+              <pre
+                class="text-[11px] leading-relaxed font-mono p-4 m-0 bg-transparent"
+              ><code v-html="highlightedCode" /></pre>
             </div>
           </div>
           <div v-else class="flex items-center justify-center h-full">
@@ -82,21 +148,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue"
+import { ref, computed } from "vue";
 
-const props = withDefaults(defineProps<{ startStep?: "intro" | "generate" | "viewer" }>(), { startStep: "intro" })
-const step = ref(props.startStep)
+const props = withDefaults(defineProps<{ startStep?: "intro" | "generate" | "viewer" }>(), {
+  startStep: "intro",
+});
+const step = ref(props.startStep);
 
 interface FileNode {
-  name: string
-  path: string
-  type: "file" | "folder"
-  children?: FileNode[]
-  content?: string
+  name: string;
+  path: string;
+  type: "file" | "folder";
+  children?: FileNode[];
+  content?: string;
 }
 
-const selectedPath = ref<string | null>(null)
-const openFolders = ref<Set<string>>(new Set())
+const selectedPath = ref<string | null>(null);
+const openFolders = ref<Set<string>>(new Set());
 
 const fileTree: FileNode[] = [
   {
@@ -432,94 +500,96 @@ $(BUILD_DIR)/test_runner: $(TEST_DIR)/test_bms_current_limit.c $(TEST_DIR)/test_
 clean:
 \trm -rf $(BUILD_DIR)`,
   },
-]
+];
 
 interface FlatItem {
-  node: FileNode
-  depth: number
-  path: string
+  node: FileNode;
+  depth: number;
+  path: string;
 }
 
 function flattenTree(nodes: FileNode[], depth: number, openSet: Set<string>): FlatItem[] {
-  const result: FlatItem[] = []
+  const result: FlatItem[] = [];
   for (const node of nodes) {
-    result.push({ node, depth, path: node.path })
+    result.push({ node, depth, path: node.path });
     if (node.type === "folder" && openSet.has(node.path)) {
-      result.push(...flattenTree(node.children ?? [], depth + 1, openSet))
+      result.push(...flattenTree(node.children ?? [], depth + 1, openSet));
     }
   }
-  return result
+  return result;
 }
 
-const visibleItems = computed(() => flattenTree(fileTree, 0, openFolders.value))
+const visibleItems = computed(() => flattenTree(fileTree, 0, openFolders.value));
 
 function isOpen(path: string): boolean {
-  return openFolders.value.has(path)
+  return openFolders.value.has(path);
 }
 
 function toggleFolder(path: string) {
-  const next = new Set(openFolders.value)
+  const next = new Set(openFolders.value);
   if (next.has(path)) {
-    next.delete(path)
+    next.delete(path);
   } else {
-    next.add(path)
+    next.add(path);
   }
-  openFolders.value = next
+  openFolders.value = next;
 }
 
 function findFile(path: string): FileNode | undefined {
   function walk(nodes: FileNode[]): FileNode | undefined {
     for (const node of nodes) {
-      if (node.path === path) return node
+      if (node.path === path) return node;
       if (node.children) {
-        const found = walk(node.children)
-        if (found) return found
+        const found = walk(node.children);
+        if (found) return found;
       }
     }
-    return undefined
+    return undefined;
   }
-  return walk(fileTree)
+  return walk(fileTree);
 }
 
 const currentFile = computed(() => {
-  if (!selectedPath.value) return null
-  return findFile(selectedPath.value) ?? null
-})
+  if (!selectedPath.value) return null;
+  return findFile(selectedPath.value) ?? null;
+});
 
 const highlightedCode = computed(() => {
-  if (!currentFile.value?.content) return ""
-  const code = currentFile.value.content
+  if (!currentFile.value?.content) return "";
+  const code = currentFile.value.content;
 
-  const keywords = /\b(auto|break|case|const|continue|default|do|else|enum|extern|for|goto|if|inline|int|int16_t|include|main|register|return|signed|sizeof|static|struct|switch|typedef|uint16_t|union|unsigned|void|volatile|while|#define|#ifndef|#endif|#include)\b/g
-  const macros = /(#\s*(include|define|ifndef|endif)\b)/g
-  const strings = /("[^"]*")/g
-  const comments = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g
-  const numbers = /\b(\d+)\b/g
-  const preprocessor = /(#\s*include\s*<[^>]+>)/g
+  const keywords =
+    /\b(auto|break|case|const|continue|default|do|else|enum|extern|for|goto|if|inline|int|int16_t|include|main|register|return|signed|sizeof|static|struct|switch|typedef|uint16_t|union|unsigned|void|volatile|while|#define|#ifndef|#endif|#include)\b/g;
+  const macros = /(#\s*(include|define|ifndef|endif)\b)/g;
+  const strings = /("[^"]*")/g;
+  const comments = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g;
+  const numbers = /\b(\d+)\b/g;
+  const preprocessor = /(#\s*include\s*<[^>]+>)/g;
 
-  let html = code
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
+  let html = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-  html = html.replace(preprocessor, (m) => `<span class="text-[#fbae8c]">${m}</span>`)
-  html = html.replace(comments, (m) => `<span class="text-white/30 italic">${m}</span>`)
-  html = html.replace(strings, (m) => `<span class="text-[#95b9ba]">${m}</span>`)
-  html = html.replace(keywords, (m) => `<span class="text-[#f9996c]">${m}</span>`)
-  html = html.replace(numbers, (m) => `<span class="text-[#ac97bf]">${m}</span>`)
+  const tokens: string[] = [];
+  const hold = (s: string) => `@@TOK_${tokens.push(s) - 1}@@`;
 
-  return html
-})
+  html = html.replace(comments, (m) => hold(`<span class="text-white/30 italic">${m}</span>`));
+  html = html.replace(strings, (m) => hold(`<span class="text-[#95b9ba]">${m}</span>`));
+  html = html.replace(preprocessor, (m) => hold(`<span class="text-[#fbae8c]">${m}</span>`));
+  html = html.replace(keywords, (m) => hold(`<span class="text-[#f9996c]">${m}</span>`));
+  html = html.replace(numbers, (m) => hold(`<span class="text-[#ac97bf]">${m}</span>`));
+  html = html.replace(/@@TOK_(\d+)@@/g, (_, i) => tokens[Number(i)] ?? "");
+
+  return html;
+});
 
 function onNodeClick(node: FileNode) {
   if (node.type === "folder") {
-    toggleFolder(node.path)
+    toggleFolder(node.path);
   } else {
-    selectedPath.value = node.path
+    selectedPath.value = node.path;
   }
 }
 
-openFolders.value = new Set(["src", "tests"])
+openFolders.value = new Set(["src", "tests"]);
 </script>
 
 <style>

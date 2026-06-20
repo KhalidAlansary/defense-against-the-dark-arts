@@ -132,6 +132,7 @@
         v-if="showModal && selectedSpec"
         class="fixed inset-0 z-[9999] flex items-center justify-center"
         @click.self="showModal = false"
+        @keydown.esc="showModal = false"
       >
         <div class="absolute inset-0 bg-black/60" />
         <div

@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
+import { computed } from "vue";
 
 const SWE1_TABS = [
   { id: "files", label: "Files" },
@@ -31,12 +31,12 @@ const SWE1_TABS = [
   { id: "traceability", label: "Traceability Matrix" },
   { id: "communication-matrix", label: "Communication Matrix" },
   { id: "validation", label: "Validation" },
-]
+];
 
 const SWE4_TABS = [
   { id: "unit-tests", label: "Unit Tests" },
   { id: "unit-tests-coverage", label: "Tests Coverage Report" },
-]
+];
 
 const SWE6_TABS = [
   { id: "files", label: "Files" },
@@ -44,18 +44,21 @@ const SWE6_TABS = [
   { id: "traceability", label: "Traceability Matrix" },
   { id: "communication-matrix", label: "Communication Matrix" },
   { id: "validation", label: "Validation" },
-]
+];
 
 const props = defineProps<{
-  swe: "swe1" | "swe4" | "swe6"
-  active: string
-}>()
+  swe: "swe1" | "swe4" | "swe6";
+  active: string;
+}>();
 
 const tabs = computed(() => {
   switch (props.swe) {
-    case "swe1": return SWE1_TABS
-    case "swe4": return SWE4_TABS
-    case "swe6": return SWE6_TABS
+    case "swe1":
+      return SWE1_TABS;
+    case "swe4":
+      return SWE4_TABS;
+    case "swe6":
+      return SWE6_TABS;
   }
-})
+});
 </script>
