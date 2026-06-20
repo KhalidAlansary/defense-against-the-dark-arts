@@ -277,32 +277,6 @@ decoupled behind RabbitMQ.
 
 ---
 
-# Core Components
-
-<div class="max-w-3xl mx-auto mt-6">
-
-| Component               | Responsibility                                       |
-| ----------------------- | ---------------------------------------------------- |
-| **Web App** (Next.js)   | User interface and client-side workflows             |
-| **API Gateway** (Angie) | Unified entry point, JWT validation, rate limiting   |
-| **Auth Service**        | Authentication, users, organizations, RBAC           |
-| **Project Service**     | Projects, membership, AI request orchestration       |
-| **Resource Service**    | File upload/download, storage abstraction            |
-| **PostgreSQL**          | Shared relational database                           |
-| **MinIO**               | Shared S3-compatible object storage                  |
-| **RabbitMQ**            | Asynchronous AI task queue                           |
-
-</div>
-
-<!--
-Walk the table top to bottom. The gateway does cross-cutting concerns so the
-services stay focused. Resource service hides storage behind presigned URLs.
--->
-
----
-layout: default
----
-
 # Technology Stack
 
 <div class="grid grid-cols-3 gap-6 mt-6">
@@ -526,353 +500,6 @@ layout: two-cols
 
 <div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
   <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
-</div>
-
-<!--
-This is what makes the platform responsive and scalable. The protobuf contract
-gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
-comes from per-SWE conditional polling.
--->
-
----
-layout: section
----
-
-# Database Redesign 
-A complete architectural redesign — from JSON-centric monolith to a scalable, multi-tenant, resource-centric platform.
-
----
-layout: default
----
-
-# The Database Was Holding Us Back.
-
-<v-clicks>
-<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
-
-> **JSON-Based Resource Storage** <br /> - Every retrieval required preprocessing to identify the resource type and extract the required fields. <br /> - Increased application complexity and reduced efficiency.
-
-</div>
-</v-clicks>
-
-<v-clicks>
-<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
-
-> **Lack of Structured Storage:**  <br /> - Artifacts had no relationships, no validation, no traceability in the database.
-
-</div>
-</v-clicks>
-
-<v-clicks>
-<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
-
-> **Monolithic Resource Schema:** <br /> - Supporting new artifact types required schema modifications. <br />- Large numbers of nullable columns accumulated over time. <br /> - Increased maintenance effort and risk of breaking existing functionality.
-
-</div>
-</v-clicks>
-
----
-layout: default
----
-
-# Resource-Centric Architecture
-
-<div class="flex gap-6">
-  <div class="flex-[8] flex flex-col gap-6">
-    <div>
-    A generic Resource entity was introduced to represent all engineering artifacts.
-    </div>
-    <div>
-    <h4>Design Principles</h4>
-    <b>Inheritance</b><br />
-      - Common metadata defined once in the Resource entity & shared across all types<br />
-      <b>Polymorphism</b><br />
-      - Each artifact stores only what makes it unique.<br />
-      - Different resource types are handled through a common abstraction.<br />
-    </div>
-    
-    
-  </div>
-
-  <div class="flex-[2]">
-
-<ZoomPanContainer title="Resource-Centric Diagram" hint="Drag to move · wheel to zoom · Esc resets" :initial-scale="0.85" :min-scale="0.45" :max-scale="2.4">
-
-```mermaid {scale: 0.25}
-erDiagram
-  ORGANIZATION ||--o{ RESOURCE : owns
-  PROJECT ||--o{ RESOURCE : contains
-  TEAM ||--o{ RESOURCE : accesses
-  RESOURCE {
-      uuid id PK
-      string name
-      enum type
-      uuid projectId FK
-      string organizationId FK
-      string teamId FK
-  }
-  MINIO_FILE_STORAGE {
-      uuid id PK
-      uuid resourceId FK
-      int version
-      bool isActive
-      string objectName
-  }
-  USER_FILE {
-      uuid id PK
-      uuid minioFileId FK
-  }
-  CODE {
-      uuid id PK
-      uuid minioFileId FK
-      int version
-      int totalTests
-      int passedTests
-      int failedTests
-  }
-  SYSTEM_REQUIREMENT {
-      uuid id PK
-      uuid resourceId FK
-      uuid activeVersionId FK
-  }
-  SYSTEM_REQUIREMENT_VERSION {
-      uuid id PK
-      uuid requirementId FK
-      int version
-      uuid previousVersionId FK
-  }
-  SOFTWARE_REQUIREMENT {
-      uuid id PK
-      uuid resourceId FK
-      uuid activeVersionId FK
-  }
-  SOFTWARE_REQUIREMENT_VERSION {
-      uuid id PK
-      uuid requirementId FK
-      int version
-      uuid previousVersionId FK
-  }
-  TEST_SPEC {
-      uuid id PK
-      uuid resourceId FK
-      uuid activeVersionId FK
-  }
-  TEST_SPEC_VERSION {
-      uuid id PK
-      uuid testSpecId FK
-      int version
-      uuid previousVersionId FK
-  }
-  RESOURCE ||--o{ MINIO_FILE_STORAGE : stores
-  MINIO_FILE_STORAGE ||--o{ USER_FILE : uploaded_as
-  MINIO_FILE_STORAGE ||--o{ CODE : analyzed_as
-  RESOURCE ||--|| SYSTEM_REQUIREMENT : represents
-  RESOURCE ||--|| SOFTWARE_REQUIREMENT : represents
-  RESOURCE ||--|| TEST_SPEC : represents
-  SYSTEM_REQUIREMENT ||--o{ SYSTEM_REQUIREMENT_VERSION : versions
-  SOFTWARE_REQUIREMENT ||--o{ SOFTWARE_REQUIREMENT_VERSION : versions
-  TEST_SPEC ||--o{ TEST_SPEC_VERSION : versions
-```
-
-</ZoomPanContainer>
-
-  </div>
-</div>
-
-<!--
-<div>
-    <h4>Benefits</h4>
-    - No redundancy, no nullable column sprawl<br />
-    - New types onboard without touching the core schema
-</div>
--->
-
----
-layout: default
----
-
-# SaaS and Multi-Tenant Design
-
-<div class="flex gap-6">
-
-  <div class="flex-[6] flex flex-col gap-6">
-  <p>Every entity in the database is scoped to an Organization at the schema level.<br /><br />
-  <b> Logical Isolation</b><br />
-  Tenant data is separated by design, not by convention.<br /><br />
-  <b>Security</b><br />
-  No cross-tenant data leakage enforced at the schema level.<br /><br />
-  <b>SaaS Scalability</b><br />
-  Add organizations without touching the core architecture.
-  
-
-  </p>
-
-
-  </div>
-
-  <div class="flex-[4] flex flex-col items-center text-center gap-4">
-
-  <b class="text-lg font-semibold">
-    Access Control Structure
-  </b>
-
-  <div class="flex flex-col items-center">
-    <!-- Organization -->
-    <div class="w-80 bg-[#f9996c] text-white text-center py-4 rounded-xl font-semibold text-lg">
-      Organization
-    </div>
-    <div class="h-6 border-l-2 border-dashed border-[#fbb08f]"></div>
-    <!-- Teams -->
-    <div class="w-64 bg-[#fbb08f] text-white text-center py-4 rounded-xl font-semibold text-lg">
-      Teams
-    </div>
-    <div class="h-6 border-l-2 border-dashed border-[#fcd0bd]"></div>
-    <!-- Projects -->
-    <div class="w-52 bg-[#fcd0bd] text-gray-900 text-center py-4 rounded-xl font-semibold text-lg">
-      Projects
-    </div>
-    <div class="h-6 border-l-2 border-dashed border-[#fde4d7]"></div>
-    <!-- Roles -->
-    <div class="w-40 bg-[#fde4d7] text-gray-900 text-center py-4 rounded-xl font-semibold text-lg">
-      Roles &amp; Access
-    </div>
-  </div>
-  <span class="text-sm max-w-xs">
-    Flexible ownership model for collaborative engineering environments.
-  </span>
-
-</div>
-
-</div>
-
----
-layout: default
----
-
-# Versioning and History
-
-<div class="flex gap-6">
-  <div class="flex-1 flex flex-col text-sm gap-2">
-
-  <h4>Immutable Versioning</h4>
-
-  Instead of updating records in place, every artifact type has a dedicated version entity. Every change is recorded, every state is recoverable.
-
-  <h4>Benefits</h4>
-
-  <ul class="list-disc list-inside space-y-1">
-    <li>Full auditability</li>
-    <li>Complete history on every artifact</li>
-    <li>Rollback capability</li>
-  </ul>
-
-  </div>
-
-  <div class="flex-1 font-mono text-xs  p-2 leading-relaxed ">
-  <div class= "border-solid border border-white rounded p-2 my-[25px]">
-      SystemRequirement<br/>
-    &nbsp;&nbsp;└── SystemRequirementVersion<br/>
-    SoftwareRequirement<br/>
-    &nbsp;&nbsp;└── SoftwareRequirementVersion<br/>
-    TestSpec<br/>
-    &nbsp;&nbsp;└── TestSpecVersion
-    </div>
-  </div>
-</div>
-
-<div class="mt-4">
-
-```mermaid {scale: 0.8}
-flowchart LR
-    V1["V1"]
-    V2["V2"]
-    V3["V3\n(Current Active)"]
-    V4["V4"]
-
-    V1 -->|created before| V2
-    V2 -->|created before| V3
-    V3 -->|created before| V4
-
-    V3 -. previousActiveVersion .-> V1
-
-    classDef active fill:#f9996c,color:#fff,stroke:#f9996c;
-    classDef inactive fill:#f8f8f8,color:#333,stroke:#ccc;
-
-    class V3 active;
-    class V1,V2,V4 inactive;
-```
-
-</div>
-
----
-layout: default
----
-
-# Traceability, Versioning, and Knowledge Graph Support
-
-<div class="flex gap-8 mt-4">
-
-  <div class="flex-[5] flex flex-col gap-4 text-sm">
-    <div>
-      <h4 class="text-base font-semibold mb-1">Relationship-Based Architecture</h4>
-      <p>Dedicated relationship entities connect engineering artifacts.</p>
-    </div>
-    <div>
-      <h4 class="text-base font-semibold mb-1">Knowledge Graph Integration</h4>
-      <p>The same relationships used for traceability are also used by the Knowledge Graph Visualizer.</p>
-      <p class="mt-2 font-semibold">Benefits:</p>
-      <ul class="list-disc list-inside mt-1 space-y-1">
-        <li>Single source of truth</li>
-        <li>No separate graph database</li>
-        <li>No data synchronization issues</li>
-        <li>Real-time visualization of engineering relationships</li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="flex-[5] flex flex-col gap-4">
-
-```mermaid {scale: 0.5}
-erDiagram
-    SYSTEM_REQUIREMENT {
-        UUID id
-        STRING title
-    }
-    SOFTWARE_REQUIREMENT {
-        UUID id
-        STRING title
-    }
-    RELATIONSHIP {
-        UUID id
-        UUID source_id
-        UUID target_id
-        STRING type
-    }
-    SYSTEM_REQUIREMENT ||--o{ RELATIONSHIP : source
-    SOFTWARE_REQUIREMENT ||--o{ RELATIONSHIP : target
-```
-
-```mermaid {scale: 0.5}
-graph TD
-    SR["System Requirement"]
-    SW1["Software Requirement A"]
-    SW2["Software Requirement B"]
-    TS1["Test Spec A"]
-    TS2["Test Spec B"]
-    F1["FIBEX Chunk A"]
-    F2["FIBEX Chunk B"]
-
-    SR --> SW1
-    SR --> SW2
-    SW1 --> TS1
-    SW2 --> TS2
-    SW1 --> F1
-    SW2 --> F2
-```
-
-  </div>
-
 </div>
 
 ---
@@ -1257,48 +884,143 @@ Beyond the V-Cycle
 
 ---
 
-# Cybersecurity & Functional Safety
+# Cybersecurity — TARA
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="opacity-60 text-sm">Threat Analysis &amp; Risk Assessment · ISO/SAE 21434</div>
 
-<div>
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-4 items-start">
+
+<div class="text-sm">
 
 <v-clicks>
 
-**ISO 21434 — Cybersecurity**
-
-- **TARA** — Threat Analysis & Risk Assessment
-- **SECO** — Security Concepts report generation
+- **Full ISO/SAE 21434 chain** — assets, threat scenarios, attack paths, damage and feasibility, through to the derived **cybersecurity goals**, each stage on its own tab
+- **Forward and backward trace links** relate each threat to its asset, attack path, risk and goal; selecting a link navigates to the referenced entry
+- **Editable throughout**, with the full report exportable to **Excel**
 
 </v-clicks>
 
 </div>
 
 <div>
-
-<v-clicks>
-
-**ISO 26262 — Functional Safety**
-
-- **HARA** — Hazard Analysis & Risk Assessment
-- **FMEA** — Failure Mode & Effects Analysis (AIAG/VDA)
-- **FTA** — Fault Tree Analysis with cut-set identification
-
-</v-clicks>
-
+  <TaraDemo />
+  <div class="mt-2 text-center text-xs opacity-55 leading-relaxed">
+  Switch between the three tabs, then follow a <span class="text-[#f9996c]">trace link</span> — the report navigates to the linked entry and highlights it.
+  </div>
 </div>
-
-</div>
-
-<div v-click class="mt-8 text-sm opacity-80">
-
-Each workspace provides **AI-assisted report generation**, structured data management, and professional **Excel export** with domain-specific formatting.
 
 </div>
 
 <!--
-These extend the platform beyond pure V-Cycle development into the
-safety/security analysis that automotive programs require alongside it.
+TARA workspace: the bullets are the talking points, the demo on the right is the
+proof. Click a trace link live to land the "everything stays connected" point.
+The analysis itself is produced by the AI engine — this is the UI.
+-->
+
+---
+layout: default
+---
+
+# Cybersecurity — SECO
+
+<div class="opacity-60 text-sm">Security Concept · ISO/SAE 21434</div>
+
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-3 items-start">
+
+<div class="text-sm">
+
+<v-clicks>
+
+- **Document-style editor** — narrative sections (introduction, scope, system description) alongside the goals and measures tables, with a **contents** sidebar
+- Records cybersecurity **goals and security measures**, with **goal ↔ measure coverage** matrices relating the two
+- Exports to a formatted **Word .docx** generated from a standardized template (cover page, contents and tables)
+
+</v-clicks>
+
+</div>
+
+<div>
+  <SecoDemo />
+  <div class="mt-2 text-center text-xs opacity-55 leading-relaxed">
+  Scroll the document and the <span class="text-[#f9996c]">contents</span> track the current section; selecting a section navigates to it.
+  </div>
+</div>
+
+</div>
+
+<div v-click class="mt-3 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying over its cybersecurity goals and system-description document — or independently, from its own uploaded inputs.
+</div>
+
+<!--
+SECO workspace: bullets + the document demo side by side. Close with the link to
+TARA — a SECO can build on a finished TARA or run standalone.
+-->
+
+---
+
+# Functional Safety — ISO 26262
+
+<div class="text-sm opacity-80">
+Three <b>separate</b> workspaces — but a deliberately <b>shared UI and flow</b>:
+</div>
+
+<div v-click class="mt-2 mb-5 p-3 rounded bg-gray-400/10 text-sm">
+Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → AI <b>generate</b> (re-run anytime) → multi-view report → <b>export</b>
+</div>
+
+<div class="grid grid-cols-3 gap-4">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">HARA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Hazard Analysis &amp; Risk Assessment</div>
+  <div class="text-xs opacity-80 mt-2">A workspace to explore the hazard analysis — safety goals grouped by <b>ASIL</b> in a hierarchy view, or the full assessment as tables, with the ISO 26262 reference on hand.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">FTA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Fault Tree Analysis</div>
+  <div class="text-xs opacity-80 mt-2">Three linked views of the fault tree — the <b>tree</b> itself, a <b>cross-ASIL</b> coverage audit, and <b>minimal cut sets</b> — to follow how failures lead to a hazard.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">FMEA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Failure Mode &amp; Effects Analysis</div>
+  <div class="text-xs opacity-80 mt-2">An interactive <b>worksheet</b> across three views — <b>Risk Overview</b>, <b>Failure Detail</b>, and <b>Action Summary</b> — with filtering and inline review of each failure mode.</div>
+</div>
+
+</div>
+
+<div v-click class="mt-5 text-sm opacity-70">
+Shared shell across all three — dropzone, progress polling, a segmented view-toggle, and a slide-out legend / reference sheet — so only the analysis inside differs.
+</div>
+
+<div class="absolute bottom-4 left-12 right-12 text-xs opacity-55">
+<span class="text-[#f9996c]">*</span> Scope review is an FTA &amp; FMEA step — HARA generates straight from the upload.
+</div>
+
+<!--
+Three separate workspaces that share components, so the UI and flow feel the same.
+Cards: HARA (ASIL via S×E×C, derives safety goals), FTA (cut sets + cross-ASIL),
+FMEA (RPN + Action Priority). Footnotes carry the two real differences: scope
+review is FTA/FMEA only, and HARA has no export.
+-->
+
+---
+layout: default
+---
+
+# Functional Safety — Live View
+
+<div class="opacity-60 text-sm">HARA, FTA and FMEA — three workspaces framed by one shared shell</div>
+
+<div class="max-w-3xl mx-auto mt-4">
+  <FusaDemo />
+</div>
+
+<!--
+The demo is the argument: the workspace switcher plus the per-workspace view toggle
+show three separate analyses sharing one UI. Example rows are illustrative.
 -->
 
 ---
