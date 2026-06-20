@@ -575,13 +575,13 @@ layout: default
 # Resource-Centric Architecture
 
 <div class="flex gap-6">
-  <div class="flex flex-col gap-6">
+  <div class="flex-[6] flex flex-col gap-6">
     <div>Card 1</div>
     <div>Card 2</div>
     <div>Card 3</div>
   </div>
 
-  <div>
+  <div class="flex-[4]">
     ```mermaid {scale: 0.52}
     erDiagram
       ORGANIZATION ||--o{ RESOURCE : owns
