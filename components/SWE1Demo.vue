@@ -61,7 +61,6 @@
               @click.stop
               @keydown.esc="settingsOpen = false"
               tabindex="-1"
-              tabindex="-1"
             >
               <div class="flex flex-col gap-0.5">
                 <span class="text-[10px] font-medium opacity-50 uppercase tracking-wider px-2 py-1"
@@ -234,7 +233,6 @@
                       </div>
 
                       <div class="flex shrink-0 items-center justify-end gap-1">
-
                         <div class="relative inline-flex">
                           <button
                             class="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-medium cursor-pointer transition-colors"
