@@ -1,7 +1,7 @@
 ---
 # Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
-title: "AI Agents for the Automotive V-Cycle"
+title: "Web-based AI-powered SDLC Automation Platform"
 titleTemplate: "%s — CairoMotive"
 info: |
   ## A Platform for AI-Assisted Software Engineering
@@ -38,7 +38,7 @@ exportFilename: defense
 hideInToc: false
 ---
 
-# AI Agents for the Automotive V-Cycle
+# Web-based AI-powered SDLC Automation Platform
 
 A Platform for AI-Assisted Software Engineering across the V-Cycle
 
