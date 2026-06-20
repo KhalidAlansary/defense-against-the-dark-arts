@@ -588,6 +588,200 @@ demand and that the platform automates.
 layout: section
 ---
 
+# 4.5. Communication Matrix (FIBEX)
+
+---
+layout: default
+---
+
+# Communication Matrix
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div>
+
+<div class="text-[#f9996c] font-semibold text-base mb-3">Validation Report</div>
+
+<v-clicks>
+
+- Upload communication architecture XML files
+- **Automated quality checks dashboard** 
+
+
+</v-clicks>
+
+</div>
+
+<div>
+
+<div class="text-[#f9996c] font-semibold text-base mb-3">Validation Result</div>
+
+<v-clicks>
+
+- **Pass/Fail** status with detailed findings
+- **Issues & errors** flagged for correction
+- **Warnings** for inconsistencies
+- Summary of all network components checked
+
+
+</v-clicks>
+
+</div>
+
+</div>
+
+
+
+---
+layout: center
+---
+
+# Communication Matrix — Validation Report
+
+<img :src="'/images/fibex1.png'" alt="Validation Report" class="max-h-96 rounded" />
+---
+layout: center
+---
+
+# Communication Matrix — Validation Report
+
+<img :src="'/images/fibex2.png'" alt="Mapping Chunks" class="max-h-96 rounded" />
+---
+layout: two-cols
+layoutClass: gap-8
+---
+
+# Communication Matrix
+
+<v-clicks>
+
+**Mapping Chunks to Requirements**
+
+- Extract components from the validated network architecture
+- **Automatically match** each component to the corresponding requirements
+- Ensures every network element is justified by a requirement
+- Spot **coverage gaps** in the requirements
+
+
+</v-clicks>
+
+::right::
+
+<div class="mt-14" />
+
+
+---
+layout: center
+---
+
+# Communication Matrix — Mapping Details
+
+<img :src="'/images/mapping.png'" alt="Mapping Details" class="max-h-96 rounded" />
+
+---
+layout: section
+---
+
+# 4.6. Requirement Validation
+
+Review, approve, and refine generated requirements
+
+---
+layout: two-cols
+layoutClass: gap-8
+---
+
+# Requirement Validation
+
+<v-clicks>
+
+**Review & Approve Requirements**
+
+- **SWE.1:** Validate system requirements from uploaded files
+- **SWE.6:** Validate software requirements (generated or uploaded)
+- Automatic analysis checks:
+  - Clarity & completeness
+  - Internal consistency
+  - Redundancies & conflicts
+  - Overall quality metrics
+
+</v-clicks>
+
+::right::
+
+<div class="mt-14" />
+
+<v-clicks>
+
+**User Control**
+
+- **Approve** or **discard** individual requirements
+- Apply changes in batch
+- Only approved requirements can be exported
+
+</v-clicks>
+
+---
+layout: center
+---
+
+# Requirement Validation — Dashboard
+
+<img :src="'/images/validation.jpeg'" alt="Validation Dashboard" class="max-h-96 rounded" />
+
+---
+layout: section
+---
+
+# 4.7. Admin Panel
+
+User management and organization control
+
+---
+layout: two-cols
+layoutClass: gap-8
+---
+
+# User Management
+
+<v-clicks>
+
+**Manage Organization Users**
+
+- View all users with status (Active, Pending)
+- **Search** and filter users
+- Assign **roles** and permissions
+- Track **last active** date
+
+</v-clicks>
+
+::right::
+
+<div class="mt-14" />
+
+<v-clicks>
+
+**User Actions**
+
+- **Add** new users directly
+- **Edit** user details and roles
+- **Delete** users from organization
+- **Send invitations** for new team members
+- Bulk operations support
+
+</v-clicks>
+
+---
+layout: center
+---
+
+# Admin Panel — User Management Dashboard
+
+<img :src="'/images/admin.png'" alt="Admin Dashboard" class="max-h-96 rounded" />
+
+---
+layout: section
+---
+
 # 5. Safety & Security
 
 Beyond the V-Cycle
