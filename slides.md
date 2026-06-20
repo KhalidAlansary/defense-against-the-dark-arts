@@ -298,7 +298,7 @@ decoupled behind RabbitMQ.
 - oRPC + OpenAPI contracts
 - Drizzle ORM
 - Zod schema validation
-- Protocol Buffers (queue)
+- Protobuf + ConnectRPC
 
 </div>
 
@@ -998,6 +998,62 @@ show three separate analyses sharing one UI. Example rows are illustrative.
 -->
 
 ---
+layout: default
+---
+
+# Cross-Service Communication
+
+<div class="text-sm opacity-80 mb-3">The <b>platform backend</b> (TypeScript) and the <b>AI backend</b> (Python) speak different languages — the stack is chosen for a <b>type-safe contract</b> across that boundary.</div>
+
+<div class="flex justify-center mb-3">
+
+```mermaid {scale: 0.45}
+flowchart LR
+  S["Schema · .proto"]
+  S -- "generate" --> TS["Platform backend<br/>typed client (TS)"]
+  S -- "generate" --> PY["AI backend<br/>typed client (Python)"]
+  style S fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+```
+
+</div>
+
+<div class="grid grid-cols-3 gap-4 text-sm">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">Protocol Buffers</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">The contract</div>
+  <div class="text-xs opacity-80 mt-2">One language-neutral schema as the single source of truth — generated into typed clients for both backends, giving <b>compile-time safety</b> across the language boundary. Versioned and backward-compatible.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">ConnectRPC</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Synchronous calls</div>
+  <div class="text-xs opacity-80 mt-2">Server and client are generated from that same schema and run over ordinary <b>HTTP/1.1</b> — no hand-written REST glue or manual validation, and no drift between the two services.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">Message broker</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Asynchronous jobs</div>
+  <div class="text-xs opacity-80 mt-2">AI generation is long-running, so it's <b>decoupled</b> behind a queue: jobs survive restarts, retry on failure, and let AI workers <b>scale out</b> — the platform never blocks on a request.</div>
+</div>
+
+</div>
+
+<div v-click class="mt-4 text-sm opacity-70 text-center">
+Why not plain REST / JSON? With two different-language backends, a schema-first generated contract removes a whole class of integration bugs.
+</div>
+
+<!--
+This slide is about the technology decisions, not the request flow. Three
+choices: (1) Protocol Buffers as a language-neutral, schema-first contract
+generated for both backends — compile-time safety across TypeScript and Python.
+(2) ConnectRPC for synchronous calls, generated from that same schema, over
+plain HTTP/1.1. (3) a message broker for long-running AI jobs, so the platform
+stays responsive and AI workers scale independently. The thread: one schema, no
+drift, fewer integration bugs.
+-->
+
+---
 layout: section
 ---
 
@@ -1007,20 +1063,21 @@ Deployment, tooling, and observability
 
 ---
 
-# DevOps & Developer Experience
+# Secrets Management
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="text-sm opacity-80 mb-4">Two layers, split by audience — runtime infrastructure creds vs. developer & app secrets.</div>
+
+<div class="grid grid-cols-2 gap-6">
 
 <div>
 
+**Runtime — Docker Compose secrets**
+
 <v-clicks>
 
-**Deployment**
-
-- Fully containerized via **Docker Compose**
-- Automated init, **health checks**, startup orchestration
-- Secrets via Compose secrets + OpenBao/Varlock
-- Cloud components swappable for self-hosted equivalents
+- Mounted as **files** at `/run/secrets/…` — never baked into images or env
+- Postgres, MinIO, and Better-Auth credentials
+- Services read them via the `*_FILE` convention
 
 </v-clicks>
 
@@ -1028,14 +1085,13 @@ Deployment, tooling, and observability
 
 <div>
 
+**Dev & app — OpenBao + varlock**
+
 <v-clicks>
 
-**Developer Experience**
-
-- **Turborepo** monorepo with caching
-- **Dev Containers** for reproducible environments
-- CI checks + container publishing pipelines
-- Mocked AI engine for local development
+- LLM-provider keys live in a central **OpenBao** server
+- `varlock` resolves `vaultSecret()` placeholders at **command runtime** — never written to disk
+- `bao login` authenticates each developer
 
 </v-clicks>
 
@@ -1043,15 +1099,212 @@ Deployment, tooling, and observability
 
 </div>
 
-<div v-click class="mt-6 text-sm opacity-70">
+<div v-click class="mt-5 flex justify-center">
 
-Observability: structured logging, centralized aggregation, **Langfuse** AI-workflow tracing, and health endpoints.
+```mermaid {scale: 0.62}
+flowchart LR
+  S[".env.schema<br/>KEY = vaultSecret()"]
+  B[("OpenBao")]
+  V{{"varlock run"}}
+  A["Process env<br/>(runtime only)"]
+  S --> V
+  B -- "secret value" --> V
+  V -- "injected · never on disk" --> A
+  style B fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+  style V fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+```
 
 </div>
 
 <!--
-Self-hosting and reproducibility are the operational backbone. Dev Containers +
-mocked AI engine let the team develop without the real engine running.
+Two distinct mechanisms the deck used to lump together. Compose secrets handle
+the infra credentials at runtime as mounted files. OpenBao + varlock distribute
+the LLM keys to developers: the .env.schema only declares vaultSecret(), and
+varlock pulls the real value from OpenBao when a command runs — nothing sensitive
+is ever written to disk.
+-->
+
+---
+layout: default
+---
+
+# API Gateway & Edge — Angie
+
+<div class="text-sm opacity-80 mb-3">A single <b>Angie</b> config is the platform's front door — three jobs at the edge:</div>
+
+<div class="grid grid-cols-3 gap-3 text-sm">
+  <div class="p-3 rounded-lg bg-gray-400/10"><span class="text-[#f9996c] font-semibold">Reverse proxy</span><div class="opacity-80 text-xs mt-1">Path-based routing to the auth, project, resource, traceability &amp; storage upstreams</div></div>
+  <div class="p-3 rounded-lg bg-gray-400/10"><span class="text-[#f9996c] font-semibold">TLS via ACME</span><div class="opacity-80 text-xs mt-1">Built-in Let's Encrypt client auto-issues &amp; renews certs — no certbot sidecar</div></div>
+  <div class="p-3 rounded-lg bg-gray-400/10"><span class="text-[#f9996c] font-semibold">JWT validation</span><div class="opacity-80 text-xs mt-1">Built-in module verifies signatures at the edge — bad tokens never reach a service</div></div>
+</div>
+
+<div class="mt-4 flex justify-center">
+
+```mermaid {scale: 0.5}
+flowchart LR
+  Client(("Client"))
+  subgraph A["Angie · edge"]
+    TLS["ACME TLS<br/>auto-renew"]
+    JWT["auth_jwt<br/>verify signature"]
+  end
+  Client -- HTTPS --> A
+  A -. "JWKS by kid · cached" .-> AUTH["Auth Service"]
+  A --> P["Project"]
+  A --> R["Resource"]
+  A --> T["Traceability"]
+  A --> W["Web"]
+  style A fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+```
+
+</div>
+
+<div v-click class="mt-3 text-xs opacity-70">
+The JWKS signing keys are fetched once and cached (keyed by the token's <code>kid</code>), so per-request validation adds no round-trip to the auth service.
+</div>
+
+<!--
+Angie (an nginx fork) does three things from one config. Reverse proxy: routes
+/api/* to the right service. ACME: the built-in Let's Encrypt client issues and
+renews TLS certs automatically. JWT: the built-in auth_jwt module validates the
+token signature at the edge using the auth service's JWKS, cached by kid so
+there's no per-request lookup. Unauthenticated routes (login, JWKS) stay open.
+-->
+
+---
+layout: default
+---
+
+# Quality Gates & Deployment
+
+<div class="text-xs opacity-60 mb-2">Two automated PR checks post their results straight onto the pull request:</div>
+
+<div class="grid grid-cols-2 gap-5">
+
+<div>
+
+<div class="text-[#f9996c] font-semibold text-sm">AI Pipeline Preview</div>
+<div class="text-xs opacity-80 mt-1 mb-2">Runs the <b>real pipeline</b> on a fixed sample requirements doc against the live LLM, then <b>upserts a bot comment</b> — reviewers see the <b>behavioural change</b>, not just the code diff.</div>
+
+<div v-click class="rounded-lg border border-gray-500/30 bg-gray-400/5 text-xs overflow-hidden">
+  <div class="px-3 py-1.5 bg-gray-400/15 flex items-center gap-2">
+    <span>🤖</span><span class="font-semibold">github-actions</span><span class="opacity-50">bot · pipeline preview · example</span>
+  </div>
+  <div class="px-3 py-2">
+    <div class="opacity-70">Sample input: <code>reqTest2.docx</code></div>
+    <div class="mt-1"><b>12</b> specs · <b>7</b> requirements · <b>5</b> techniques · <b>38</b> steps</div>
+    <div class="font-mono text-[10px] opacity-80 mt-2 leading-relaxed">
+      | Test Case ID | Tested Req IDs | Objective | … |<br/>
+      | TS-001 | SR-3, SR-7 | Verify boundary handling | … |<br/>
+      | TS-002 | SR-4 | Reject malformed CAN frame | … |
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div>
+
+<div class="text-[#f9996c] font-semibold text-sm">Contract Checks · Buf</div>
+<div class="text-xs opacity-80 mt-1 mb-2">On any <code>.proto</code> change, <b>Buf</b> lints the contract for best practices and detects <b>breaking changes</b> vs. the base branch — so the shared contract can't silently break either backend.</div>
+
+<div v-click class="rounded-lg border border-gray-500/30 bg-gray-400/5 text-xs overflow-hidden">
+  <div class="px-3 py-1.5 bg-gray-400/15 flex items-center gap-2">
+    <span>🤖</span><span class="font-semibold">buf</span><span class="opacity-50">bot · contract checks · example</span>
+  </div>
+  <div class="px-3 py-2">
+    <div class="opacity-70 mb-2">Latest Buf results for this PR</div>
+    <table class="w-full text-[10px] text-center border-collapse [&_th]:border [&_td]:border [&_th]:border-gray-500/20 [&_td]:border-gray-500/20 [&_th]:py-0.5 [&_td]:py-0.5">
+      <thead class="opacity-60"><tr><th>Build</th><th>Format</th><th>Lint</th><th>Breaking</th></tr></thead>
+      <tbody><tr><td>✅ passed</td><td>✅ passed</td><td>✅ passed</td><td class="text-red-400">❌ failed</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold text-sm">Tests on real infrastructure</div>
+  <div class="text-xs opacity-80 mt-1">Integration & e2e run against a <b>real Postgres</b> and the gateway in CI — not mocks. A factory + <b>LIFO cleanup registry</b> isolates each test; <b>Turbo <code>--affected</code></b> runs only what changed.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold text-sm">Migrations gate deploys</div>
+  <div class="text-xs opacity-80 mt-1">A <b>db-migrate</b> container applies Drizzle's <b>versioned SQL</b> on every deploy; services boot only <b>after it succeeds</b> — schema changes ship as code.</div>
+</div>
+
+</div>
+
+<!--
+The headline is the AI Pipeline Preview workflow (pr-pipeline-comment.yml). LLM
+output is non-deterministic, so a normal "assert equals" test doesn't fit. Instead,
+every PR runs the actual pipeline end-to-end on a canonical requirements doc against
+the real LLM, then posts/updates ONE bot comment containing summary stats and the
+full generated test-spec table. Reviewers eyeball the behavioural impact of a change,
+and the raw output is also uploaded as a CI artifact. Second top card: Buf
+(bufbuild/buf-action) lints the shared .proto contract for best practices and detects
+breaking changes vs. the base branch, posting a build/format/lint/breaking status
+table onto the PR so the contract can't silently break either backend. The mock
+shows the gate doing its job — a breaking change caught, blocking the merge. Both
+mock comments show illustrative example data. Bottom row: integration/e2e on real Postgres
++ gateway (not mocks), and the db-migrate gate on deploy. Footer: generic
+linters/type-checks exist but aren't the interesting part.
+-->
+
+---
+layout: default
+---
+
+# Observability — Logs, Traces & Profiling
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+**Structured logs → one pipeline**
+
+<v-clicks>
+
+- **pino** (TS) + **structlog** (Python) emit **JSON to stdout**
+- **Alloy** discovers containers via the Docker socket and relabels by service
+- Ships to **Loki**, explored in **Grafana** — apps ship nothing themselves
+
+</v-clicks>
+
+<div v-click class="mt-3">
+  <img :src="'/images/grafana-logs-screenshot.png'" class="rounded border border-gray-500/20" />
+</div>
+
+</div>
+
+<div>
+
+**AI-specific observability**
+
+<v-clicks>
+
+- **Langfuse** — a LangChain callback traces every nested LLM call; `request_id` groups one run into a single session
+- **pyinstrument** — opt-in wall-clock profiler, one HTML report per message, to find slow pipeline stages
+
+</v-clicks>
+
+<div v-click class="mt-3">
+  <img :src="'/images/langfuse-screenshot.webp'" class="rounded border border-gray-500/20" />
+</div>
+
+</div>
+
+</div>
+
+<!--
+Two halves. Platform logs: pino and structlog both write JSON to stdout; Alloy
+collects from the Docker socket, labels by service, and pushes to Loki for
+Grafana — no log shipping in the apps. AI observability: Langfuse traces the LLM
+calls of a generation run (grouped by request_id), and pyinstrument profiles a
+message end-to-end when enabled, writing an HTML flame report.
 -->
 
 ---
