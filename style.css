@@ -121,20 +121,35 @@ html.dark .slidev-layout,
 }
 .slide-fade-enter-from {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateY(20px);
 }
 .slide-fade-leave-to {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateY(-20px);
 }
 
-/* Animate v-clicks items with a slide-fade */
-[v-click] {
-  transition: all 0.5s ease;
+/* Entrance animation for elements that appear on slide mount */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.slidev-v-click-hidden {
-  opacity: 0;
-  transform: translateX(15px);
+.slide-enter {
+  animation: slide-up 0.8s ease both;
+}
+
+/* Animate v-clicks items with a vertical slide */
+.slidev-vclick-target {
+  transition: all 0.8s ease !important;
+}
+.slidev-vclick-hidden {
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
 }
 
 /* Default slide transition between sections */
@@ -163,4 +178,24 @@ html.dark .slidev-layout,
 .slidev-transition-view-switch-leave-to {
   transform: translateX(-8px) !important;
   opacity: 0 !important;
+}
+
+/* Modal scrollbar matching Zenith's test-spec-modal-scrollbar */
+.test-spec-modal-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.22) rgba(255, 255, 255, 0.06);
+}
+.test-spec-modal-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.test-spec-modal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.06);
+}
+.test-spec-modal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+}
+.test-spec-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
 }
