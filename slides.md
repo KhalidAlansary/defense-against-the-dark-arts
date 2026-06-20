@@ -64,7 +64,6 @@ Presenter notes:
 
 ---
 transition: fade-out
-layout: default
 ---
 
 # Outline
@@ -85,8 +84,6 @@ layout: default
 Roadmap of the talk. Point to the major sections and roughly how long each takes.
 -->
 
----
-layout: default
 ---
 
 # 1. Team Members
@@ -123,8 +120,6 @@ layout: section
 What we built, and why it matters
 
 ---
-layout: default
----
 
 # The Context
 
@@ -149,8 +144,6 @@ platform provides.
 -->
 
 ---
-layout: default
----
 
 # The Problem
 
@@ -174,8 +167,6 @@ flexibility. Cloud services (e.g. LLM inference) are used by default, but every
 component can be swapped for a self-hosted equivalent when policy demands it.
 -->
 
----
-layout: default
 ---
 
 # Objectives & Scope
@@ -233,8 +224,6 @@ layout: section
 How the platform is put together
 
 ---
-layout: default
----
 
 # Architecture — Service-Based
 
@@ -286,8 +275,6 @@ single shared data layer for consistency and type safety. The AI engine is
 decoupled behind RabbitMQ.
 -->
 
----
-layout: default
 ---
 
 # Technology Stack
@@ -370,8 +357,6 @@ oRPC, Drizzle, and Zod. Protocol Buffers carry the contract across the language
 boundary to the AI engine.
 -->
 
----
-layout: default
 ---
 
 # Asynchronous AI Processing
@@ -500,121 +485,371 @@ layout: section
 SWE.1 · SWE.4 · SWE.6
 
 ---
-layout: two-cols
-layoutClass: gap-8
----
 
-# SWE.1 — Requirements Analysis
+# Application Flow — Old vs New
 
-<v-clicks>
+<div class="grid grid-cols-2 gap-6 mt-4">
 
-**What it does**
+<div>
 
-- Upload **system requirements** documents
-- AI generates **software requirements** for each
-- Status workflow: Draft → In Review → Accepted / Rejected
-- Configurable attributes (ASIL, verification method, status)
+**Previous Flow (v1)**
 
-</v-clicks>
+- 5-step project creation wizard
+- Choose SWE stage (only SWE.6 available)
+- Upload software requirements as last step
+- Redirected directly to SWE.6 workspace
+- Single workspace for test spec generation
+- File management at project level (separate page)
+- Traceability matrix in its own standalone page
 
-::right::
+</div>
 
-<div class="mt-14" />
+<div>
 
-<v-clicks>
+**Current Flow (v2)**
 
-**Traceability**
+- 2-step project creation: details → team members
+- Redirected to **Project Overview** — central hub with V-Cycle navigation
+- Inline editing of project info (name, description)
+- Navigate to any SWE: **SWE.1 · SWE.4 · SWE.6**
+- **Tab-based** workspaces per SWE with per-SWE file management
+- Upload mandatory docs → Generate → Live status
+- Traceability matrix in a tab within each SWE
 
-- Each software req shows a **"refines"** link to its system req
-- Click an ID to navigate the trace chain, then return
-- Coverage analysis flags system reqs with **no** software reqs
+</div>
 
-</v-clicks>
+</div>
+
+<div v-click class="mt-4 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+
+**Key shift:** Project creation is lightweight (2 steps). Document management and AI generation are now **per-SWE**, with each workspace providing its own set of tabbed views tailored to the stage.
+
+</div>
 
 <!--
-Demo hook: show the collapsed system-req list, expand to reveal generated
-software reqs, then click a refines link to walk the traceability chain.
+Walk through the evolution: the old flow was rigid (5 steps, single SWE), the new
+flow is flexible — lightweight project creation, a project overview hub, and
+independent SWE workspaces with their own file management and AI generation.
 -->
 
 ---
-layout: two-cols
-layoutClass: gap-8
+transition: view-switch
+---
+
+# SWE.1 — File Management
+
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe1" active="files" />
+  </div>
+</div>
+
+<div v-click="1" style="display:none"></div>
+
+<Transition name="slide-fade" mode="out-in">
+<div v-if="$slidev.nav.clicks < 1" key="upload" class="grid grid-cols-2 gap-6 mt-8">
+<div class="ml-6">
+  <div class="text-white font-semibold text-base">Per-SWE Document Upload</div>
+  <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+    <li>Users are prompted to upload required documents for the active SWE stage</li>
+    <li>Compliance standards and supplementary files can be added via designated upload zones</li>
+    <li>Files are automatically flagged with their corresponding category upon upload</li>
+    <li>Required and optional uploads are clearly distinguished in the interface</li>
+    <li>Mandatory documents are enforced — users cannot proceed until the required document is uploaded</li>
+  </ul>
+</div>
+<div class="flex items-start">
+  <img :src="'/images/swe1-upload-modal.png'" class="w-full max-h-96 object-contain -mt-4" />
+</div>
+</div>
+<div v-else key="file-table" class="mt-8 ml-6">
+  <div class="text-white font-semibold text-base mb-3">File Table Management</div>
+  <ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm opacity-80 mb-4 list-disc list-inside">
+    <li>Files displayed in a structured table with metadata</li>
+    <li>Files can be removed with a single click</li>
+    <li>Additional documents can be uploaded anytime</li>
+    <li>File management scoped per SWE stage</li>
+  </ul>
+  <img :src="'/images/swe1-project-files.png'" class="w-full" />
+</div>
+</Transition>
+
+<!--
+Click 1: docs-to-be-uploaded screenshot. Click 2: switches to project-files screenshot and file-table text.
+-->
+
+---
+transition: view-switch
+---
+
+# SWE.1 — Software Requirements
+
+<div class="flex justify-center mb-1">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe1" active="software-requirements" />
+  </div>
+</div>
+
+<SWE1RequirementsDemo />
+
+<!--
+Demo: collapsed list → expand to reveal generated sw reqs, then click a refines
+link to walk the traceability chain. Open a card's details modal, change status,
+add a review comment.
+-->
+
+---
+transition: view-switch
+---
+
+# SWE.1 — Traceability Matrix
+
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe1" active="traceability" />
+  </div>
+</div>
+
+<div v-click="1">
+
+**Per-SWE Traceability**
+
+- Maps **software → system requirements** with reference IDs for traceability
+- Automatic **coverage gap detection** — flags system requirements missing software requirements
+
+</div>
+
+<div v-click="2" class="flex justify-center mt-6 mb-8">
+  <img :src="'/images/swe1-traceability-matrix.png'" class="w-[80%]" />
+</div>
+
+<!--
+Traceability was initially a standalone page (SWE.6 only). With multiple SWEs,
+each workspace has its own Traceability Matrix tab so users see the relevant
+trace chain without leaving context.
+-->
+
 ---
 
 # SWE.4 — Unit Verification
 
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe4" active="unit-tests" />
+  </div>
+</div>
+
+<div class="grid grid-cols-5 gap-4 mt-2">
+
+<div class="col-span-2">
+
 <v-clicks>
 
-**What it does**
+**Code Upload**
 
-- Upload C/C++ code via **zip** or **GitHub import**
-- Browse code in a **file tree** with inline viewing
-- Trigger **unit test generation**
-- Generated tests appear alongside source files
+- Upload C/C++ code via **zip** or **GitHub import** (mandatory)
+- Browse imported code in a **file tree** with inline viewing
 
 </v-clicks>
 
-::right::
+<v-clicks>
 
-<div class="mt-14" />
+**Test Generation**
+
+- Trigger **unit test generation** from the Unit Tests tab
+- Generated tests appear **alongside source files** in the tree
+- Generation status displayed at the top of the page
+
+</v-clicks>
+
+</div>
+
+<div class="col-span-3 flex items-start">
+  <img v-click="2" :src="'/images/swe4-generated-unit-tests-in-file-tree-and-file-viewer.png'" class="rounded-lg border border-white/10 w-full" />
+</div>
+
+</div>
+
+<!--
+Demo: import a small C project, browse the file tree, generate unit tests,
+watch them appear in the tree next to source files.
+-->
+---
+
+# SWE.4 — Coverage Report
+
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe4" active="unit-tests-coverage" />
+  </div>
+</div>
+
+<div class="grid grid-cols-5 gap-4 mt-2">
+
+<div class="col-span-2">
 
 <v-clicks>
 
-**Coverage reporting**
+**Coverage Metrics**
 
-- Line, branch, and function **coverage %**
-- Real-time generation status at the top of the page
+- **Tests Coverage Report** tab displays: line, branch, and function coverage percentages
+- Reports update after each generation run
 - Tests organized in the tree next to the code they verify
 
 </v-clicks>
 
+</div>
+
+<div class="col-span-3 flex items-start">
+  <img v-click="1" :src="'/images/swe4-test-coverage-report.png'" class="rounded-lg border border-white/10 w-full" />
+</div>
+
+</div>
+
 <!--
-Demo hook: import a small C project, generate tests, then open the coverage
-report tab.
+Demo: generate tests, switch to the Tests Coverage Report tab to see coverage
+metrics, then open the file tree to browse generated tests.
+-->
+---
+
+# SWE.6 — File Management
+
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe6" active="files" />
+  </div>
+</div>
+
+<div class="grid grid-cols-2 gap-6 mt-2">
+
+<div>
+
+<v-clicks>
+
+**Per-SWE Document Upload**
+
+- Upload **software requirements** documents (mandatory) via the Files tab
+- Drag & drop or file picker; supports PDF, DOCX, and more
+- Files tagged with a **category badge** (Software Requirements, etc.)
+
+</v-clicks>
+
+</div>
+
+<div>
+
+<v-clicks>
+
+**File Table Management**
+
+- Files listed in a table: name, category, size, date
+- **Hover to reveal delete** button (Trash2 icon) per row
+- Delete triggers a confirmation dialog before removal
+- **Add Files** button to upload additional documents anytime
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<div v-click class="mt-2 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+File management is scoped per-SWE — each stage has its own independent set of documents.
+</div>
+
+<!--
+Show the Files tab with uploaded docs, hover to reveal delete, click Add Files
+to open the upload modal with category selection.
 -->
 
 ---
-layout: two-cols
-layoutClass: gap-8
----
 
-# SWE.6 — Qualification Testing
+# SWE.6 — Test Specifications
 
-<v-clicks>
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe6" active="test-specs" />
+  </div>
+</div>
 
-**What it does**
+<div class="grid grid-cols-5 gap-4 mt-2">
 
-- Upload requirement documents
-- AI generates **test specifications**
-- Specs organized **under their software requirements**
-- Specs appear **incrementally** as they generate
-
-</v-clicks>
-
-::right::
-
-<div class="mt-14" />
+<div class="col-span-2">
 
 <v-clicks>
 
-**Detail & traceability**
+**AI Generation**
 
-- Card summary → click for **full spec modal**
-- Traceability matrix maps **test specs → software reqs**
-- **Communication matrix** (FIBEX) validation & chunk mapping
+- AI generates **test specifications** from uploaded software requirements
+- Specs organized **under their corresponding software requirement**
+- Specs appear **incrementally** as they generate — real-time feedback
 
 </v-clicks>
+
+<v-clicks>
+
+**Detail & Traceability**
+
+- Card summary → click for **full spec modal** with all fields
+- Each spec traces back to its originating requirement
+- **Communication Matrix** (FIBEX) validation & chunk mapping
+
+</v-clicks>
+
+</div>
+
+<div class="col-span-3 flex items-start">
+  <img v-click="1" :src="'/images/swe6-generated-test-specs.png'" class="rounded-lg border border-white/10 w-full" />
+</div>
+
+</div>
 
 <!--
-Demo hook: upload reqs, watch specs stream in live, open a spec modal, then show
+Demo: upload reqs, watch specs stream in live, open a spec modal, then show
 the traceability matrix tab.
 -->
 
 ---
-layout: default
+
+# SWE.6 — Traceability Matrix
+
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe6" active="traceability" />
+  </div>
+</div>
+
+<div class="grid grid-cols-5 gap-4 mt-2">
+
+<div class="col-span-2">
+
+<v-clicks>
+
+**Per-SWE Traceability**
+
+- Maps **test specifications → software requirements**
+- End-to-end visibility from requirements through verification
+- Automatic **coverage gap detection** — flags requirements without specs
+- Previously a standalone page; now a tab within the workspace
+
+</v-clicks>
+
+</div>
+
+<div class="col-span-3 flex items-start">
+  <img v-click="1" :src="'/images/swe6-traceability-matrix.png'" class="rounded-lg border border-white/10 w-full" />
+</div>
+
+</div>
+
+<!--
+Same evolution story as SWE.1: the traceability matrix was a standalone page,
+now it's a contextual tab within each SWE workspace.
+-->
+
 ---
 
-# Traceability & Validation
+# AI Validation & Quality
 
 <div class="grid grid-cols-2 gap-8 mt-4">
 
@@ -622,12 +857,11 @@ layout: default
 
 <v-clicks>
 
-**Traceability Matrix**
+**Requirement Quality Checks**
 
-- SWE.1: software reqs → system reqs
-- SWE.6: test specs → software reqs
-- End-to-end visibility, requirements → verification
-- Automatic coverage gap detection
+- AI validates clarity, atomicity, consistency
+- Flags redundancies, conflicts, ambiguities
+- Suggests edits and refinements
 
 </v-clicks>
 
@@ -637,12 +871,11 @@ layout: default
 
 <v-clicks>
 
-**AI Validation**
+**Communication Matrix**
 
-- Checks clarity, atomicity, consistency
-- Flags redundancies, conflicts, ambiguities
-- Suggests edits and refinements
-- FIBEX communication-matrix quality report
+- FIBEX-based validation
+- Chunk mapping for traceability
+- Quality report generation
 
 </v-clicks>
 
@@ -650,15 +883,15 @@ layout: default
 
 </div>
 
-<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
+<div v-click class="mt-6 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
 
-> Traceability is maintained **automatically** as artifacts are generated — the core compliance pain point of the V-Cycle.
+Validation is accessible from the **Validation tab** within each SWE workspace — keeping quality checks close to the artifacts being validated.
 
 </div>
 
 <!--
-Tie back to the intro: this is the manual, error-prone work that the standards
-demand and that the platform automates.
+AI validation is built into each SWE's Validation tab, providing immediate
+feedback on requirement quality and communication matrix consistency.
 -->
 
 ---
@@ -669,8 +902,6 @@ layout: section
 
 Beyond the V-Cycle
 
----
-layout: default
 ---
 
 # Cybersecurity — TARA
@@ -747,8 +978,6 @@ TARA — a SECO can build on a finished TARA or run standalone.
 -->
 
 ---
-layout: default
----
 
 # Functional Safety — ISO 26262
 
@@ -823,8 +1052,6 @@ layout: section
 Deployment, tooling, and observability
 
 ---
-layout: default
----
 
 # DevOps & Developer Experience
 
@@ -881,8 +1108,6 @@ layout: section
 
 What we delivered
 
----
-layout: default
 ---
 
 # Summary of Achievements

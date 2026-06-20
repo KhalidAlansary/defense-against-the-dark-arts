@@ -113,3 +113,54 @@ html.dark .slidev-layout,
 #slidev-page-root .slidev-page {
   --slidev-theme-primary: #f9996c;
 }
+
+/* Transition for SWE.1 File Management content swap */
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.8s ease;
+}
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Animate v-clicks items with a slide-fade */
+[v-click] {
+  transition: all 0.5s ease;
+}
+.slidev-v-click-hidden {
+  opacity: 0;
+  transform: translateX(15px);
+}
+
+/* Default slide transition between sections */
+.slidev-transition-slide-left-enter-active,
+.slidev-transition-slide-left-leave-active {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.slidev-transition-slide-left-enter-from {
+  transform: translateX(30px) !important;
+  opacity: 0 !important;
+}
+.slidev-transition-slide-left-leave-to {
+  transform: translateX(-30px) !important;
+  opacity: 0 !important;
+}
+
+/* Tab-switch transition for SWE workspace slides */
+.slidev-transition-view-switch-enter-active,
+.slidev-transition-view-switch-leave-active {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.slidev-transition-view-switch-enter-from {
+  transform: translateX(8px) !important;
+  opacity: 0 !important;
+}
+.slidev-transition-view-switch-leave-to {
+  transform: translateX(-8px) !important;
+  opacity: 0 !important;
+}
