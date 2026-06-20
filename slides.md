@@ -526,11 +526,13 @@ layout: two-cols
 
 <div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
   <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
+</div>
 <!--
 This is what makes the platform responsive and scalable. The protobuf contract
 gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
 comes from per-SWE conditional polling.
 -->
+
 ---
 layout: section
 ---
