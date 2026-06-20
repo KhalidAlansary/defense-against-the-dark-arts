@@ -572,7 +572,7 @@ transition: view-switch
   </ul>
 </div>
 <div class="flex items-start">
-  <img :src="'/images/swe1-upload-modal.png'" class="w-full max-h-96 object-contain -mt-4" />
+  <img :src="'/images/swe1-upload-modal.png'" alt="SWE.1 document upload modal" class="w-full max-h-96 object-contain -mt-4" />
 </div>
 </div>
 <div v-else key="file-table" class="mt-8 ml-6">
@@ -583,7 +583,7 @@ transition: view-switch
     <li>Additional documents can be uploaded anytime</li>
     <li>File management scoped per SWE stage</li>
   </ul>
-  <img :src="'/images/swe1-project-files.png'" class="w-full" />
+  <img :src="'/images/swe1-project-files.png'" alt="SWE.1 project files table" class="w-full" />
 </div>
 </Transition>
 
@@ -633,7 +633,7 @@ add a review comment.
 </div>
 
 <div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/swe1-traceability-matrix.png'" class="w-[80%]" />
+  <img :src="'/images/swe1-traceability-matrix.png'" alt="SWE.1 traceability matrix" class="w-[80%]" />
 </div>
 
 <!--
@@ -670,7 +670,7 @@ transition: view-switch
   </ul>
 </div>
 <div class="col-span-4 flex items-center justify-center mt-2">
-  <img :src="'/images/swe4-code-upload-modal.png'" class="w-[85%]" />
+  <img :src="'/images/swe4-code-upload-modal.png'" alt="SWE.4 code upload modal" class="w-[85%]" />
 </div>
 </div>
 </Transition></div>
@@ -714,7 +714,7 @@ transition: view-switch
 </div>
 
 <div class="flex justify-center mt-8" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/swe4-test-coverage-report.png'" class="w-[80%]" />
+  <img :src="'/images/swe4-test-coverage-report.png'" alt="SWE.4 test coverage report" class="w-[80%]" />
 </div>
 
 </div>
@@ -757,7 +757,7 @@ transition: view-switch
   </ul>
 </div>
 <div class="flex items-start">
-  <img :src="'/images/swe6-upload-modal.png'" class="w-full max-h-96 object-contain -mt-4" />
+  <img :src="'/images/swe6-upload-modal.png'" alt="SWE.6 document upload modal" class="w-full max-h-96 object-contain -mt-4" />
 </div>
 </div>
 <div v-else key="file-table" class="mt-8 ml-6">
@@ -768,7 +768,7 @@ transition: view-switch
     <li>Additional documents can be uploaded anytime</li>
     <li>File management scoped per SWE stage</li>
   </ul>
-  <img :src="'/images/swe6-project-files.png'" class="w-full" />
+  <img :src="'/images/swe6-project-files.png'" alt="SWE.6 project files table" class="w-full" />
 </div>
 </Transition>
 
@@ -816,7 +816,7 @@ Demo: click generate, test specs appear streamed in.
 </div>
 
 <div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/swe6-traceability-matrix.png'" class="w-[80%]" />
+  <img :src="'/images/swe6-traceability-matrix.png'" alt="SWE.6 traceability matrix" class="w-[80%]" />
 </div>
 
 <!--
