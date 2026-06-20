@@ -575,29 +575,27 @@ layout: default
 # Resource-Centric Architecture
 
 <div class="flex gap-6">
-  <div class="flex-[6] flex flex-col gap-6">
+  <div class="flex-[8] flex flex-col gap-6">
     <div>
     A generic Resource entity was introduced to represent all engineering artifacts.
     </div>
     <div>
     <h4>Design Principles</h4>
     <b>Inheritance</b><br />
-      Common metadata defined once in the Resource entity & shared across all types<br />
+      - Common metadata defined once in the Resource entity & shared across all types<br />
       <b>Polymorphism</b><br />
-      Each artifact stores only what makes it unique.<br />
-      Different resource types are handled through a common abstraction.<br />
+      - Each artifact stores only what makes it unique.<br />
+      - Different resource types are handled through a common abstraction.<br />
     </div>
-    <div>
-    <h4>Benefits</h4>
-    No redundancy, no nullable column sprawl<br />
-    New types onboard without touching the core schema
-    </div>
+    
     
   </div>
 
-  <div class="flex-[4]">
+  <div class="flex-[2]">
 
-```mermaid {scale: 0.52}
+<ZoomPanContainer title="Resource-Centric Diagram" hint="Drag to move · wheel to zoom · Esc resets" :initial-scale="0.85" :min-scale="0.45" :max-scale="2.4">
+
+```mermaid {scale: 0.25}
 erDiagram
   ORGANIZATION ||--o{ RESOURCE : owns
   PROJECT ||--o{ RESOURCE : contains
@@ -609,14 +607,6 @@ erDiagram
       uuid projectId FK
       string organizationId FK
       string teamId FK
-  }
-  STANDARD_RESOURCE {
-      uuid id PK
-      uuid resourceId FK
-      string objectName
-      string bucketName
-      int version
-      enum type
   }
   MINIO_FILE_STORAGE {
       uuid id PK
@@ -670,31 +660,83 @@ erDiagram
       int version
       uuid previousVersionId FK
   }
-  FIBEX_PARSING {
-      uuid id PK
-      uuid resourceId FK
-  }
-  FIBEX_CHUNK {
-      uuid id PK
-      uuid resourceId FK
-      string elementId
-  }
-  RESOURCE ||--o{ STANDARD_RESOURCE : metadata
   RESOURCE ||--o{ MINIO_FILE_STORAGE : stores
   MINIO_FILE_STORAGE ||--o{ USER_FILE : uploaded_as
   MINIO_FILE_STORAGE ||--o{ CODE : analyzed_as
   RESOURCE ||--|| SYSTEM_REQUIREMENT : represents
   RESOURCE ||--|| SOFTWARE_REQUIREMENT : represents
   RESOURCE ||--|| TEST_SPEC : represents
-  RESOURCE ||--|| FIBEX_PARSING : represents
-  RESOURCE ||--o{ FIBEX_CHUNK : contains
   SYSTEM_REQUIREMENT ||--o{ SYSTEM_REQUIREMENT_VERSION : versions
   SOFTWARE_REQUIREMENT ||--o{ SOFTWARE_REQUIREMENT_VERSION : versions
   TEST_SPEC ||--o{ TEST_SPEC_VERSION : versions
 ```
 
+</ZoomPanContainer>
+
   </div>
 </div>
+<!--
+<div>
+    <h4>Benefits</h4>
+    - No redundancy, no nullable column sprawl<br />
+    - New types onboard without touching the core schema
+</div>
+--> 
+
+
+---
+layout: default
+---
+
+# SaaS and Multi-Tenant Design
+
+<div class="flex gap-6">
+  
+  <div class="flex-[8] flex flex-col gap-6">
+    <div>
+      A generic Resource entity was introduced to represent all engineering artifacts.
+    </div>
+    <div>
+      <h4>Design Principles</h4>
+      <b>Inheritance</b><br />
+      - Common metadata defined once in the Resource entity & shared across all types<br />
+      <b>Polymorphism</b><br />
+      - Each artifact stores only what makes it unique.<br />
+      - Different resource types are handled through a common abstraction.<br />
+    </div>
+
+  </div>
+
+  <div class="flex-[2]">
+    <div class="flex flex-col items-center py-4">
+      <div class="w-80 bg-blue-500 text-white text-center py-4 rounded-xl font-semibold text-lg">
+        Organization
+      </div>
+      <div class="h-6 border-l-2 border-dashed border-blue-400"></div>
+      <div class="w-64 bg-blue-400 text-white text-center py-4 rounded-xl font-semibold text-lg">
+        Teams
+      </div>
+      <div class="h-6 border-l-2 border-dashed border-blue-400"></div>
+      <div class="w-52 bg-blue-300 text-white text-center py-4 rounded-xl font-semibold text-lg">
+        Projects
+      </div>
+      <div class="h-6 border-l-2 border-dashed border-blue-300"></div>
+      <div class="w-40 bg-teal-600 text-white text-center py-4 rounded-xl font-semibold text-lg">
+        Roles &amp; Access
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+---
+layout: default
+---
+
+# Traceability, Versioning, and Knowledge Graph Support
+
+
 
 ---
 layout: section
