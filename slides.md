@@ -1245,7 +1245,7 @@ layout: section
 
 # 6. Safety & Security
 
-Beyond the V-Cycle
+Extending the platform's scope — ISO 21434 & ISO 26262
 
 ---
 
@@ -1253,7 +1253,23 @@ Beyond the V-Cycle
 
 <div class="opacity-60 text-sm">Threat Analysis &amp; Risk Assessment · ISO/SAE 21434</div>
 
-<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-4 items-start">
+<div class="flex flex-wrap items-center gap-x-1.5 gap-y-1 mt-4 text-xs">
+  <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Upload</span>
+  <span class="opacity-40">→</span>
+  <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Validate <span class="opacity-50">· required sections</span></span>
+  <span class="opacity-40">→</span>
+  <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Configure <span class="opacity-50">· detects ECU, suggests defaults</span></span>
+  <span class="opacity-40">→</span>
+  <span class="px-2 py-1 rounded bg-[#f9996c]/15 border border-[#f9996c]/30 text-[#f9996c] font-medium">you edit</span>
+  <span class="opacity-40">→</span>
+  <span class="px-2 py-1 rounded bg-white/5 border border-white/10">Generate</span>
+</div>
+
+<div class="mt-2 text-xs opacity-55 leading-relaxed">
+Validation, configuration and generation are each an AI request, run as a <b>chain</b> — the engineer reviews and edits the configs in between.
+</div>
+
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-3 items-start">
 
 <div class="text-sm">
 
@@ -1277,9 +1293,10 @@ Beyond the V-Cycle
 </div>
 
 <!--
-TARA workspace: the bullets are the talking points, the demo on the right is the
-proof. Click a trace link live to land the "everything stays connected" point.
-The analysis itself is produced by the AI engine — this is the UI.
+TARA workspace: the starter step bar is the human-in-the-loop chained flow —
+validation gate (required sections, pass/fail), then ECU-specific configs the
+user edits, then AI generation. Bullets + demo are the resulting report. The
+analysis is produced by the AI engine; this is the UI and the workflow around it.
 -->
 
 ---
@@ -1329,7 +1346,7 @@ Three <b>separate</b> workspaces — but a deliberately <b>shared UI and flow</b
 </div>
 
 <div v-click class="mt-2 mb-5 p-3 rounded bg-gray-400/10 text-sm">
-Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → AI <b>generate</b> (re-run anytime) → multi-view report → <b>export</b>
+Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → <b>generate</b> (re-run anytime) → multi-view report → <b>export</b>
 </div>
 
 <div class="grid grid-cols-3 gap-4">
