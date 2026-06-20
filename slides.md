@@ -224,7 +224,6 @@ Objectives on the left, scope on the right. Stress that the AI engine itself is
 an external service that consumes queued tasks — the platform orchestrates it.
 -->
 
-
 ---
 layout: section
 ---
@@ -297,7 +296,6 @@ layout: section
 <!--
 Farah
 -->
-
 
 ---
 layout: default
@@ -408,10 +406,8 @@ layout: section
 
 <!--
 Mohamed
- Discuss abstracted interaction during the flow of the request 
+ Discuss abstracted interaction during the flow of the request
 -->
-
-
 
 ---
 layout: section
@@ -459,7 +455,6 @@ layout: section
 Mohamed
 -->
 
-
 ---
 layout: section
 ---
@@ -468,7 +463,9 @@ layout: section
 
 SWE.1 · SWE.4 · SWE.6
 
-<!-- Mariam , Salma, Omar-->
+<!--
+Mariam , Salma, Omar
+-->
 
 ---
 layout: two-cols
@@ -632,9 +629,6 @@ Tie back to the intro: this is the manual, error-prone work that the standards
 demand and that the platform automates.
 -->
 
-
-
-
 ---
 layout: section
 ---
@@ -643,6 +637,7 @@ layout: section
 
 - Workflow redesign
 - SWE process enhancements
+
 <!--
 Salma CHECK THE TITLE and separate the bullet points to separate slide (if needed) 
 I think it will be better if merged with section 7
@@ -656,7 +651,7 @@ layout: section
 
 - Validation 
 
-- Test coverage reporting 
+- Test coverage reporting
 
 <!--
 Mariam CHECK THE TITLE and separate the bullet points to separate slide (if needed), 
@@ -762,6 +757,7 @@ A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying 
 SECO workspace: bullets + the document demo side by side. Close with the link to
 TARA — a SECO can build on a finished TARA or run standalone.
 -->
+
 ---
 layout: default
 ---
@@ -829,7 +825,6 @@ layout: default
 The demo is the argument: the workspace switcher plus the per-workspace view toggle
 show three separate analyses sharing one UI. Example rows are illustrative.
 -->
-
 
 ---
 layout: section
