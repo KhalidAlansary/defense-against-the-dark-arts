@@ -877,8 +877,6 @@ layout: section
 transition: fade-out
 ---
 
-# User Management Service
-
 <div class="text-sm opacity-60 mb-4">Multi-tenant accounts replacing the single-account initial version</div>
 
 <div class="grid grid-cols-2 gap-6 mt-2">
@@ -896,7 +894,7 @@ transition: fade-out
 </v-clicks>
 
 <div v-click class="mt-4 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
-An <B>Organization</B> represents a company — it is the primary multi-tenancy boundary in the system.
+An <b>Organization</b> represents a company — it is the primary multi-tenancy boundary in the system.
 </div>
 
 </div>
