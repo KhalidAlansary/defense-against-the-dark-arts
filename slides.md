@@ -691,42 +691,113 @@ layout: default
 # SaaS and Multi-Tenant Design
 
 <div class="flex gap-6">
+
+  <div class="flex-[6] flex flex-col gap-6">
+  <p>Every entity in the database is scoped to an Organization at the schema level.<br /><br />
+  <b> Logical Isolation</b><br />
+  Tenant data is separated by design, not by convention.<br /><br />
+  <b>Security</b><br />
+  No cross-tenant data leakage enforced at the schema level.<br /><br />
+  <b>SaaS Scalability</b><br />
+  Add organizations without touching the core architecture.
   
-  <div class="flex-[8] flex flex-col gap-6">
-    <div>
-      A generic Resource entity was introduced to represent all engineering artifacts.
-    </div>
-    <div>
-      <h4>Design Principles</h4>
-      <b>Inheritance</b><br />
-      - Common metadata defined once in the Resource entity & shared across all types<br />
-      <b>Polymorphism</b><br />
-      - Each artifact stores only what makes it unique.<br />
-      - Different resource types are handled through a common abstraction.<br />
-    </div>
+
+  </p>
+
 
   </div>
 
-  <div class="flex-[2]">
-    <div class="flex flex-col items-center py-4">
-      <div class="w-80 bg-blue-500 text-white text-center py-4 rounded-xl font-semibold text-lg">
-        Organization
-      </div>
-      <div class="h-6 border-l-2 border-dashed border-blue-400"></div>
-      <div class="w-64 bg-blue-400 text-white text-center py-4 rounded-xl font-semibold text-lg">
-        Teams
-      </div>
-      <div class="h-6 border-l-2 border-dashed border-blue-400"></div>
-      <div class="w-52 bg-blue-300 text-white text-center py-4 rounded-xl font-semibold text-lg">
-        Projects
-      </div>
-      <div class="h-6 border-l-2 border-dashed border-blue-300"></div>
-      <div class="w-40 bg-teal-600 text-white text-center py-4 rounded-xl font-semibold text-lg">
-        Roles &amp; Access
-      </div>
+  <div class="flex-[4] flex flex-col items-center text-center gap-4">
+
+  <b class="text-lg font-semibold">
+    Access Control Structure
+  </b>
+
+  <div class="flex flex-col items-center">
+    <!-- Organization -->
+    <div class="w-80 bg-[#f9996c] text-white text-center py-4 rounded-xl font-semibold text-lg">
+      Organization
     </div>
+    <div class="h-6 border-l-2 border-dashed border-[#fbb08f]"></div>
+    <!-- Teams -->
+    <div class="w-64 bg-[#fbb08f] text-white text-center py-4 rounded-xl font-semibold text-lg">
+      Teams
+    </div>
+    <div class="h-6 border-l-2 border-dashed border-[#fcd0bd]"></div>
+    <!-- Projects -->
+    <div class="w-52 bg-[#fcd0bd] text-gray-900 text-center py-4 rounded-xl font-semibold text-lg">
+      Projects
+    </div>
+    <div class="h-6 border-l-2 border-dashed border-[#fde4d7]"></div>
+    <!-- Roles -->
+    <div class="w-40 bg-[#fde4d7] text-gray-900 text-center py-4 rounded-xl font-semibold text-lg">
+      Roles &amp; Access
+    </div>
+  </div>
+  <span class="text-sm max-w-xs">
+    Flexible ownership model for collaborative engineering environments.
+  </span>
+
+</div>
+
+</div>
+
+---
+layout: default
+---
+
+# Versioning and History
+
+<div class="flex gap-6">
+  <div class="flex-1 flex flex-col text-sm gap-2">
+
+  <h4>Immutable Versioning</h4>
+
+  Instead of updating records in place, every artifact type has a dedicated version entity. Every change is recorded, every state is recoverable.
+
+  <h4>Benefits</h4>
+
+  <ul class="list-disc list-inside space-y-1">
+    <li>Full auditability</li>
+    <li>Complete history on every artifact</li>
+    <li>Rollback capability</li>
+  </ul>
 
   </div>
+
+  <div class="flex-1 font-mono text-xs  p-2 leading-relaxed ">
+  <div class= "border-solid border border-white rounded p-2 my-[25px]">
+      SystemRequirement<br/>
+    &nbsp;&nbsp;└── SystemRequirementVersion<br/>
+    SoftwareRequirement<br/>
+    &nbsp;&nbsp;└── SoftwareRequirementVersion<br/>
+    TestSpec<br/>
+    &nbsp;&nbsp;└── TestSpecVersion
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+
+```mermaid {scale: 0.8}
+flowchart LR
+    V1["V1"]
+    V2["V2"]
+    V3["V3\n(Current Active)"]
+    V4["V4"]
+
+    V1 -->|created before| V2
+    V2 -->|created before| V3
+    V3 -->|created before| V4
+
+    V3 -. previousActiveVersion .-> V1
+
+    classDef active fill:#f9996c,color:#fff,stroke:#f9996c;
+    classDef inactive fill:#f8f8f8,color:#333,stroke:#ccc;
+
+    class V3 active;
+    class V1,V2,V4 inactive;
+```
 
 </div>
 
@@ -736,6 +807,70 @@ layout: default
 
 # Traceability, Versioning, and Knowledge Graph Support
 
+<div class="flex gap-8 mt-4">
+
+  <div class="flex-[5] flex flex-col gap-4 text-sm">
+    <div>
+      <h4 class="text-base font-semibold mb-1">Relationship-Based Architecture</h4>
+      <p>Dedicated relationship entities connect engineering artifacts.</p>
+    </div>
+    <div>
+      <h4 class="text-base font-semibold mb-1">Knowledge Graph Integration</h4>
+      <p>The same relationships used for traceability are also used by the Knowledge Graph Visualizer.</p>
+      <p class="mt-2 font-semibold">Benefits:</p>
+      <ul class="list-disc list-inside mt-1 space-y-1">
+        <li>Single source of truth</li>
+        <li>No separate graph database</li>
+        <li>No data synchronization issues</li>
+        <li>Real-time visualization of engineering relationships</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="flex-[5] flex flex-col gap-4">
+
+```mermaid {scale: 0.5}
+erDiagram
+    SYSTEM_REQUIREMENT {
+        UUID id
+        STRING title
+    }
+    SOFTWARE_REQUIREMENT {
+        UUID id
+        STRING title
+    }
+    RELATIONSHIP {
+        UUID id
+        UUID source_id
+        UUID target_id
+        STRING type
+    }
+    SYSTEM_REQUIREMENT ||--o{ RELATIONSHIP : source
+    SOFTWARE_REQUIREMENT ||--o{ RELATIONSHIP : target
+```
+
+```mermaid {scale: 0.5}
+graph TD
+    SR["System Requirement"]
+    SW1["Software Requirement A"]
+    SW2["Software Requirement B"]
+    TS1["Test Spec A"]
+    TS2["Test Spec B"]
+    F1["FIBEX Chunk A"]
+    F2["FIBEX Chunk B"]
+
+    SR --> SW1
+    SR --> SW2
+    SW1 --> TS1
+    SW2 --> TS2
+    SW1 --> F1
+    SW2 --> F2
+```
+
+  </div>
+
+</div>
 
 
 ---
