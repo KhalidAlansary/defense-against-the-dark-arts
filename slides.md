@@ -576,9 +576,23 @@ layout: default
 
 <div class="flex gap-6">
   <div class="flex-[6] flex flex-col gap-6">
-    <div>Card 1</div>
-    <div>Card 2</div>
-    <div>Card 3</div>
+    <div>
+    A generic Resource entity was introduced to represent all engineering artifacts.
+    </div>
+    <div>
+    <h4>Design Principles</h4>
+    <b>Inheritance</b><br />
+      Common metadata defined once in the Resource entity & shared across all types<br />
+      <b>Polymorphism</b><br />
+      Each artifact stores only what makes it unique.<br />
+      Different resource types are handled through a common abstraction.<br />
+    </div>
+    <div>
+    <h4>Benefits</h4>
+    No redundancy, no nullable column sprawl<br />
+    New types onboard without touching the core schema
+    </div>
+    
   </div>
 
   <div class="flex-[4]">
