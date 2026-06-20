@@ -485,6 +485,13 @@ layout: section
 SWE.1 · SWE.4 · SWE.6
 
 ---
+layout: section
+---
+
+# Flow Redesign
+From rigid wizards to flexible workspaces
+
+---
 
 # Application Flow — Old vs New
 
@@ -533,6 +540,12 @@ independent SWE workspaces with their own file management and AI generation.
 -->
 
 ---
+layout: section
+---
+
+# SWE.1 — Software Requirements Analysis
+
+---
 transition: view-switch
 ---
 
@@ -546,7 +559,7 @@ transition: view-switch
 
 <div v-click="1" style="display:none"></div>
 
-<Transition name="slide-fade" mode="out-in">
+<Transition name="slide-fade" mode="out-in" appear>
 <div v-if="$slidev.nav.clicks < 1" key="upload" class="grid grid-cols-2 gap-6 mt-8">
 <div class="ml-6">
   <div class="text-white font-semibold text-base">Per-SWE Document Upload</div>
@@ -590,7 +603,7 @@ transition: view-switch
   </div>
 </div>
 
-<SWE1RequirementsDemo />
+<div class="slide-enter"><SWE1Demo /></div>
 
 <!--
 Demo: collapsed list → expand to reveal generated sw reqs, then click a refines
@@ -598,8 +611,6 @@ link to walk the traceability chain. Open a card's details modal, change status,
 add a review comment.
 -->
 
----
-transition: view-switch
 ---
 
 # SWE.1 — Traceability Matrix
@@ -610,16 +621,18 @@ transition: view-switch
   </div>
 </div>
 
-<div v-click="1">
+<div style="animation: slide-up 0.8s ease both;">
 
 **Per-SWE Traceability**
 
-- Maps **software → system requirements** with reference IDs for traceability
-- Automatic **coverage gap detection** — flags system requirements missing software requirements
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Maps software → system requirements with reference IDs for traceability</li>
+  <li>Automatic coverage gap detection — flags system requirements missing software requirements</li>
+</ul>
 
 </div>
 
-<div v-click="2" class="flex justify-center mt-6 mb-8">
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
   <img :src="'/images/swe1-traceability-matrix.png'" class="w-[80%]" />
 </div>
 
@@ -630,8 +643,16 @@ trace chain without leaving context.
 -->
 
 ---
+layout: section
+---
 
-# SWE.4 — Unit Verification
+# SWE.4 — Software Unit Verification
+
+---
+transition: view-switch
+---
+
+# SWE.4 — Code Upload
 
 <div class="flex justify-center mb-3">
   <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
@@ -639,41 +660,34 @@ trace chain without leaving context.
   </div>
 </div>
 
-<div class="grid grid-cols-5 gap-4 mt-2">
+<div class="slide-enter"><Transition name="slide-fade" mode="out-in" appear>
+<div class="grid grid-cols-6 gap-4 mt-2">
+<div class="col-span-2 pt-8">
+  <div class="text-white font-semibold text-base">Upload Code</div>
+  <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+    <li>Upload C/C++ source code via zip or GitHub import</li>
+    <li>Uploaded files appear in a file tree and can be viewed in the built-in code viewer</li>
+  </ul>
+</div>
+<div class="col-span-4 flex items-center justify-center mt-2">
+  <img :src="'/images/swe4-code-upload-modal.png'" class="w-[85%]" />
+</div>
+</div>
+</Transition></div>
+---
+transition: view-switch
+---
 
-<div class="col-span-2">
+# SWE.4 — Unit Tests
 
-<v-clicks>
-
-**Code Upload**
-
-- Upload C/C++ code via **zip** or **GitHub import** (mandatory)
-- Browse imported code in a **file tree** with inline viewing
-
-</v-clicks>
-
-<v-clicks>
-
-**Test Generation**
-
-- Trigger **unit test generation** from the Unit Tests tab
-- Generated tests appear **alongside source files** in the tree
-- Generation status displayed at the top of the page
-
-</v-clicks>
-
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe4" active="unit-tests" />
+  </div>
 </div>
 
-<div class="col-span-3 flex items-start">
-  <img v-click="2" :src="'/images/swe4-generated-unit-tests-in-file-tree-and-file-viewer.png'" class="rounded-lg border border-white/10 w-full" />
-</div>
+<div class="slide-enter"><SWE4Demo startStep="generate" /></div>
 
-</div>
-
-<!--
-Demo: import a small C project, browse the file tree, generate unit tests,
-watch them appear in the tree next to source files.
--->
 ---
 
 # SWE.4 — Coverage Report
@@ -684,24 +698,22 @@ watch them appear in the tree next to source files.
   </div>
 </div>
 
-<div class="grid grid-cols-5 gap-4 mt-2">
+<div class="flex flex-col items-start ml-6">
 
-<div class="col-span-2">
-
-<v-clicks>
+<div style="animation: slide-up 0.8s ease both;">
 
 **Coverage Metrics**
 
-- **Tests Coverage Report** tab displays: line, branch, and function coverage percentages
-- Reports update after each generation run
-- Tests organized in the tree next to the code they verify
-
-</v-clicks>
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Displays overall percentage of passed tests</li>
+  <li>Shows line, branch, and function coverage percentages</li>
+  <li>Detailed test results with pass/fail status for each generated test</li>
+</ul>
 
 </div>
 
-<div class="col-span-3 flex items-start">
-  <img v-click="1" :src="'/images/swe4-test-coverage-report.png'" class="rounded-lg border border-white/10 w-full" />
+<div class="flex justify-center mt-8" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/swe4-test-coverage-report.png'" class="w-[80%]" />
 </div>
 
 </div>
@@ -710,6 +722,15 @@ watch them appear in the tree next to source files.
 Demo: generate tests, switch to the Tests Coverage Report tab to see coverage
 metrics, then open the file tree to browse generated tests.
 -->
+
+---
+layout: section
+---
+
+# SWE.6 — Software Qualification Testing
+
+---
+transition: view-switch
 ---
 
 # SWE.6 — File Management
@@ -720,48 +741,42 @@ metrics, then open the file tree to browse generated tests.
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-6 mt-2">
+<div v-click="1" style="display:none"></div>
 
-<div>
-
-<v-clicks>
-
-**Per-SWE Document Upload**
-
-- Upload **software requirements** documents (mandatory) via the Files tab
-- Drag & drop or file picker; supports PDF, DOCX, and more
-- Files tagged with a **category badge** (Software Requirements, etc.)
-
-</v-clicks>
-
+<Transition name="slide-fade" mode="out-in" appear>
+<div v-if="$slidev.nav.clicks < 1" key="upload" class="grid grid-cols-2 gap-6 mt-8">
+<div class="ml-6">
+  <div class="text-white font-semibold text-base">Per-SWE Document Upload</div>
+  <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+    <li>Users are prompted to upload required documents for the active SWE stage</li>
+    <li>Compliance standards and supplementary files can be added via designated upload zones</li>
+    <li>Files are automatically flagged with their corresponding category upon upload</li>
+    <li>Required and optional uploads are clearly distinguished in the interface</li>
+    <li>Mandatory documents are enforced — users cannot proceed until the required document is uploaded</li>
+  </ul>
 </div>
-
-<div>
-
-<v-clicks>
-
-**File Table Management**
-
-- Files listed in a table: name, category, size, date
-- **Hover to reveal delete** button (Trash2 icon) per row
-- Delete triggers a confirmation dialog before removal
-- **Add Files** button to upload additional documents anytime
-
-</v-clicks>
-
+<div class="flex items-start">
+  <img :src="'/images/swe6-upload-modal.png'" class="w-full max-h-96 object-contain -mt-4" />
 </div>
-
 </div>
-
-<div v-click class="mt-2 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
-File management is scoped per-SWE — each stage has its own independent set of documents.
+<div v-else key="file-table" class="mt-8 ml-6">
+  <div class="text-white font-semibold text-base mb-3">File Table Management</div>
+  <ul class="grid grid-cols-2 gap-x-6 gap-y-1 text-sm opacity-80 mb-4 list-disc list-inside">
+    <li>Files displayed in a structured table with metadata</li>
+    <li>Files can be removed with a single click</li>
+    <li>Additional documents can be uploaded anytime</li>
+    <li>File management scoped per SWE stage</li>
+  </ul>
+  <img :src="'/images/swe6-project-files.png'" class="w-full" />
 </div>
+</Transition>
 
 <!--
-Show the Files tab with uploaded docs, hover to reveal delete, click Add Files
-to open the upload modal with category selection.
+Click 1: docs-to-be-uploaded screenshot. Click 2: switches to project-files screenshot and file-table text.
 -->
 
+---
+transition: view-switch
 ---
 
 # SWE.6 — Test Specifications
@@ -772,41 +787,10 @@ to open the upload modal with category selection.
   </div>
 </div>
 
-<div class="grid grid-cols-5 gap-4 mt-2">
-
-<div class="col-span-2">
-
-<v-clicks>
-
-**AI Generation**
-
-- AI generates **test specifications** from uploaded software requirements
-- Specs organized **under their corresponding software requirement**
-- Specs appear **incrementally** as they generate — real-time feedback
-
-</v-clicks>
-
-<v-clicks>
-
-**Detail & Traceability**
-
-- Card summary → click for **full spec modal** with all fields
-- Each spec traces back to its originating requirement
-- **Communication Matrix** (FIBEX) validation & chunk mapping
-
-</v-clicks>
-
-</div>
-
-<div class="col-span-3 flex items-start">
-  <img v-click="1" :src="'/images/swe6-generated-test-specs.png'" class="rounded-lg border border-white/10 w-full" />
-</div>
-
-</div>
+<div class="slide-enter"><SWE6Demo /></div>
 
 <!--
-Demo: upload reqs, watch specs stream in live, open a spec modal, then show
-the traceability matrix tab.
+Demo: click generate, test specs appear streamed in.
 -->
 
 ---
@@ -819,27 +803,19 @@ the traceability matrix tab.
   </div>
 </div>
 
-<div class="grid grid-cols-5 gap-4 mt-2">
-
-<div class="col-span-2">
-
-<v-clicks>
+<div style="animation: slide-up 0.8s ease both;">
 
 **Per-SWE Traceability**
 
-- Maps **test specifications → software requirements**
-- End-to-end visibility from requirements through verification
-- Automatic **coverage gap detection** — flags requirements without specs
-- Previously a standalone page; now a tab within the workspace
-
-</v-clicks>
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Maps test specifications → software requirements with reference IDs for traceability</li>
+  <li>Automatic coverage gap detection — flags requirements missing test specifications</li>
+</ul>
 
 </div>
 
-<div class="col-span-3 flex items-start">
-  <img v-click="1" :src="'/images/swe6-traceability-matrix.png'" class="rounded-lg border border-white/10 w-full" />
-</div>
-
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/swe6-traceability-matrix.png'" class="w-[80%]" />
 </div>
 
 <!--
