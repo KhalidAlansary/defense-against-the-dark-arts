@@ -418,7 +418,84 @@ comes from per-SWE conditional polling.
 layout: section
 ---
 
-# 4. The V-Cycle Workspaces
+# 4. Storage & Version Management
+
+File Lifecycle Management using MinIO
+
+---
+layout: default
+---
+
+# Version Control
+
+MinIO versioning allows multiple versions of the same object to coexist.
+
+
+<div class="grid grid-cols-5 gap-6">
+
+<div class="col-span-3">
+
+### How it works
+
+- Initial upload creates the first version
+- Each update creates a new version
+- Previous versions are preserved
+- Every version receives a unique **Version ID**
+- The most recent version is marked as **Latest**
+
+<br/>
+
+### Versioning Namespace
+
+Versioning is scoped to a specific **user-project namespace**, ensuring that file versions are managed independently for each user within each project.
+</div>
+<div class="col-span-2">
+<img
+  src="/public/images/Multiple-versions.png"
+  class="rounded shadow-lg"
+/>
+</div>
+</div>
+
+---
+layout: two-cols
+---
+
+# Object Retrieval
+
+### Latest Version
+
+- Returned by default
+- No version ID required
+
+<br/>
+
+### Specific Version
+
+- Client provides the version ID
+- MinIO returns the requested revision
+
+<br/>
+
+
+### Benefits
+
+- File history preservation
+- Recovery of previous revisions
+- Protection against accidental overwrites
+- Traceability of changes
+
+::right::
+
+<div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
+  <img src="/public/images/retrieving-specific-version.png" class="rounded shadow-lg" />
+</div>
+
+---
+layout: section
+---
+
+# 5. The V-Cycle Workspaces
 
 SWE.1 · SWE.4 · SWE.6
 
@@ -588,7 +665,7 @@ demand and that the platform automates.
 layout: section
 ---
 
-# 5. Safety & Security
+# 6. Safety & Security
 
 Beyond the V-Cycle
 
@@ -741,7 +818,7 @@ show three separate analyses sharing one UI. Example rows are illustrative.
 layout: section
 ---
 
-# 6. DevOps & Infrastructure
+# 7. DevOps & Infrastructure
 
 Deployment, tooling, and observability
 
@@ -800,7 +877,7 @@ mocked AI engine let the team develop without the real engine running.
 layout: section
 ---
 
-# 7. Results
+# 8. Results
 
 What we delivered
 
