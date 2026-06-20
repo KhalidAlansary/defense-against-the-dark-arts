@@ -312,6 +312,62 @@ boundary to the AI engine.
 -->
 
 ---
+layout: default
+---
+
+# Cross-Service Communication
+
+<div class="text-sm opacity-80 mb-3">The <b>platform backend</b> (TypeScript) and the <b>AI backend</b> (Python) speak different languages — the stack is chosen for a <b>type-safe contract</b> across that boundary.</div>
+
+<div class="flex justify-center mb-3">
+
+```mermaid {scale: 0.45}
+flowchart LR
+  S["Schema · .proto"]
+  S -- "generate" --> TS["Platform backend<br/>typed client (TS)"]
+  S -- "generate" --> PY["AI backend<br/>typed client (Python)"]
+  style S fill:#f9996c,stroke:#c2410c,color:#0c0c0c
+```
+
+</div>
+
+<div class="grid grid-cols-3 gap-4 text-sm">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">Protocol Buffers</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">The contract</div>
+  <div class="text-xs opacity-80 mt-2">One language-neutral schema as the single source of truth — generated into typed clients for both backends, giving <b>compile-time safety</b> across the language boundary. Versioned and backward-compatible.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">ConnectRPC</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Synchronous calls</div>
+  <div class="text-xs opacity-80 mt-2">Server and client are generated from that same schema and run over ordinary <b>HTTP/1.1</b> — no hand-written REST glue or manual validation, and no drift between the two services.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">Message broker</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Asynchronous jobs</div>
+  <div class="text-xs opacity-80 mt-2">AI generation is long-running, so it's <b>decoupled</b> behind a queue: jobs survive restarts, retry on failure, and let AI workers <b>scale out</b> — the platform never blocks on a request.</div>
+</div>
+
+</div>
+
+<div v-click class="mt-4 text-sm opacity-70 text-center">
+Why not plain REST / JSON? With two different-language backends, a schema-first generated contract removes a whole class of integration bugs.
+</div>
+
+<!--
+This slide is about the technology decisions, not the request flow. Three
+choices: (1) Protocol Buffers as a language-neutral, schema-first contract
+generated for both backends — compile-time safety across TypeScript and Python.
+(2) ConnectRPC for synchronous calls, generated from that same schema, over
+plain HTTP/1.1. (3) a message broker for long-running AI jobs, so the platform
+stays responsive and AI workers scale independently. The thread: one schema, no
+drift, fewer integration bugs.
+-->
+
+---
 layout: section
 ---
 
@@ -1571,62 +1627,6 @@ show three separate analyses sharing one UI. Example rows are illustrative.
 -->
 
 ---
-layout: default
----
-
-# Cross-Service Communication
-
-<div class="text-sm opacity-80 mb-3">The <b>platform backend</b> (TypeScript) and the <b>AI backend</b> (Python) speak different languages — the stack is chosen for a <b>type-safe contract</b> across that boundary.</div>
-
-<div class="flex justify-center mb-3">
-
-```mermaid {scale: 0.45}
-flowchart LR
-  S["Schema · .proto"]
-  S -- "generate" --> TS["Platform backend<br/>typed client (TS)"]
-  S -- "generate" --> PY["AI backend<br/>typed client (Python)"]
-  style S fill:#f9996c,stroke:#c2410c,color:#0c0c0c
-```
-
-</div>
-
-<div class="grid grid-cols-3 gap-4 text-sm">
-
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
-  <div class="text-[#f9996c] font-semibold">Protocol Buffers</div>
-  <div class="text-[10px] uppercase tracking-wide opacity-50">The contract</div>
-  <div class="text-xs opacity-80 mt-2">One language-neutral schema as the single source of truth — generated into typed clients for both backends, giving <b>compile-time safety</b> across the language boundary. Versioned and backward-compatible.</div>
-</div>
-
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
-  <div class="text-[#f9996c] font-semibold">ConnectRPC</div>
-  <div class="text-[10px] uppercase tracking-wide opacity-50">Synchronous calls</div>
-  <div class="text-xs opacity-80 mt-2">Server and client are generated from that same schema and run over ordinary <b>HTTP/1.1</b> — no hand-written REST glue or manual validation, and no drift between the two services.</div>
-</div>
-
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
-  <div class="text-[#f9996c] font-semibold">Message broker</div>
-  <div class="text-[10px] uppercase tracking-wide opacity-50">Asynchronous jobs</div>
-  <div class="text-xs opacity-80 mt-2">AI generation is long-running, so it's <b>decoupled</b> behind a queue: jobs survive restarts, retry on failure, and let AI workers <b>scale out</b> — the platform never blocks on a request.</div>
-</div>
-
-</div>
-
-<div v-click class="mt-4 text-sm opacity-70 text-center">
-Why not plain REST / JSON? With two different-language backends, a schema-first generated contract removes a whole class of integration bugs.
-</div>
-
-<!--
-This slide is about the technology decisions, not the request flow. Three
-choices: (1) Protocol Buffers as a language-neutral, schema-first contract
-generated for both backends — compile-time safety across TypeScript and Python.
-(2) ConnectRPC for synchronous calls, generated from that same schema, over
-plain HTTP/1.1. (3) a message broker for long-running AI jobs, so the platform
-stays responsive and AI workers scale independently. The thread: one schema, no
-drift, fewer integration bugs.
--->
-
----
 layout: section
 ---
 
@@ -1887,6 +1887,26 @@ layout: section
 # Results
 
 What we delivered
+
+---
+
+# Conclusion & Summary of Achievements
+
+<v-clicks>
+
+- **Unified architecture** — service-based, clear separation of concerns over a shared PostgreSQL + MinIO data layer.
+- **End-to-end type safety** — TypeScript with oRPC contracts, Drizzle schemas, and Zod validation across the whole stack.
+- **Flexible deployment** — fully containerized and reproducible; runs on managed cloud services or fully self-hosted by swapping in self-hosted components.
+- **V-Cycle stages** — SWE.1, SWE.4, SWE.6 with live status, MinIO file management, and async RabbitMQ processing.
+- **Safety & security workspaces** — TARA, SECO, HARA, FMEA, FTA with AI-assisted generation and Excel export.
+- **Scalability foundation** — async message queuing enabling horizontal scaling of AI workloads.
+
+</v-clicks>
+
+<!--
+This recaps the conclusion's "Summary of Achievements." Each bullet maps to a
+section the audience just saw.
+-->
 
 ---
 layout: center
