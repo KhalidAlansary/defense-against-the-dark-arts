@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-16">
+  <div class="mt-0">
     <!-- Generate button -->
     <Transition name="slide-fade" mode="out-in">
       <div
@@ -30,6 +30,47 @@
 
       <!-- Table demo -->
       <div v-else key="table" class="w-full mt-12">
+        <div class="flex items-center justify-end gap-2 px-4 py-2">
+          <div class="relative inline-flex">
+            <button
+              class="inline-flex items-center gap-1.5 p-1.5 rounded-md hover:bg-white/[0.06] opacity-50 hover:opacity-100 transition-colors cursor-pointer text-xs"
+              @click.stop="settingsOpen = !settingsOpen"
+              aria-label="Filter attributes"
+            >
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="14" y2="12" />
+                <line x1="4" y1="18" x2="10" y2="18" />
+                <circle cx="8" cy="6" r="1.5" fill="currentColor" stroke="none" />
+                <circle cx="16" cy="12" r="1.5" fill="currentColor" stroke="none" />
+                <circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none" />
+              </svg>
+              Settings
+            </button>
+            <div
+              v-if="settingsOpen"
+              class="absolute z-50 right-0 top-full mt-2 w-auto min-w-[160px] rounded-md border border-white/10 bg-[#1a1a1a] p-2 shadow-lg"
+              @click.stop
+            >
+              <div class="flex flex-col gap-0.5">
+                <span class="text-[10px] font-medium opacity-50 uppercase tracking-wider px-2 py-1">Filter Attributes</span>
+                <label
+                  v-for="attr in configurableAttributes"
+                  :key="attr.id"
+                  class="flex items-center gap-2 px-2 py-1 rounded cursor-pointer hover:bg-white/[0.06] transition-colors text-xs"
+                >
+                  <input
+                    type="checkbox"
+                    :checked="toggleState[attr.id]"
+                    class="rounded border-white/20 accent-[#f9996c]"
+                    @change="toggleAttribute(attr.id)"
+                  />
+                  {{ attr.label }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="rounded-xl border border-white/10 bg-white/[0.03] overflow-hidden">
           <!-- System Requirement Row (collapsible, starts open) -->
           <div class="border-b border-white/10 last:border-b-0">
@@ -167,9 +208,20 @@
                           battery charge current limit to a value less than or equal to the
                           previously active limit within 10 ms.
                         </p>
-                      </div>
+                        <div class="flex flex-wrap gap-1.5 mt-1.5">
+                          <span
+                            v-for="attr in visibleAttrs"
+                            :key="attr.id"
+                            class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium border bg-white/[0.04] text-white/70 border-white/10"
+                          >
+                            <span class="opacity-50 mr-1">{{ attr.label }}:</span>
+                            {{ attr.value }}
+                          </span>
+                            </div>
+                          </div>
 
-                      <div class="flex shrink-0 items-center justify-end gap-1">
+                          <div class="flex shrink-0 items-center justify-end gap-1">
+
                         <div class="relative inline-flex">
                           <button
                             class="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-medium cursor-pointer transition-colors"
@@ -592,12 +644,36 @@ const generated = ref(false);
 const highlightedSysReq = ref(false);
 const sysReqOpen = ref(true);
 const refinesOpen = ref(false);
+const settingsOpen = ref(false);
 const statusOpen = ref(false);
 const actionsOpen = ref(false);
 const showModal = ref(false);
 const modalMode = ref<"view" | "edit" | "review">("view");
 const modalStatusOpen = ref(false);
 const modalActionsOpen = ref(false);
+
+interface ConfigAttr { id: string; label: string; value: string }
+const configurableAttributes: ConfigAttr[] = [
+  { id: "category", label: "Category", value: "Software" },
+  { id: "safety_level", label: "Safety level", value: "ASIL D" },
+  { id: "domain", label: "Domain", value: "Powertrain, Safety" },
+  { id: "verification_method", label: "Verification methods", value: "Test" },
+]
+
+const toggleState = ref<Record<string, boolean>>({
+  category: true,
+  safety_level: true,
+  domain: false,
+  verification_method: false,
+})
+
+const visibleAttrs = computed(() =>
+  configurableAttributes.filter((a) => toggleState.value[a.id])
+)
+
+function toggleAttribute(id: string) {
+  toggleState.value[id] = !toggleState.value[id]
+}
 
 const currentStatus = ref<"draft" | "in review" | "accepted" | "rejected">("draft");
 

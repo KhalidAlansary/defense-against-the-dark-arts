@@ -40,8 +40,6 @@ hideInToc: false
 
 # Web-based AI-powered SDLC Automation Platform
 
-A Platform for AI-Assisted Software Engineering across the V-Cycle
-
 <div class="pt-10 flex justify-center">
   <img :src="'/images/cairomotive-logo.svg'" alt="CairoMotive" class="h-20" />
 </div>
