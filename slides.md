@@ -679,14 +679,6 @@ erDiagram
   </div>
 </div>
 
-<!--
-<div>
-    <h4>Benefits</h4>
-    - No redundancy, no nullable column sprawl<br />
-    - New types onboard without touching the core schema
-</div>
--->
-
 ---
 layout: default
 ---
@@ -1257,48 +1249,139 @@ Beyond the V-Cycle
 
 ---
 
-# Cybersecurity & Functional Safety
+# Cybersecurity — TARA
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="opacity-60 text-sm">Threat Analysis &amp; Risk Assessment · ISO/SAE 21434</div>
 
-<div>
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-4 items-start">
+
+<div class="text-sm">
 
 <v-clicks>
 
-**ISO 21434 — Cybersecurity**
-
-- **TARA** — Threat Analysis & Risk Assessment
-- **SECO** — Security Concepts report generation
+- **Full ISO/SAE 21434 chain** — assets, threat scenarios, attack paths, damage and feasibility, through to the derived **cybersecurity goals**, each stage on its own tab
+- **Forward and backward trace links** relate each threat to its asset, attack path, risk and goal; selecting a link navigates to the referenced entry
+- **Editable throughout**, with the full report exportable to **Excel**
 
 </v-clicks>
 
 </div>
 
 <div>
-
-<v-clicks>
-
-**ISO 26262 — Functional Safety**
-
-- **HARA** — Hazard Analysis & Risk Assessment
-- **FMEA** — Failure Mode & Effects Analysis (AIAG/VDA)
-- **FTA** — Fault Tree Analysis with cut-set identification
-
-</v-clicks>
-
+  <TaraDemo />
+  <div class="mt-2 text-center text-xs opacity-55 leading-relaxed">
+  Switch between the three tabs, then follow a <span class="text-[#f9996c]">trace link</span> — the report navigates to the linked entry and highlights it.
+  </div>
 </div>
-
-</div>
-
-<div v-click class="mt-8 text-sm opacity-80">
-
-Each workspace provides **AI-assisted report generation**, structured data management, and professional **Excel export** with domain-specific formatting.
 
 </div>
 
 <!--
-These extend the platform beyond pure V-Cycle development into the
-safety/security analysis that automotive programs require alongside it.
+TARA workspace: the bullets are the talking points, the demo on the right is the
+proof. Click a trace link live to land the "everything stays connected" point.
+The analysis itself is produced by the AI engine — this is the UI.
+-->
+
+---
+
+# Cybersecurity — SECO
+
+<div class="opacity-60 text-sm">Security Concept · ISO/SAE 21434</div>
+
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-3 items-start">
+
+<div class="text-sm">
+
+<v-clicks>
+
+- **Document-style editor** — narrative sections (introduction, scope, system description) alongside the goals and measures tables, with a **contents** sidebar
+- Records cybersecurity **goals and security measures**, with **goal ↔ measure coverage** matrices relating the two
+- Exports to a formatted **Word .docx** generated from a standardized template (cover page, contents and tables)
+
+</v-clicks>
+
+</div>
+
+<div>
+  <SecoDemo />
+  <div class="mt-2 text-center text-xs opacity-55 leading-relaxed">
+  Scroll the document and the <span class="text-[#f9996c]">contents</span> track the current section; selecting a section navigates to it.
+  </div>
+</div>
+
+</div>
+
+<div v-click class="mt-3 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying over its cybersecurity goals and system-description document — or independently, from its own uploaded inputs.
+</div>
+
+<!--
+SECO workspace: bullets + the document demo side by side. Close with the link to
+TARA — a SECO can build on a finished TARA or run standalone.
+-->
+
+---
+
+# Functional Safety — ISO 26262
+
+<div class="text-sm opacity-80">
+Three <b>separate</b> workspaces — but a deliberately <b>shared UI and flow</b>:
+</div>
+
+<div v-click class="mt-2 mb-5 p-3 rounded bg-gray-400/10 text-sm">
+Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → AI <b>generate</b> (re-run anytime) → multi-view report → <b>export</b>
+</div>
+
+<div class="grid grid-cols-3 gap-4">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">HARA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Hazard Analysis &amp; Risk Assessment</div>
+  <div class="text-xs opacity-80 mt-2">A workspace to explore the hazard analysis — safety goals grouped by <b>ASIL</b> in a hierarchy view, or the full assessment as tables, with the ISO 26262 reference on hand.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">FTA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Fault Tree Analysis</div>
+  <div class="text-xs opacity-80 mt-2">Three linked views of the fault tree — the <b>tree</b> itself, a <b>cross-ASIL</b> coverage audit, and <b>minimal cut sets</b> — to follow how failures lead to a hazard.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">FMEA</div>
+  <div class="text-[10px] uppercase tracking-wide opacity-50">Failure Mode &amp; Effects Analysis</div>
+  <div class="text-xs opacity-80 mt-2">An interactive <b>worksheet</b> across three views — <b>Risk Overview</b>, <b>Failure Detail</b>, and <b>Action Summary</b> — with filtering and inline review of each failure mode.</div>
+</div>
+
+</div>
+
+<div v-click class="mt-5 text-sm opacity-70">
+Shared shell across all three — dropzone, progress polling, a segmented view-toggle, and a slide-out legend / reference sheet — so only the analysis inside differs.
+</div>
+
+<div class="absolute bottom-4 left-12 right-12 text-xs opacity-55">
+<span class="text-[#f9996c]">*</span> Scope review is an FTA &amp; FMEA step — HARA generates straight from the upload.
+</div>
+
+<!--
+Three separate workspaces that share components, so the UI and flow feel the same.
+Cards: HARA (ASIL via S×E×C, derives safety goals), FTA (cut sets + cross-ASIL),
+FMEA (RPN + Action Priority). Footnotes carry the two real differences: scope
+review is FTA/FMEA only, and HARA has no export.
+-->
+
+---
+
+# Functional Safety — Live View
+
+<div class="opacity-60 text-sm">HARA, FTA and FMEA — three workspaces framed by one shared shell</div>
+
+<div class="max-w-3xl mx-auto mt-4">
+  <FusaDemo />
+</div>
+
+<!--
+The demo is the argument: the workspace switcher plus the per-workspace view toggle
+show three separate analyses sharing one UI. Example rows are illustrative.
 -->
 
 ---

@@ -27,8 +27,6 @@ function clampScale(value) {
 }
 
 function onWheel(event) {
-  event.preventDefault();
-
   const previousScale = scale.value;
   const nextScale = clampScale(previousScale - event.deltaY * 0.0015);
   if (nextScale === previousScale) return;
@@ -108,7 +106,7 @@ onBeforeUnmount(() => {
 
     <div
       class="viewport relative h-full min-h-[260px] overflow-hidden"
-      @wheel="onWheel"
+      @wheel.prevent="onWheel"
       @pointerdown="onPointerDown"
       @pointermove="onPointerMove"
       @pointerup="stopDragging"
