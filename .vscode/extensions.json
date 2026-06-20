@@ -2,7 +2,8 @@
   "recommendations": [
     "antfu.slidev",
     "bradlc.vscode-tailwindcss",
+    "jkillian.custom-local-formatters",
     "oxc.oxc-vscode",
-    "jkillian.custom-local-formatters"
+    "vue.volar"
   ]
 }
