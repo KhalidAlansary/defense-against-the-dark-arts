@@ -1338,7 +1338,7 @@ now it's a contextual tab within each SWE workspace.
 transition: view-switch
 ---
 
-# SWE.6 — Communication Matrix
+# Communication Matrix
 
 <div class="flex justify-center mb-3">
   <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
@@ -1346,17 +1346,144 @@ transition: view-switch
   </div>
 </div>
 
+<div style="animation: slide-up 0.8s ease both;">
+
+**Validation Report**
+<div class="grid grid-cols-2 gap-6 mt-4">
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Upload communication architecture XML files</li>
+  <li>Automated quality checks dashboard</li>
+ <li>Summary of all network components checked</li>
+</ul>
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Pass/Fail status with detailed findings</li>
+  <li>Issues & errors flagged for correction</li>
+  <li>Warnings for inconsistencies</li>
+</ul>
+</div>
+</div>
+
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/fibex1.png'" alt="communication matrix" class="w-[60%]" />
+  <img :src="'/images/fibex2.png'" alt="communication matrix bar chart" class="w-[40%]" />
+</div>
 ---
 transition: view-switch
 ---
 
-# SWE.6 — Requirement Validation
+# Communication Matrix
+
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe6" active="communication-matrix" />
+  </div>
+</div>
+
+<div style="animation: slide-up 0.8s ease both;">
+
+**Mapping Chunks to Requirements**
+<div class="grid grid-cols-2 gap-6 mt-4">
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Extract components from the validated network architecture</li>
+  <li>Automatically match each component to the corresponding requirements</li>
+    <li>Ensures every network element is justified by a requirement</li>
+  <li>Spot coverage gaps in the requirements</li>
+</ul>
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/mapping.png'" alt="mapping" class="w-[100%]" />
+</div>
+</div>
+</div>
+
+
+---
+transition: view-switch
+---
+
+# Requirement Validation
 
 <div class="flex justify-center mb-3">
   <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
     <SWEPills swe="swe6" active="validation" />
   </div>
 </div>
+
+<div style="animation: slide-up 0.8s ease both;">
+
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div>
+
+**Review & Approve Requirements**
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>SWE.1: Validate system requirements from uploaded files</li>
+  <li>SWE.6: Validate software requirements (generated or uploaded)</li>
+</ul>
+</div>
+<div>
+
+**User Control**
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Approve or discard individual requirements</li>
+  <li>Apply changes in batch</li>
+ <li>Only approved requirements can be exported</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/validation.jpeg'" alt="validation" class="w-[60%]" />
+</div>
+
+---
+layout: section
+---
+
+# 4.7. Admin Panel
+
+User management and organization control
+
+---
+transition: view-switch
+---
+
+# User Management
+
+<div style="animation: slide-up 0.8s ease both;">
+
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div>
+
+**Manage Organization Users**
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>View all users with status (Active, Pending)</li>
+  <li>Search and filter users</li>
+  <li>Assign roles and permissions</li>
+  <li>Track last active date</li>
+</ul>
+</div>
+<div>
+
+**User Actions**
+<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Add new users directly</li>
+  <li>Edit user details and roles</li>
+ <li>Delete users from organization</li>
+ <li>Send invitations for new team members</li>
+<li>Bulk operations support</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/admin.png'" alt="admin" class="w-[80%]" />
+</div>
+
 
 ---
 layout: section
