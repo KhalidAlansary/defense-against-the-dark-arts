@@ -645,6 +645,7 @@ layout: section
 - SWE process enhancements
 <!--
 Salma CHECK THE TITLE and separate the bullet points to separate slide (if needed) 
+I think it will be better if merged with section 7
 -->
 
 ---
@@ -658,7 +659,9 @@ layout: section
 - Test coverage reporting 
 
 <!--
-Mariam CHECK THE TITLE and separate the bullet points to separate slide (if needed), my opinion for Test coverage reporting is to be merged with SWE 4 as it is not a standalone feature
+Mariam CHECK THE TITLE and separate the bullet points to separate slide (if needed), 
+I think it will be better if merged with section 7
+my opinion for Test coverage reporting is to be merged with SWE 4 as it is not a standalone feature
 -->
 
 ---
@@ -672,6 +675,7 @@ layout: section
 
 <!--
 Mariam CHECK THE TITLE and separate the bullet points to separate slide (if needed) 
+I think it will be better if merged with section 7
 -->
 
 ---
@@ -824,63 +828,6 @@ layout: default
 <!--
 The demo is the argument: the workspace switcher plus the per-workspace view toggle
 show three separate analyses sharing one UI. Example rows are illustrative.
--->
-
----
-layout: section
----
-
-# 6. DevOps & Infrastructure
-
-Deployment, tooling, and observability
-
----
-layout: default
----
-
-# DevOps & Developer Experience
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-<v-clicks>
-
-**ISO 21434 — Cybersecurity**
-
-- **TARA** — Threat Analysis & Risk Assessment
-- **SECO** — Security Concepts report generation
-
-</v-clicks>
-
-</div>
-
-<div>
-
-<v-clicks>
-
-**ISO 26262 — Functional Safety**
-
-- **HARA** — Hazard Analysis & Risk Assessment
-- **FMEA** — Failure Mode & Effects Analysis (AIAG/VDA)
-- **FTA** — Fault Tree Analysis with cut-set identification
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<div v-click class="mt-8 text-sm opacity-80">
-
-Each workspace provides **AI-assisted report generation**, structured data management, and professional **Excel export** with domain-specific formatting.
-
-</div>
-
-<!--
-Omar
-These extend the platform beyond pure V-Cycle development into the
-safety/security analysis that automotive programs require alongside it.
 -->
 
 
