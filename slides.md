@@ -86,7 +86,7 @@ Roadmap of the talk. Point to the major sections and roughly how long each takes
 
 ---
 
-# 1. Team Members
+# Team Members
 
 <div class="max-w-xl mx-auto mt-10">
 
@@ -115,7 +115,7 @@ supervising staff.
 layout: section
 ---
 
-# 2. Introduction
+# Introduction
 
 What we built, and why it matters
 
@@ -168,58 +168,10 @@ component can be swapped for a self-hosted equivalent when policy demands it.
 -->
 
 ---
-
-# Objectives & Scope
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-**Objectives**
-
-<v-clicks>
-
-- A **self-hosted** platform that orchestrates AI agents for SE tasks
-- A **service-based** architecture with a shared data layer for consistency
-- **End-to-end type-safe** APIs (with language-agnostic OpenAPI)
-- **Asynchronous** AI processing via a message broker
-- **Containerized**, reproducible deployment + CI
-
-</v-clicks>
-
-</div>
-
-<div>
-
-**Scope — three V-Cycle stages**
-
-<v-clicks>
-
-- **SWE.1** — Software Requirements Analysis
-- **SWE.4** — Software Unit Verification
-- **SWE.6** — Software Qualification Testing
-
-Plus security & safety workspaces:
-
-- **TARA · SECO** — ISO 21434 cybersecurity
-- **HARA · FMEA · FTA** — ISO 26262 functional safety
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<!--
-Objectives on the left, scope on the right. Stress that the AI engine itself is
-an external service that consumes queued tasks — the platform orchestrates it.
--->
-
----
 layout: section
 ---
 
-# 3. System Architecture
+# System Architecture
 
 How the platform is put together
 
@@ -273,30 +225,6 @@ flowchart TD
 Pragmatic middle ground: separation of concerns at the service/API layer, but a
 single shared data layer for consistency and type safety. The AI engine is
 decoupled behind RabbitMQ.
--->
-
----
-
-# Core Components
-
-<div class="max-w-3xl mx-auto mt-6">
-
-| Component               | Responsibility                                       |
-| ----------------------- | ---------------------------------------------------- |
-| **Web App** (Next.js)   | User interface and client-side workflows             |
-| **API Gateway** (Angie) | Unified entry point, JWT validation, rate limiting   |
-| **Auth Service**        | Authentication, users, organizations, RBAC           |
-| **Project Service**     | Projects, membership, AI request orchestration       |
-| **Resource Service**    | File upload/download, storage abstraction            |
-| **PostgreSQL**          | Shared relational database                           |
-| **MinIO**               | Shared S3-compatible object storage                  |
-| **RabbitMQ**            | Asynchronous AI task queue                           |
-
-</div>
-
-<!--
-Walk the table top to bottom. The gateway does cross-cutting concerns so the
-services stay focused. Resource service hides storage behind presigned URLs.
 -->
 
 ---
@@ -387,7 +315,7 @@ boundary to the AI engine.
 layout: section
 ---
 
-# 4. Service Communication
+# Service Communication
 
 ---
 layout: section
@@ -450,96 +378,6 @@ flowchart TD
 
 </div>
 </div>
-
----
-layout: section
----
-
-# 5. Storage & Version Management
-
-File Lifecycle Management using MinIO
-
----
-layout: default
----
-
-# Version Control
-
-MinIO versioning allows multiple versions of the same object to coexist.
-
-
-<div class="grid grid-cols-5 gap-6">
-
-<div class="col-span-3">
-
-### How it works
-
-- Initial upload creates the first version
-- Each update creates a new version
-- Previous versions are preserved
-- Every version receives a unique **Version ID**
-- The most recent version is marked as **Latest**
-
-<br/>
-
-### Versioning Namespace
-
-Versioning is scoped to a specific **user-project namespace**, ensuring that file versions are managed independently for each user within each project.
-</div>
-<div class="col-span-2">
-<img
-  :src="'/images/Multiple-versions.png'"
-  class="rounded shadow-lg"
-/>
-</div>
-</div>
-
----
-layout: two-cols
----
-
-# Object Retrieval
-
-### Latest Version
-
-- Returned by default
-- No version ID required
-
-<br/>
-
-### Specific Version
-
-- Client provides the version ID
-- MinIO returns the requested revision
-
-<br/>
-
-
-### Benefits
-
-- File history preservation
-- Recovery of previous revisions
-- Protection against accidental overwrites
-- Traceability of changes
-
-::right::
-
-<div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
-  <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
-</div>
-
-<!--
-This is what makes the platform responsive and scalable. The protobuf contract
-gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
-comes from per-SWE conditional polling.
--->
-
----
-layout: section
----
-
-# Database Redesign 
-A complete architectural redesign — from JSON-centric monolith to a scalable, multi-tenant, resource-centric platform.
 
 ---
 layout: default
@@ -871,6 +709,96 @@ graph TD
 layout: section
 ---
 
+# Storage & Version Management
+
+File Lifecycle Management using MinIO
+
+---
+layout: default
+---
+
+# Version Control
+
+MinIO versioning allows multiple versions of the same object to coexist.
+
+
+<div class="grid grid-cols-5 gap-6">
+
+<div class="col-span-3">
+
+### How it works
+
+- Initial upload creates the first version
+- Each update creates a new version
+- Previous versions are preserved
+- Every version receives a unique **Version ID**
+- The most recent version is marked as **Latest**
+
+<br/>
+
+### Versioning Namespace
+
+Versioning is scoped to a specific **user-project namespace**, ensuring that file versions are managed independently for each user within each project.
+</div>
+<div class="col-span-2">
+<img
+  :src="'/images/Multiple-versions.png'"
+  class="rounded shadow-lg"
+/>
+</div>
+</div>
+
+---
+layout: two-cols
+---
+
+# Object Retrieval
+
+### Latest Version
+
+- Returned by default
+- No version ID required
+
+<br/>
+
+### Specific Version
+
+- Client provides the version ID
+- MinIO returns the requested revision
+
+<br/>
+
+
+### Benefits
+
+- File history preservation
+- Recovery of previous revisions
+- Protection against accidental overwrites
+- Traceability of changes
+
+::right::
+
+<div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
+  <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
+</div>
+
+<!--
+This is what makes the platform responsive and scalable. The protobuf contract
+gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
+comes from per-SWE conditional polling.
+-->
+
+---
+layout: section
+---
+
+# Database Redesign 
+A complete architectural redesign — from JSON-centric monolith to a scalable, multi-tenant, resource-centric platform.
+
+---
+layout: section
+---
+
 # User Management Service
 
 ---
@@ -990,7 +918,7 @@ scoped to their own organization. Enforcement is at the API layer, not the UI.
 layout: section
 ---
 
-# 6. The V-Cycle Workspaces
+# The V-Cycle Workspaces
 
 SWE.1 · SWE.4 · SWE.6
 
@@ -1484,7 +1412,7 @@ transition: view-switch
 layout: section
 ---
 
-# 6. Safety & Security
+# Safety & Security
 
 Extending the platform's scope — ISO 21434 & ISO 26262
 
@@ -1956,55 +1884,9 @@ message end-to-end when enabled, writing an HTML flame report.
 layout: section
 ---
 
-# 9. Results
+# Results
 
 What we delivered
-
----
-
-# Summary of Achievements
-
-<v-clicks>
-
-- **Unified architecture** — service-based, clear separation of concerns over a shared PostgreSQL + MinIO data layer.
-- **End-to-end type safety** — TypeScript with oRPC contracts, Drizzle schemas, and Zod validation across the whole stack.
-- **Flexible deployment** — fully containerized and reproducible; runs on managed cloud services or fully self-hosted by swapping in self-hosted components.
-- **Three V-Cycle stages** — SWE.1, SWE.4, SWE.6 with live status, MinIO file management, and async RabbitMQ processing.
-- **Safety & security workspaces** — TARA, SECO, HARA, FMEA, FTA with AI-assisted generation and Excel export.
-- **Scalability foundation** — async message queuing enabling horizontal scaling of AI workloads.
-
-</v-clicks>
-
-<!--
-This recaps the conclusion's "Summary of Achievements." Each bullet maps to a
-section the audience just saw.
--->
-
----
-layout: center
-class: text-center
----
-
-# Conclusion & Future Work
-
-<div class="max-w-2xl mx-auto mt-6 text-left">
-
-<v-clicks>
-
-- **Delivered:** a platform bringing AI agents to the automotive V-Cycle, deployable from managed cloud to fully self-hosted for control over data and inference.
-- **Next:** expand testing infrastructure and CI/CD maturity.
-- **Next:** continuous deployment & release management.
-- **Next:** security & supply-chain hardening.
-- **Next:** further V-Cycle expansion (SWE.2, SWE.3, SWE.5) and deeper safety/security analysis.
-
-</v-clicks>
-
-</div>
-
-<!--
-Land the plane: rigor + automation + confidentiality, with a clear path to
-covering the rest of the V.
--->
 
 ---
 layout: center
