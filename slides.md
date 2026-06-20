@@ -674,6 +674,7 @@ transition: view-switch
 </div>
 </div>
 </Transition></div>
+
 ---
 transition: view-switch
 ---
@@ -707,7 +708,7 @@ transition: view-switch
 <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
   <li>Displays overall percentage of passed tests</li>
   <li>Shows line, branch, and function coverage percentages</li>
-  <li>Detailed test results with pass/fail status for each generated test</li>
+  <li>Contains detailed test results with pass/fail status for each generated test</li>
 </ul>
 
 </div>
@@ -824,51 +825,28 @@ now it's a contextual tab within each SWE workspace.
 -->
 
 ---
+transition: view-switch
+---
 
-# AI Validation & Quality
+# SWE.6 — Communication Matrix
 
-<div class="grid grid-cols-2 gap-8 mt-4">
-
-<div>
-
-<v-clicks>
-
-**Requirement Quality Checks**
-
-- AI validates clarity, atomicity, consistency
-- Flags redundancies, conflicts, ambiguities
-- Suggests edits and refinements
-
-</v-clicks>
-
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe6" active="communication-matrix" />
+  </div>
 </div>
 
-<div>
+---
+transition: view-switch
+---
 
-<v-clicks>
+# SWE.6 — Requirement Validation
 
-**Communication Matrix**
-
-- FIBEX-based validation
-- Chunk mapping for traceability
-- Quality report generation
-
-</v-clicks>
-
+<div class="flex justify-center mb-3">
+  <div @click="$slidev.nav.next()" class="cursor-pointer inline-block">
+    <SWEPills swe="swe6" active="validation" />
+  </div>
 </div>
-
-</div>
-
-<div v-click class="mt-6 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
-
-Validation is accessible from the **Validation tab** within each SWE workspace — keeping quality checks close to the artifacts being validated.
-
-</div>
-
-<!--
-AI validation is built into each SWE's Validation tab, providing immediate
-feedback on requirement quality and communication matrix consistency.
--->
 
 ---
 layout: section
