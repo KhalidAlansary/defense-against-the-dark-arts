@@ -1367,6 +1367,7 @@ transition: view-switch
   <img :src="'/images/fibex1.png'" alt="communication matrix" class="w-[60%]" />
   <img :src="'/images/fibex2.png'" alt="communication matrix bar chart" class="w-[40%]" />
 </div>
+
 ---
 transition: view-switch
 ---
@@ -1395,7 +1396,6 @@ transition: view-switch
 </div>
 </div>
 
-
 ---
 transition: view-switch
 ---
@@ -1409,8 +1409,6 @@ transition: view-switch
 </div>
 
 <div style="animation: slide-up 0.8s ease both;">
-
-
 <div class="grid grid-cols-2 gap-6 mt-4">
 <div>
 
@@ -1441,7 +1439,7 @@ transition: view-switch
 layout: section
 ---
 
-# 4.7. Admin Panel
+# Admin Panel
 
 User management and organization control
 
@@ -1452,8 +1450,6 @@ transition: view-switch
 # User Management
 
 <div style="animation: slide-up 0.8s ease both;">
-
-
 <div class="grid grid-cols-2 gap-6 mt-4">
 <div>
 
@@ -1483,7 +1479,6 @@ transition: view-switch
 <div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
   <img :src="'/images/admin.png'" alt="admin" class="w-[80%]" />
 </div>
-
 
 ---
 layout: section
