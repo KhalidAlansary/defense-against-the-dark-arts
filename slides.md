@@ -800,7 +800,7 @@ flowchart LR
 layout: default
 ---
 
-# Traceability, Versioning, and Knowledge Graph Support
+# Traceability and Knowledge Graph Support
 
 <div class="flex gap-8 mt-4">
 
@@ -810,7 +810,7 @@ layout: default
       <p>Dedicated relationship entities connect engineering artifacts.</p>
     </div>
     <div>
-      <h4 class="text-base font-semibold mb-1">Knowledge Graph Integration</h4>
+      <h4 class="text-base font-semibold mb-1">Can Support Knowledge Graph Integration</h4>
       <p>The same relationships used for traceability are also used by the Knowledge Graph Visualizer.</p>
       <p class="mt-2 font-semibold">Benefits:</p>
       <ul class="list-disc list-inside mt-1 space-y-1">
