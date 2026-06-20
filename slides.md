@@ -596,101 +596,103 @@ layout: default
   </div>
 
   <div class="flex-[4]">
-    ```mermaid {scale: 0.52}
-    erDiagram
-      ORGANIZATION ||--o{ RESOURCE : owns
-      PROJECT ||--o{ RESOURCE : contains
-      TEAM ||--o{ RESOURCE : accesses
-      RESOURCE {
-          uuid id PK
-          string name
-          enum type
-          uuid projectId FK
-          string organizationId FK
-          string teamId FK
-      }
-      STANDARD_RESOURCE {
-          uuid id PK
-          uuid resourceId FK
-          string objectName
-          string bucketName
-          int version
-          enum type
-      }
-      MINIO_FILE_STORAGE {
-          uuid id PK
-          uuid resourceId FK
-          int version
-          bool isActive
-          string objectName
-      }
-      USER_FILE {
-          uuid id PK
-          uuid minioFileId FK
-      }
-      CODE {
-          uuid id PK
-          uuid minioFileId FK
-          int version
-          int totalTests
-          int passedTests
-          int failedTests
-      }
-      SYSTEM_REQUIREMENT {
-          uuid id PK
-          uuid resourceId FK
-          uuid activeVersionId FK
-      }
-      SYSTEM_REQUIREMENT_VERSION {
-          uuid id PK
-          uuid requirementId FK
-          int version
-          uuid previousVersionId FK
-      }
-      SOFTWARE_REQUIREMENT {
-          uuid id PK
-          uuid resourceId FK
-          uuid activeVersionId FK
-      }
-      SOFTWARE_REQUIREMENT_VERSION {
-          uuid id PK
-          uuid requirementId FK
-          int version
-          uuid previousVersionId FK
-      }
-      TEST_SPEC {
-          uuid id PK
-          uuid resourceId FK
-          uuid activeVersionId FK
-      }
-      TEST_SPEC_VERSION {
-          uuid id PK
-          uuid testSpecId FK
-          int version
-          uuid previousVersionId FK
-      }
-      FIBEX_PARSING {
-          uuid id PK
-          uuid resourceId FK
-      }
-      FIBEX_CHUNK {
-          uuid id PK
-          uuid resourceId FK
-          string elementId
-      }
-      RESOURCE ||--o{ STANDARD_RESOURCE : metadata
-      RESOURCE ||--o{ MINIO_FILE_STORAGE : stores
-      MINIO_FILE_STORAGE ||--o{ USER_FILE : uploaded_as
-      MINIO_FILE_STORAGE ||--o{ CODE : analyzed_as
-      RESOURCE ||--|| SYSTEM_REQUIREMENT : represents
-      RESOURCE ||--|| SOFTWARE_REQUIREMENT : represents
-      RESOURCE ||--|| TEST_SPEC : represents
-      RESOURCE ||--|| FIBEX_PARSING : represents
-      RESOURCE ||--o{ FIBEX_CHUNK : contains
-      SYSTEM_REQUIREMENT ||--o{ SYSTEM_REQUIREMENT_VERSION : versions
-      SOFTWARE_REQUIREMENT ||--o{ SOFTWARE_REQUIREMENT_VERSION : versions
-      TEST_SPEC ||--o{ TEST_SPEC_VERSION : versions
-    ```
+
+```mermaid {scale: 0.52}
+erDiagram
+  ORGANIZATION ||--o{ RESOURCE : owns
+  PROJECT ||--o{ RESOURCE : contains
+  TEAM ||--o{ RESOURCE : accesses
+  RESOURCE {
+      uuid id PK
+      string name
+      enum type
+      uuid projectId FK
+      string organizationId FK
+      string teamId FK
+  }
+  STANDARD_RESOURCE {
+      uuid id PK
+      uuid resourceId FK
+      string objectName
+      string bucketName
+      int version
+      enum type
+  }
+  MINIO_FILE_STORAGE {
+      uuid id PK
+      uuid resourceId FK
+      int version
+      bool isActive
+      string objectName
+  }
+  USER_FILE {
+      uuid id PK
+      uuid minioFileId FK
+  }
+  CODE {
+      uuid id PK
+      uuid minioFileId FK
+      int version
+      int totalTests
+      int passedTests
+      int failedTests
+  }
+  SYSTEM_REQUIREMENT {
+      uuid id PK
+      uuid resourceId FK
+      uuid activeVersionId FK
+  }
+  SYSTEM_REQUIREMENT_VERSION {
+      uuid id PK
+      uuid requirementId FK
+      int version
+      uuid previousVersionId FK
+  }
+  SOFTWARE_REQUIREMENT {
+      uuid id PK
+      uuid resourceId FK
+      uuid activeVersionId FK
+  }
+  SOFTWARE_REQUIREMENT_VERSION {
+      uuid id PK
+      uuid requirementId FK
+      int version
+      uuid previousVersionId FK
+  }
+  TEST_SPEC {
+      uuid id PK
+      uuid resourceId FK
+      uuid activeVersionId FK
+  }
+  TEST_SPEC_VERSION {
+      uuid id PK
+      uuid testSpecId FK
+      int version
+      uuid previousVersionId FK
+  }
+  FIBEX_PARSING {
+      uuid id PK
+      uuid resourceId FK
+  }
+  FIBEX_CHUNK {
+      uuid id PK
+      uuid resourceId FK
+      string elementId
+  }
+  RESOURCE ||--o{ STANDARD_RESOURCE : metadata
+  RESOURCE ||--o{ MINIO_FILE_STORAGE : stores
+  MINIO_FILE_STORAGE ||--o{ USER_FILE : uploaded_as
+  MINIO_FILE_STORAGE ||--o{ CODE : analyzed_as
+  RESOURCE ||--|| SYSTEM_REQUIREMENT : represents
+  RESOURCE ||--|| SOFTWARE_REQUIREMENT : represents
+  RESOURCE ||--|| TEST_SPEC : represents
+  RESOURCE ||--|| FIBEX_PARSING : represents
+  RESOURCE ||--o{ FIBEX_CHUNK : contains
+  SYSTEM_REQUIREMENT ||--o{ SYSTEM_REQUIREMENT_VERSION : versions
+  SOFTWARE_REQUIREMENT ||--o{ SOFTWARE_REQUIREMENT_VERSION : versions
+  TEST_SPEC ||--o{ TEST_SPEC_VERSION : versions
+```
+
   </div>
 </div>
 
