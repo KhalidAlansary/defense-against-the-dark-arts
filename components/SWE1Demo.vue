@@ -31,13 +31,21 @@
       <!-- Table demo -->
       <div v-else key="table" class="w-full mt-12">
         <div class="flex items-center justify-end gap-2 px-4 py-2">
-          <div class="relative inline-flex">
+          <div ref="settingsContainerRef" class="relative inline-flex">
             <button
               class="inline-flex items-center gap-1.5 p-1.5 rounded-md hover:bg-white/[0.06] opacity-50 hover:opacity-100 transition-colors cursor-pointer text-xs"
               @click.stop="settingsOpen = !settingsOpen"
               aria-label="Filter attributes"
             >
-              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="w-4 h-4 shrink-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="4" y1="6" x2="20" y2="6" />
                 <line x1="4" y1="12" x2="14" y2="12" />
                 <line x1="4" y1="18" x2="10" y2="18" />
@@ -51,9 +59,13 @@
               v-if="settingsOpen"
               class="absolute z-50 right-0 top-full mt-2 w-auto min-w-[160px] rounded-md border border-white/10 bg-[#1a1a1a] p-2 shadow-lg"
               @click.stop
+              @keydown.esc="settingsOpen = false"
+              tabindex="-1"
             >
               <div class="flex flex-col gap-0.5">
-                <span class="text-[10px] font-medium opacity-50 uppercase tracking-wider px-2 py-1">Filter Attributes</span>
+                <span class="text-[10px] font-medium opacity-50 uppercase tracking-wider px-2 py-1"
+                  >Filter Attributes</span
+                >
                 <label
                   v-for="attr in configurableAttributes"
                   :key="attr.id"
@@ -217,11 +229,10 @@
                             <span class="opacity-50 mr-1">{{ attr.label }}:</span>
                             {{ attr.value }}
                           </span>
-                            </div>
-                          </div>
+                        </div>
+                      </div>
 
-                          <div class="flex shrink-0 items-center justify-end gap-1">
-
+                      <div class="flex shrink-0 items-center justify-end gap-1">
                         <div class="relative inline-flex">
                           <button
                             class="inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11px] font-medium cursor-pointer transition-colors"
@@ -636,7 +647,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 let glowTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -645,6 +656,7 @@ const highlightedSysReq = ref(false);
 const sysReqOpen = ref(true);
 const refinesOpen = ref(false);
 const settingsOpen = ref(false);
+const settingsContainerRef = ref<HTMLElement | null>(null);
 const statusOpen = ref(false);
 const actionsOpen = ref(false);
 const showModal = ref(false);
@@ -652,28 +664,43 @@ const modalMode = ref<"view" | "edit" | "review">("view");
 const modalStatusOpen = ref(false);
 const modalActionsOpen = ref(false);
 
-interface ConfigAttr { id: string; label: string; value: string }
+interface ConfigAttr {
+  id: string;
+  label: string;
+  value: string;
+}
 const configurableAttributes: ConfigAttr[] = [
   { id: "category", label: "Category", value: "Software" },
   { id: "safety_level", label: "Safety level", value: "ASIL D" },
   { id: "domain", label: "Domain", value: "Powertrain, Safety" },
   { id: "verification_method", label: "Verification methods", value: "Test" },
-]
+];
 
 const toggleState = ref<Record<string, boolean>>({
   category: true,
   safety_level: true,
   domain: false,
   verification_method: false,
-})
+});
 
-const visibleAttrs = computed(() =>
-  configurableAttributes.filter((a) => toggleState.value[a.id])
-)
+const visibleAttrs = computed(() => configurableAttributes.filter((a) => toggleState.value[a.id]));
 
 function toggleAttribute(id: string) {
-  toggleState.value[id] = !toggleState.value[id]
+  toggleState.value[id] = !toggleState.value[id];
 }
+
+function onClickOutside(event: MouseEvent) {
+  if (
+    settingsOpen.value &&
+    settingsContainerRef.value &&
+    !settingsContainerRef.value.contains(event.target as Node)
+  ) {
+    settingsOpen.value = false;
+  }
+}
+
+onMounted(() => document.addEventListener("click", onClickOutside));
+onUnmounted(() => document.removeEventListener("click", onClickOutside));
 
 const currentStatus = ref<"draft" | "in review" | "accepted" | "rejected">("draft");
 
