@@ -40,7 +40,7 @@ hideInToc: false
 
 # AI Agents for the Automotive V-Cycle
 
-A Platform for AI-Assisted Software Engineering across the V-Cycle
+Design and Implementation of a Web-Based Platform for AI Agents
 
 <div class="pt-10 flex justify-center">
   <img :src="'/images/cairomotive-logo.svg'" alt="CairoMotive" class="h-20" />
@@ -224,6 +224,7 @@ Objectives on the left, scope on the right. Stress that the AI engine itself is
 an external service that consumes queued tasks — the platform orchestrates it.
 -->
 
+
 ---
 layout: section
 ---
@@ -236,7 +237,7 @@ How the platform is put together
 layout: default
 ---
 
-# Architecture — Service-Based
+# Architecture — Service-Based 
 
 <div class="grid grid-cols-5 gap-6">
 
@@ -281,10 +282,22 @@ flowchart TD
 </div>
 
 <!--
+quick recap on the architecture to  the audience in the context
 Pragmatic middle ground: separation of concerns at the service/API layer, but a
 single shared data layer for consistency and type safety. The AI engine is
 decoupled behind RabbitMQ.
 -->
+
+---
+layout: section
+---
+
+# Database redesign
+
+<!--
+Farah
+-->
+
 
 ---
 layout: default
@@ -365,62 +378,97 @@ One type-safe contract from database → backend → frontend.
 </div>
 
 <!--
+Khalid (TO BE REVISED)
 The through-line: a single TypeScript type system, enforced at every boundary by
 oRPC, Drizzle, and Zod. Protocol Buffers carry the contract across the language
 boundary to the AI engine.
 -->
 
 ---
-layout: default
+layout: section
 ---
 
-# Asynchronous AI Processing
+# 4. Service Communication
 
-<div class="grid grid-cols-5 gap-6">
+---
+layout: section
+---
 
-<div class="col-span-3">
-
-AI generation is long-running, so the platform **decouples** it from the request/response cycle.
-
-```text
-1. User triggers generation (e.g. SWE.6 test specs)
-2. Project service publishes a typed message → RabbitMQ
-3. AI engine consumes the task, runs the agent
-4. Status + results reported back; UI polls and updates live
-```
-
-</div>
-
-<div class="col-span-2">
-
-<v-clicks>
-
-**Why it matters**
-
-- **RabbitMQ** broker for reliable delivery
-- **Protocol Buffers** enforce the message contract across languages
-- Message type ⇒ explicit dispatch & request safety
-- Enables **horizontal scaling** of AI workloads
-
-</v-clicks>
-
-</div>
-
-</div>
+# connectrpc & protobuf
 
 <!--
-This is what makes the platform responsive and scalable. The protobuf contract
-gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
-comes from per-SWE conditional polling.
+Khalid (RENAME THE TITLE if needed)
 -->
 
 ---
 layout: section
 ---
 
-# 4. The V-Cycle Workspaces
+# Overall request/response flow (SWEs BE)
+
+<!--
+Mohamed
+ Discuss abstracted interaction during the flow of the request 
+-->
+
+
+
+---
+layout: section
+---
+
+# 5. Platform Infrastructure & Reliability
+
+Deployment, tooling, and observability
+
+<!--
+Khalid
+-->
+
+---
+layout: default
+---
+
+<div>
+
+- API Gateway
+- JWT validation
+- Secrets Manager
+- Database migrations
+- Logging
+- Observability (Grafana - Langfuse)
+- Testing strategy
+
+</div>
+
+<!--
+Khalid
+-->
+
+---
+layout: section
+---
+
+# 6. Storage & Version Management
+
+---
+layout: section
+---
+
+<!--
+Mohamed
+-->
+
+
+---
+layout: section
+---
+
+# 7. The V-Cycle Workspaces (TO BE REVISED or merged with different frontend parts)
 
 SWE.1 · SWE.4 · SWE.6
+
+<!-- Mariam , Salma, Omar-->
 
 ---
 layout: two-cols
@@ -584,11 +632,53 @@ Tie back to the intro: this is the manual, error-prone work that the standards
 demand and that the platform automates.
 -->
 
+
+
+
 ---
 layout: section
 ---
 
-# 5. Safety & Security
+# 8. Workflow and SWE Process Improvements 
+
+- Workflow redesign
+- SWE process enhancements
+<!--
+Salma CHECK THE TITLE and separate the bullet points to separate slide (if needed) 
+-->
+
+---
+layout: section
+---
+
+- Admin capabilities
+
+- Validation 
+
+- Test coverage reporting 
+
+<!--
+Mariam CHECK THE TITLE and separate the bullet points to separate slide (if needed), my opinion for Test coverage reporting is to be merged with SWE 4 as it is not a standalone feature
+-->
+
+---
+layout: section
+---
+
+# Automotive Engineering Artifacts
+
+- FIBEX generation
+- Communication Matrix
+
+<!--
+Mariam CHECK THE TITLE and separate the bullet points to separate slide (if needed) 
+-->
+
+---
+layout: section
+---
+
+# 9. Safety & Security
 
 Beyond the V-Cycle
 
@@ -668,7 +758,6 @@ A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying 
 SECO workspace: bullets + the document demo side by side. Close with the link to
 TARA — a SECO can build on a finished TARA or run standalone.
 -->
-
 ---
 layout: default
 ---
@@ -757,12 +846,10 @@ layout: default
 
 <v-clicks>
 
-**Deployment**
+**ISO 21434 — Cybersecurity**
 
-- Fully containerized via **Docker Compose**
-- Automated init, **health checks**, startup orchestration
-- Secrets via Compose secrets + OpenBao/Varlock
-- Cloud components swappable for self-hosted equivalents
+- **TARA** — Threat Analysis & Risk Assessment
+- **SECO** — Security Concepts report generation
 
 </v-clicks>
 
@@ -772,12 +859,11 @@ layout: default
 
 <v-clicks>
 
-**Developer Experience**
+**ISO 26262 — Functional Safety**
 
-- **Turborepo** monorepo with caching
-- **Dev Containers** for reproducible environments
-- CI checks + container publishing pipelines
-- Mocked AI engine for local development
+- **HARA** — Hazard Analysis & Risk Assessment
+- **FMEA** — Failure Mode & Effects Analysis (AIAG/VDA)
+- **FTA** — Fault Tree Analysis with cut-set identification
 
 </v-clicks>
 
@@ -785,22 +871,24 @@ layout: default
 
 </div>
 
-<div v-click class="mt-6 text-sm opacity-70">
+<div v-click class="mt-8 text-sm opacity-80">
 
-Observability: structured logging, centralized aggregation, **Langfuse** AI-workflow tracing, and health endpoints.
+Each workspace provides **AI-assisted report generation**, structured data management, and professional **Excel export** with domain-specific formatting.
 
 </div>
 
 <!--
-Self-hosting and reproducibility are the operational backbone. Dev Containers +
-mocked AI engine let the team develop without the real engine running.
+Omar
+These extend the platform beyond pure V-Cycle development into the
+safety/security analysis that automotive programs require alongside it.
 -->
+
 
 ---
 layout: section
 ---
 
-# 7. Results
+# 10. Results
 
 What we delivered
 
