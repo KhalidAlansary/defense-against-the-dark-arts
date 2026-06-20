@@ -878,7 +878,7 @@ transition: view-switch
 layout: section
 ---
 
-# 6. Safety & Security
+# 7. Safety & Security
 
 Beyond the V-Cycle
 
