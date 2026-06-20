@@ -1630,7 +1630,7 @@ show three separate analyses sharing one UI. Example rows are illustrative.
 layout: section
 ---
 
-# 8. DevOps & Infrastructure
+# DevOps & Infrastructure
 
 Deployment, tooling, and observability
 
