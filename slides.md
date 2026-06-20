@@ -451,7 +451,7 @@ Versioning is scoped to a specific **user-project namespace**, ensuring that fil
 </div>
 <div class="col-span-2">
 <img
-  src="/public/images/Multiple-versions.png"
+  :src="'/images/Multiple-versions.png'"
   class="rounded shadow-lg"
 />
 </div>
@@ -488,7 +488,7 @@ layout: two-cols
 ::right::
 
 <div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
-  <img src="/public/images/retrieving-specific-version.png" class="rounded shadow-lg" />
+  <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
 </div>
 
 ---
