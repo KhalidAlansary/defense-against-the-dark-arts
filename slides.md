@@ -596,52 +596,77 @@ Beyond the V-Cycle
 layout: default
 ---
 
-# Cybersecurity — ISO/SAE 21434
+# Cybersecurity — TARA
 
-<div class="grid grid-cols-2 gap-6 mt-3 text-sm">
+<div class="opacity-60 text-sm">Threat Analysis &amp; Risk Assessment · ISO/SAE 21434</div>
 
-<div class="p-4 rounded-lg bg-gray-400/10">
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-4 items-start">
 
-<div class="text-[#f9996c] font-semibold text-base">TARA · Threat Analysis & Risk Assessment</div>
-<div class="opacity-60 text-xs mb-3">From threat scenarios to cybersecurity goals</div>
+<div class="text-sm">
 
 <v-clicks>
 
-- **Full ISO/SAE 21434 chain** — assets, threat scenarios, attack paths and damage, ending in derived **cybersecurity goals**
-- **Forward / backward trace links** connect every threat to its asset, risk, and goal
-- Editable throughout; exports to **Excel**
+- **Full ISO/SAE 21434 chain** — assets, threat scenarios, attack paths, damage and feasibility, through to the derived **cybersecurity goals**, each stage on its own tab
+- **Forward and backward trace links** relate each threat to its asset, attack path, risk and goal; selecting a link navigates to the referenced entry
+- **Editable throughout**, with the full report exportable to **Excel**
 
 </v-clicks>
 
 </div>
 
-<div class="p-4 rounded-lg bg-gray-400/10">
+<div>
+  <TaraDemo />
+  <div class="mt-2 text-center text-xs opacity-55 leading-relaxed">
+  Switch between the three tabs, then follow a <span class="text-[#f9996c]">trace link</span> — the report navigates to the linked entry and highlights it.
+  </div>
+</div>
 
-<div class="text-[#f9996c] font-semibold text-base">SECO · Security Concept</div>
-<div class="opacity-60 text-xs mb-3">The reviewed, sign-off-ready security deliverable</div>
+</div>
+
+<!--
+TARA workspace: the bullets are the talking points, the demo on the right is the
+proof. Click a trace link live to land the "everything stays connected" point.
+The analysis itself is produced by the AI engine — this is the UI.
+-->
+
+---
+layout: default
+---
+
+# Cybersecurity — SECO
+
+<div class="opacity-60 text-sm">Security Concept · ISO/SAE 21434</div>
+
+<div class="grid grid-cols-[0.82fr_1.18fr] gap-6 mt-3 items-start">
+
+<div class="text-sm">
 
 <v-clicks>
 
-- **Document-style editor** — narrative sections with a contents sidebar
-- Cybersecurity **goals & measures** with **goal ↔ measure coverage** matrices
-- Exports to a formatted **Word .docx** from a standardized, agreed-upon template
+- **Document-style editor** — narrative sections (introduction, scope, system description) alongside the goals and measures tables, with a **contents** sidebar
+- Records cybersecurity **goals and security measures**, with **goal ↔ measure coverage** matrices relating the two
+- Exports to a formatted **Word .docx** generated from a standardized template (cover page, contents and tables)
 
 </v-clicks>
 
 </div>
 
+<div>
+  <SecoDemo />
+  <div class="mt-2 text-center text-xs opacity-55 leading-relaxed">
+  Scroll the document and the <span class="text-[#f9996c]">contents</span> track the current section; selecting a section navigates to it.
+  </div>
 </div>
 
-<div v-click class="mt-5 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+</div>
+
+<div v-click class="mt-3 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
 A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying over its cybersecurity goals and system-description document — or independently, from its own uploaded inputs.
 </div>
 
 <!--
-Two distinct workspaces, each with its own report. TARA: the tabular threat
-analysis (STRIDE → risk → goals), exports Excel. SECO: the document-style
-deliverable — goals, measures, coverage matrices — exports a Word docx from the
-agreed template. Then the link: a SECO can build on a finished TARA (inherits its
-cybersecurity goals + reuses the system-description doc) or run standalone.
+SECO workspace: bullets + the document demo side by side. Close with the link to
+TARA — a SECO can build on a finished TARA or run standalone.
 -->
 
 ---
@@ -693,6 +718,23 @@ Three separate workspaces that share components, so the UI and flow feel the sam
 Cards: HARA (ASIL via S×E×C, derives safety goals), FTA (cut sets + cross-ASIL),
 FMEA (RPN + Action Priority). Footnotes carry the two real differences: scope
 review is FTA/FMEA only, and HARA has no export.
+-->
+
+---
+layout: default
+---
+
+# Functional Safety — Live View
+
+<div class="opacity-60 text-sm">HARA, FTA and FMEA — three workspaces framed by one shared shell</div>
+
+<div class="max-w-3xl mx-auto mt-4">
+  <FusaDemo />
+</div>
+
+<!--
+The demo is the argument: the workspace switcher plus the per-workspace view toggle
+show three separate analyses sharing one UI. Example rows are illustrative.
 -->
 
 ---
