@@ -358,52 +358,78 @@ boundary to the AI engine.
 -->
 
 ---
+layout: section
+---
 
-# Asynchronous AI Processing
-
-<div class="grid grid-cols-5 gap-6">
-
-<div class="col-span-3">
-
-AI generation is long-running, so the platform **decouples** it from the request/response cycle.
-
-```text
-1. User triggers generation (e.g. SWE.6 test specs)
-2. Project service publishes a typed message → RabbitMQ
-3. AI engine consumes the task, runs the agent
-4. Status + results reported back; UI polls and updates live
-```
-
-</div>
-
-<div class="col-span-2">
-
-<v-clicks>
-
-**Why it matters**
-
-- **RabbitMQ** broker for reliable delivery
-- **Protocol Buffers** enforce the message contract across languages
-- Message type ⇒ explicit dispatch & request safety
-- Enables **horizontal scaling** of AI workloads
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<!--
-This is what makes the platform responsive and scalable. The protobuf contract
-gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
-comes from per-SWE conditional polling.
--->
+# 4. Service Communication
 
 ---
 layout: section
 ---
 
-# 4. Storage & Version Management
+<div class="flex gap-8 items-start">
+
+<div id="ucl" class="w-1/2 text-left">
+
+### Request/Response flow
+
+- Upload files via the Resource Service.
+- Store files in MinIO and metadata in the database.
+- Trigger the AI pipeline through the Project Service using file IDs.
+- Dispatch processing requests to AI agents via RabbitMQ.
+- Receive generated results through ConnectRPC.
+- Persist the results in the database.
+
+</div>
+<div id="cp" class="w-1/2 text-left">
+
+```mermaid {scale:0.62}
+%%{init: {"flowchart": {"curve":"basis","nodeSpacing":50,"rankSpacing":50}}}%%
+flowchart TD
+
+    U[User]
+
+    PS[Project Service]
+    RS[Resource Service]
+    AI[AI Agents]
+    MQ[RabbitMQ]
+    subgraph STORAGE [Storage]
+      direction LR
+      M[(MinIO)]
+      DB[(PostgreSQL)]
+    end
+
+    U <-->|Uploading Files| RS
+    RS <--> M 
+    RS -->|Store Metadata| DB 
+    
+    U <-->|Ganeration Request with required resources IDs| PS
+    PS -. Events .-> MQ
+
+
+    PS --> DB
+
+    MQ -. Async Communication .-> AI
+    AI -. Connect RPC .-> PS
+
+
+    classDef storage fill:#e1f5fe,stroke:#000,color:#000
+    classDef service fill:#f3e5f5,stroke:#000,color:#000
+    classDef messaging fill:#fff3e0,stroke:#000,color:#000
+
+    class M,DB storage
+    class PS,RS service
+    class MQ messaging
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 5. Storage & Version Management
 
 File Lifecycle Management using MinIO
 
@@ -480,7 +506,7 @@ layout: two-cols
 layout: section
 ---
 
-# 5. The V-Cycle Workspaces
+# 6. The V-Cycle Workspaces
 
 SWE.1 · SWE.4 · SWE.6
 
@@ -1057,7 +1083,7 @@ drift, fewer integration bugs.
 layout: section
 ---
 
-# 7. DevOps & Infrastructure
+# 8. DevOps & Infrastructure
 
 Deployment, tooling, and observability
 
@@ -1311,7 +1337,7 @@ message end-to-end when enabled, writing an HTML flame report.
 layout: section
 ---
 
-# 8. Results
+# 9. Results
 
 What we delivered
 
