@@ -18,7 +18,13 @@ export default defineMermaidSetup(() => {
       tertiaryColor: "#799bb2",
 
       lineColor: "#fbae8c",
-      textColor: "#ffffff",
+      // All diagram text is near-black so labels stay readable on the
+      // light-coral node fills and light edge-label backgrounds.
+      textColor: "#0c0c0c",
+      nodeTextColor: "#0c0c0c",
+      secondaryTextColor: "#0c0c0c",
+      tertiaryTextColor: "#0c0c0c",
+      titleColor: "#0c0c0c",
 
       // xychart / bar colors
       mainBkg: "#f9996c",
