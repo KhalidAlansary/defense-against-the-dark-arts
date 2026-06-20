@@ -429,7 +429,7 @@ flowchart TD
     RS <--> M 
     RS -->|Store Metadata| DB 
     
-    U <-->|Ganeration Request with required resources IDs| PS
+    U <-->|Generation Request with required resources IDs| PS
     PS -. Events .-> MQ
 
 
@@ -866,6 +866,125 @@ graph TD
   </div>
 
 </div>
+
+---
+layout: section
+---
+
+# User Management Service
+
+---
+transition: fade-out
+---
+
+<div class="text-sm opacity-60 mb-4">Multi-tenant accounts replacing the single-account initial version</div>
+
+<div class="grid grid-cols-2 gap-6 mt-2">
+
+<div>
+
+**Platform-level roles**
+
+<v-clicks>
+
+- Every account holds a **platform-level role** — either **Site Admin** or **User**
+- A **Site Admin** has authority across the entire platform
+- A **User** belongs to one or more **Organizations**
+
+</v-clicks>
+
+<div v-click class="mt-4 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+An <b>Organization</b> represents a company — it is the primary multi-tenancy boundary in the system.
+</div>
+
+</div>
+
+<div>
+
+**Organization-level roles**
+
+<div v-click class="grid grid-cols-1 gap-2 mt-2 text-sm">
+
+<div class="p-3 rounded-lg bg-gray-400/10">
+  <span class="text-[#f9996c] font-semibold">Owner</span>
+  <div class="text-xs opacity-80 mt-1">Full control over the organization</div>
+</div>
+
+<div class="p-3 rounded-lg bg-gray-400/10">
+  <span class="text-[#f9996c] font-semibold">Org Admin</span>
+  <div class="text-xs opacity-80 mt-1">Manages members and their roles within the org</div>
+</div>
+
+<div class="p-3 rounded-lg bg-gray-400/10">
+  <span class="text-[#f9996c] font-semibold">Member</span>
+  <div class="text-xs opacity-80 mt-1">Standard participant with scoped access</div>
+</div>
+
+<div class="p-3 rounded-lg bg-gray-400/10">
+  <span class="text-[#f9996c] font-semibold">Custom Roles</span>
+  <div class="text-xs opacity-80 mt-1">Configurable per organization</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!--
+Two role scopes: platform-level (Site Admin / User) and organization-level
+(Owner / Org Admin / Member / Custom). Each user carries both. Organizations
+are the multi-tenancy boundary.
+-->
+
+---
+
+# Role-Based Access Control (RBAC)
+
+<div class="text-sm opacity-60 mb-4">Each user's role determines exactly what actions they are authorized to perform — no more, no less.</div>
+
+<div class="grid grid-cols-2 gap-8 mt-2">
+
+<div>
+
+**Site Admin** <span class="text-xs opacity-50 ml-1">platform-wide authority</span>
+
+<v-clicks>
+
+- Create new **organizations** on the platform
+- Add **members or admins** to any organization
+- Assign and modify **platform-level roles**
+- Full platform-level configuration
+
+</v-clicks>
+
+</div>
+
+<div>
+
+**Org Admin** <span class="text-xs opacity-50 ml-1">organization-scoped authority</span>
+
+<v-clicks>
+
+- Add new **members** to their organization
+- Assign and modify each member's **organization role**
+- View and manage the organization's **roster**
+- Cannot access or affect **other organizations**
+
+</v-clicks>
+
+</div>
+
+</div>
+
+<div v-click class="mt-6 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+Access is enforced at <b>API layer</b> — roles are checked on every request, not just in the UI.
+</div>
+
+<!--
+RBAC: two roles, two scopes. Site Admin acts globally; Org Admin is strictly
+scoped to their own organization. Enforcement is at the API layer, not the UI.
+-->
 
 ---
 layout: section
