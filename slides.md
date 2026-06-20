@@ -972,64 +972,40 @@ scoped to their own organization. Enforcement is at the API layer, not the UI.
 layout: section
 ---
 
-# The V-Cycle Workspaces
-
-SWE.1 · SWE.4 · SWE.6
-
----
-layout: section
----
-
 # Flow Redesign
 From rigid wizards to flexible workspaces
 
 ---
 
-# Application Flow — Old vs New
+# Application Flow
 
 <div class="grid grid-cols-2 gap-6 mt-4">
 
-<div>
+<div class="rounded-lg pt-3 pb-4 px-5 bg-gradient-to-br from-[#f9996c]/20 via-[#f9996c]/5 to-transparent border border-[#f9996c]/20 shadow-lg shadow-[#f9996c]/5">
 
-**Previous Flow (v1)**
+<strong class="block mt-0">Previous Flow</strong>
 
 - 5-step project creation wizard
-- Choose SWE stage (only SWE.6 available)
-- Upload software requirements as last step
-- Redirected directly to SWE.6 workspace
-- Single workspace for test spec generation
-- File management at project level (separate page)
-- Traceability matrix in its own standalone page
+- Only SWE.6 available
+- File management on its own page
 
 </div>
 
-<div>
+<div v-click class="rounded-lg pt-3 pb-4 px-5 bg-gradient-to-br from-[#f9996c]/20 via-[#f9996c]/5 to-transparent border border-[#f9996c]/20 shadow-lg shadow-[#f9996c]/5">
 
-**Current Flow (v2)**
+<strong class="block mt-0">Current Flow</strong>
 
-- 2-step project creation: details → team members
-- Redirected to **Project Overview** — central hub with V-Cycle navigation
-- Inline editing of project info (name, description)
-- Navigate to any SWE: **SWE.1 · SWE.4 · SWE.6**
-- **Tab-based** workspaces per SWE with per-SWE file management
-- Upload mandatory docs → Generate → Live status
-- Traceability matrix in a tab within each SWE
+- 2-step project creation
+- Navigate any SWE from the overview page
+- Per-SWE files and inline editing
 
 </div>
 
 </div>
 
-<div v-click class="mt-4 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
-
-**Key shift:** Project creation is lightweight (2 steps). Document management and AI generation are now **per-SWE**, with each workspace providing its own set of tabbed views tailored to the stage.
-
+<div v-click class="flex justify-center mt-8">
+  <img :src="'/images/overview-page.png'" alt="Project overview page" class="w-[65%]" />
 </div>
-
-<!--
-Walk through the evolution: the old flow was rigid (5 steps, single SWE), the new
-flow is flexible — lightweight project creation, a project overview hub, and
-independent SWE workspaces with their own file management and AI generation.
--->
 
 ---
 layout: section
