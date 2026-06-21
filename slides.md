@@ -948,12 +948,20 @@ scoped to their own organization. Enforcement is at the API layer, not the UI.
 layout: section
 ---
 
-# Flow Redesign
-From rigid wizards to flexible workspaces
+# Features
+
+<div class="abs-bl m-6 text-xs opacity-50">
+* UI components shown in the following slides are reproduced from the actual application.
+</div>
+
+<!--
+Section divider for the feature walkthrough. The asterisk note sets expectations
+once: the on-slide component mocks are reproductions of the real app UI.
+-->
 
 ---
 
-# Application Flow
+# Flow Redesign
 
 <div class="flex justify-center gap-8 mt-2">
   <div class="w-80 p-3 rounded-lg bg-gray-400/10 border-l-2 border-[#f9996c]/40">
