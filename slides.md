@@ -1497,13 +1497,9 @@ Validation, configuration and generation are each an AI request, run as a <b>cha
 
 <div class="text-sm">
 
-<v-clicks>
-
 - **Full ISO/SAE 21434 chain** — assets, threat scenarios, attack paths, damage and feasibility, through to the derived **cybersecurity goals**, each stage on its own tab
 - **Forward and backward trace links** relate each threat to its asset, attack path, risk and goal; selecting a link navigates to the referenced entry
 - **Editable throughout**, with the full report exportable to **Excel**
-
-</v-clicks>
 
 </div>
 
@@ -1533,13 +1529,9 @@ analysis is produced by the AI engine; this is the UI and the workflow around it
 
 <div class="text-sm">
 
-<v-clicks>
-
 - **Document-style editor** — narrative sections (introduction, scope, system description) alongside the goals and measures tables, with a **contents** sidebar
 - Records cybersecurity **goals and security measures**, with **goal ↔ measure coverage** matrices relating the two
 - Exports to a formatted **Word .docx** generated from a standardized template (cover page, contents and tables)
-
-</v-clicks>
 
 </div>
 
@@ -1552,7 +1544,7 @@ analysis is produced by the AI engine; this is the UI and the workflow around it
 
 </div>
 
-<div v-click class="mt-3 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+<div class="mt-3 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
 A <b>SECO</b> report can be generated from a completed <b>TARA</b> — carrying over its cybersecurity goals and system-description document — or independently, from its own uploaded inputs.
 </div>
 
@@ -1569,25 +1561,25 @@ TARA — a SECO can build on a finished TARA or run standalone.
 Three <b>separate</b> workspaces — but a deliberately <b>shared UI and flow</b>:
 </div>
 
-<div v-click class="mt-2 mb-5 p-3 rounded bg-gray-400/10 text-sm">
+<div class="mt-2 mb-5 p-3 rounded bg-gray-400/10 text-sm">
 Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → <b>generate</b> (re-run anytime) → multi-view report → <b>export</b>
 </div>
 
 <div class="grid grid-cols-3 gap-4">
 
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
+<div class="p-3 rounded-lg bg-gray-400/10">
   <div class="text-[#f9996c] font-semibold">HARA</div>
   <div class="text-[10px] uppercase tracking-wide opacity-50">Hazard Analysis &amp; Risk Assessment</div>
   <div class="text-xs opacity-80 mt-2">A workspace to explore the hazard analysis — safety goals grouped by <b>ASIL</b> in a hierarchy view, or the full assessment as tables, with the ISO 26262 reference on hand.</div>
 </div>
 
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
+<div class="p-3 rounded-lg bg-gray-400/10">
   <div class="text-[#f9996c] font-semibold">FTA</div>
   <div class="text-[10px] uppercase tracking-wide opacity-50">Fault Tree Analysis</div>
   <div class="text-xs opacity-80 mt-2">Three linked views of the fault tree — the <b>tree</b> itself, a <b>cross-ASIL</b> coverage audit, and <b>minimal cut sets</b> — to follow how failures lead to a hazard.</div>
 </div>
 
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
+<div class="p-3 rounded-lg bg-gray-400/10">
   <div class="text-[#f9996c] font-semibold">FMEA</div>
   <div class="text-[10px] uppercase tracking-wide opacity-50">Failure Mode &amp; Effects Analysis</div>
   <div class="text-xs opacity-80 mt-2">An interactive <b>worksheet</b> across three views — <b>Risk Overview</b>, <b>Failure Detail</b>, and <b>Action Summary</b> — with filtering and inline review of each failure mode.</div>
@@ -1595,7 +1587,7 @@ Upload → <b>scope review<span class="text-[#f9996c]">*</span></b> → <b>gener
 
 </div>
 
-<div v-click class="mt-5 text-sm opacity-70">
+<div class="mt-5 text-sm opacity-70">
 Shared shell across all three — dropzone, progress polling, a segmented view-toggle, and a slide-out legend / reference sheet — so only the analysis inside differs.
 </div>
 
