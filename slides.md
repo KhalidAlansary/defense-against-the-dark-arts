@@ -290,7 +290,7 @@ layout: default
 
 **Observability**
 
-- Structured logging
+- Grafana
 - Centralized aggregation
 - Langfuse AI tracing
 - Health checks
@@ -372,14 +372,14 @@ layout: section
 # Service Communication
 
 ---
-layout: section
+layout: default
 ---
 
-<div class="flex gap-8 items-start">
+# Request/Response flow
 
-<div id="ucl" class="w-1/2 text-left">
+<div class="flex gap-8 items-start mt-4">
 
-### Request/Response flow
+<div id="ucl" class="w-1/2 text-left pt-6">
 
 - Upload files via the Resource Service.
 - Store files in MinIO and metadata in the database.
@@ -434,10 +434,18 @@ flowchart TD
 </div>
 
 ---
+layout: section
+---
+
+# Database Redesign 
+
+A complete architectural redesign — from JSON-centric monolith to a scalable, multi-tenant, resource-centric platform.
+
+---
 layout: default
 ---
 
-# The Database Was Holding Us Back.
+# Previous Database Limitations
 
 <v-clicks>
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
@@ -760,14 +768,6 @@ graph TD
 </div>
 
 ---
-layout: section
----
-
-# Storage & Version Management
-
-File Lifecycle Management using MinIO
-
----
 layout: default
 ---
 
@@ -846,18 +846,13 @@ comes from per-SWE conditional polling.
 layout: section
 ---
 
-# Database Redesign 
-A complete architectural redesign — from JSON-centric monolith to a scalable, multi-tenant, resource-centric platform.
-
----
-layout: section
----
-
 # User Management Service
 
 ---
 transition: fade-out
 ---
+
+# User Management Service — Accounts & Roles
 
 <div class="text-sm opacity-60 mb-4">Multi-tenant accounts replacing the single-account initial version</div>
 
@@ -979,28 +974,27 @@ From rigid wizards to flexible workspaces
 
 # Application Flow
 
-<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="flex justify-center gap-8 mt-2">
+  <div class="w-80 p-3 rounded-lg bg-gray-400/10 border-l-2 border-[#f9996c]/40">
+    <div class="font-semibold text-sm">Previous Flow</div>
+    <ul class="list-disc list-inside mt-2 text-xs space-y-1">
+      <li>Document uploading in project creation</li>
+      <li>Only SWE.6 available</li>
+      <li>Navigates to SWE.6 upon project creation</li>
+      <li>File management and project details editing in one page</li>
+    </ul>
+  </div>
 
-<div class="rounded-lg pt-3 pb-4 px-5 bg-gradient-to-br from-[#f9996c]/20 via-[#f9996c]/5 to-transparent border border-[#f9996c]/20 shadow-lg shadow-[#f9996c]/5">
-
-<strong class="block mt-0">Previous Flow</strong>
-
-- 5-step project creation wizard
-- Only SWE.6 available
-- File management on its own page
-
-</div>
-
-<div v-click class="rounded-lg pt-3 pb-4 px-5 bg-gradient-to-br from-[#f9996c]/20 via-[#f9996c]/5 to-transparent border border-[#f9996c]/20 shadow-lg shadow-[#f9996c]/5">
-
-<strong class="block mt-0">Current Flow</strong>
-
-- 2-step project creation
-- Navigate any SWE from the overview page
-- Per-SWE files and inline editing
-
-</div>
-
+  <div v-click class="w-80 p-3 rounded-lg bg-gray-400/10 border-l-2 border-[#f9996c]/40">
+    <div class="font-semibold text-sm">Current Flow</div>
+    <ul class="list-disc list-inside mt-2 text-xs space-y-1">
+      <li>Per-SWE document uploading</li>
+      <li>Multiple SWEs available</li>
+      <li>Navigate to any SWE from the overview page</li>
+      <li>Inline Project details editing</li>
+      <li>Per-SWE file management</li>
+    </ul>
+  </div>
 </div>
 
 <div v-click class="flex justify-center mt-8">
@@ -1128,7 +1122,6 @@ transition: view-switch
   </div>
 </div>
 
-<div class="slide-enter"><Transition name="slide-fade" mode="out-in" appear>
 <div class="grid grid-cols-6 gap-4 mt-2">
 <div class="col-span-2 pt-8">
   <div class="text-white font-semibold text-base">Upload Code</div>
@@ -1137,11 +1130,18 @@ transition: view-switch
     <li>Uploaded files appear in a file tree and can be viewed in the built-in code viewer</li>
   </ul>
 </div>
-<div class="col-span-4 flex items-center justify-center mt-2">
-  <img :src="'/images/swe4-code-upload-modal.png'" alt="SWE.4 code upload modal" class="w-[85%]" />
+<div class="col-span-4 mt-2">
+  <div v-click="1" style="display:none" />
+  <Transition name="slide-fade" mode="out-in" appear>
+    <div v-if="$slidev.nav.clicks < 1" key="screenshot" class="flex items-center justify-center">
+      <img :src="'/images/swe4-code-upload-modal.png'" alt="SWE.4 code upload modal" class="w-[85%]" />
+    </div>
+    <div v-else key="viewer" class="flex items-center justify-center">
+      <SWE4Demo startStep="viewer" :hideTests="true" />
+    </div>
+  </Transition>
 </div>
 </div>
-</Transition></div>
 
 ---
 transition: view-switch

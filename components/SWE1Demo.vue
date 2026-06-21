@@ -677,8 +677,8 @@ const configurableAttributes: ConfigAttr[] = [
 ];
 
 const toggleState = ref<Record<string, boolean>>({
-  category: true,
-  safety_level: true,
+  category: false,
+  safety_level: false,
   domain: false,
   verification_method: false,
 });
