@@ -117,53 +117,35 @@ layout: section
 
 What we built, and why it matters
 
+
+---
+layout: default
 ---
 
-# The Context
+# Context & Problem
 
 <v-clicks>
 
-- **The V-Cycle** is the dominant paradigm in automotive software, formalized by **ASPICE** — every development phase (SWE.1–3) has a matching verification phase (SWE.4–6).
-- Standards like **ISO 26262** (functional safety) and **ISO 21434** (cybersecurity) mandate rigorous **traceability** between requirements, design, code, and tests.
-- **LLM-based AI agents** can now plan, generate, and validate engineering artifacts — but most platforms are **rigid SaaS** with no control over deployment.
+- Automotive software follows the **V-Cycle** and standards such as **ASPICE**, **ISO 26262**, and **ISO 21434**, which require strong **traceability** across requirements, code, and tests.
+
+- Generating and maintaining these artifacts manually remains **high-effort**, and manual processes often lead to inconsistent results and weak traceability.
+
+- **LLM-based AI agents** can automate engineering activities such as requirements analysis and test generation.
+
+- Introducing AI can create **data-governance concerns** for organizations working with proprietary code and confidential requirements.
 
 </v-clicks>
 
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
-> Organizations working with **proprietary code and confidential requirements** need **control over where artifacts and inference run** — and the option to keep them inside their own boundary.
+> **The need:** A platform that integrates AI agents into the software lifecycle, maintains end-to-end traceability, and supports flexible deployment from managed cloud services to fully self-hosted environments.
 
 </div>
 
 <!--
-Set the stage: V-Cycle + standards demand traceability; AI can help; but teams
-need control over deployment and data governance. That flexibility is what the
-platform provides.
+start with who is our main user (automotive software engineers), what is their problem (manual work, traceability, data governance), and what is the need (a platform that integrates AI agents into the software lifecycle, maintains end-to-end traceability, and supports flexible deployment from managed cloud services to fully self-hosted environments).
 -->
 
----
-
-# The Problem
-
-<v-clicks>
-
-- Generating test cases and requirements from documents is **high-effort** and must stay synchronized as requirements evolve.
-- Manual work leads to **inconsistent interpretation**, **incomplete coverage**, and **brittle traceability** between a test and its originating requirement.
-- Integrating AI into internal workflows raises **data-governance** concerns — teams need a say in **where** artifacts are stored and inference runs.
-
-</v-clicks>
-
-<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
-
-> **The need:** a platform that integrates AI agents into the software lifecycle, maintains traceability, and can be deployed flexibly — from managed cloud services to fully self-hosted.
-
-</div>
-
-<!--
-Three pain points. Land the framing: the value is rigor + automation + deployment
-flexibility. Cloud services (e.g. LLM inference) are used by default, but every
-component can be swapped for a self-hosted equivalent when policy demands it.
--->
 
 ---
 layout: section
