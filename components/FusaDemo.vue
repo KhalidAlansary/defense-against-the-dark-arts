@@ -211,9 +211,9 @@ const explanation = computed(() => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="spf">
             <td class="mono">MCS-01</td>
-            <td class="text-[#f9996c] font-bold">1 · SPF</td>
+            <td><span class="bdg" :class="pillClass('Critical')">1 · SPF</span></td>
             <td>Torque sensor stuck-high</td>
             <td class="opacity-50">—</td>
             <td><span class="bdg" :class="pillClass('Critical')">Critical</span></td>
@@ -411,6 +411,9 @@ const explanation = computed(() => {
   padding: 0.4rem 0.55rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   vertical-align: middle;
+}
+.tbl tr.spf td:first-child {
+  border-left: 2px solid #ef4444;
 }
 .slide-enter-active,
 .slide-leave-active {

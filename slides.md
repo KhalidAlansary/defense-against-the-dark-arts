@@ -1567,7 +1567,7 @@ review is FTA/FMEA only, and HARA has no export.
 
 ---
 
-# Functional Safety — Live View
+# Functional Safety
 
 <div class="opacity-60 text-sm">HARA, FTA and FMEA — three workspaces framed by one shared shell</div>
 
