@@ -66,17 +66,18 @@ transition: fade-out
 
 # Outline
 
-<div class="grid grid-cols-2 gap-x-10 gap-y-3 mt-10 max-w-3xl">
+<!-- <div class="grid grid-cols-2 gap-x-10 gap-y-3 mt-10 max-w-3xl"> -->
 
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">1</span><span class="text-lg">Team Members</span></div>
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">2</span><span class="text-lg">Introduction</span></div>
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">3</span><span class="text-lg">System Architecture</span></div>
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">4</span><span class="text-lg">The V-Cycle Workspaces</span></div>
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">5</span><span class="text-lg">Safety &amp; Security</span></div>
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">6</span><span class="text-lg">DevOps &amp; Infrastructure</span></div>
-<div class="flex gap-3 items-baseline"><span class="text-2xl font-bold text-[#f9996c]">7</span><span class="text-lg">Results</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">Team Members</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">Introduction</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">System Architecture</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">Storage & Version Management</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">The V-Cycle Workspaces</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">Safety &amp; Security</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">DevOps &amp; Infrastructure</span></div>
+<div class="flex gap-6 items-baseline"><span class="text-5xl font-bold text-[#f9996c]">.</span><span class="text-lg">Results</span></div>
 
-</div>
+<!-- </div> -->
 
 <!--
 Roadmap of the talk. Point to the major sections and roughly how long each takes.
@@ -418,7 +419,6 @@ layout: section
 ---
 
 # Database Redesign 
-
 A complete architectural redesign — from JSON-centric monolith to a scalable, multi-tenant, resource-centric platform.
 
 ---
@@ -760,6 +760,13 @@ MinIO versioning allows multiple versions of the same object to coexist.
 
 <div class="col-span-3">
 
+### Versioning Namespace
+
+Versioning is scoped to a specific **user-project namespace**, ensuring that file versions are managed independently for each user within each project.
+
+
+<br/>
+
 ### How it works
 
 - Initial upload creates the first version
@@ -768,11 +775,6 @@ MinIO versioning allows multiple versions of the same object to coexist.
 - Every version receives a unique **Version ID**
 - The most recent version is marked as **Latest**
 
-<br/>
-
-### Versioning Namespace
-
-Versioning is scoped to a specific **user-project namespace**, ensuring that file versions are managed independently for each user within each project.
 </div>
 <div class="col-span-2">
 <img
@@ -808,19 +810,12 @@ layout: two-cols
 - File history preservation
 - Recovery of previous revisions
 - Protection against accidental overwrites
-- Traceability of changes
 
 ::right::
 
 <div style="height:100%;display:flex;align-items:center;justify-content:flex-end">
   <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
 </div>
-
-<!--
-This is what makes the platform responsive and scalable. The protobuf contract
-gives type safety even across the TS ↔ AI-engine boundary. Real-time UI feedback
-comes from per-SWE conditional polling.
--->
 
 ---
 layout: section
