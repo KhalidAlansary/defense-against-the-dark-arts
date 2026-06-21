@@ -130,7 +130,7 @@ layout: default
 
 # Context & Problem
 
-<v-clicks>
+
 
 - Automotive software follows the **V-Cycle** and standards such as **ASPICE**, **ISO 26262**, and **ISO 21434**, which require strong **traceability** across requirements, code, and tests.
 
@@ -140,7 +140,6 @@ layout: default
 
 - Introducing AI can create **data-governance concerns** for organizations working with proprietary code and confidential requirements.
 
-</v-clicks>
 
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
@@ -471,29 +470,26 @@ layout: default
 
 # Previous Database Limitations
 
-<v-clicks>
+
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
 > **JSON-Based Resource Storage** <br /> - Every retrieval required preprocessing to identify the resource type and extract the required fields. <br /> - Increased application complexity and reduced efficiency.
 
 </div>
-</v-clicks>
 
-<v-clicks>
+
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
 > **Lack of Structured Storage:**  <br /> - Artifacts had no relationships, no validation, no traceability in the database.
 
 </div>
-</v-clicks>
 
-<v-clicks>
+
 <div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
 > **Monolithic Resource Schema:** <br /> - Supporting new artifact types required schema modifications. <br />- Large numbers of nullable columns accumulated over time. <br /> - Increased maintenance effort and risk of breaking existing functionality.
 
 </div>
-</v-clicks>
 
 ---
 layout: default
