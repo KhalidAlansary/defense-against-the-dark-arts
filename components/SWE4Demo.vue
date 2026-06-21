@@ -150,10 +150,13 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
-const props = withDefaults(defineProps<{ startStep?: "intro" | "generate" | "viewer"; hideTests?: boolean }>(), {
-  startStep: "intro",
-  hideTests: false,
-});
+const props = withDefaults(
+  defineProps<{ startStep?: "intro" | "generate" | "viewer"; hideTests?: boolean }>(),
+  {
+    startStep: "intro",
+    hideTests: false,
+  },
+);
 const step = ref(props.startStep);
 
 interface FileNode {
