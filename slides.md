@@ -823,9 +823,6 @@ layout: two-cols
   <img :src="'/images/retrieving-specific-version.png'" class="rounded shadow-lg" />
 </div>
 
-
-
-
 ---
 layout: section
 ---
