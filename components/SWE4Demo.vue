@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-2">
+  <div class="w-full">
     <Transition name="slide-fade" mode="out-in">
       <div
         v-if="step === 'intro'"
@@ -50,7 +50,7 @@
       <div
         v-else
         key="viewer"
-        class="flex gap-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] mt-8 mb-6"
+        class="flex gap-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] w-full"
         style="height: 340px"
       >
         <!-- File Tree -->
@@ -132,7 +132,7 @@
               </svg>
               {{ currentFile.path.split("/").pop() }}
             </div>
-            <div class="flex-1 overflow-auto p-0 swe4-scrollbar">
+            <div class="flex-1 min-w-0 overflow-auto p-0 swe4-scrollbar">
               <pre
                 class="text-[11px] leading-relaxed font-mono p-4 m-0 bg-transparent"
               ><code v-html="highlightedCode" /></pre>
@@ -150,9 +150,13 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 
-const props = withDefaults(defineProps<{ startStep?: "intro" | "generate" | "viewer" }>(), {
-  startStep: "intro",
-});
+const props = withDefaults(
+  defineProps<{ startStep?: "intro" | "generate" | "viewer"; hideTests?: boolean }>(),
+  {
+    startStep: "intro",
+    hideTests: false,
+  },
+);
 const step = ref(props.startStep);
 
 interface FileNode {
@@ -519,7 +523,18 @@ function flattenTree(nodes: FileNode[], depth: number, openSet: Set<string>): Fl
   return result;
 }
 
-const visibleItems = computed(() => flattenTree(fileTree, 0, openFolders.value));
+function filterOutTests(nodes: FileNode[]): FileNode[] {
+  return nodes
+    .filter((n) => !(props.hideTests && n.path === "tests"))
+    .map((n) => {
+      if (n.children) return { ...n, children: filterOutTests(n.children) };
+      return n;
+    });
+}
+
+const treeData = computed(() => (props.hideTests ? filterOutTests(fileTree) : fileTree));
+
+const visibleItems = computed(() => flattenTree(treeData.value, 0, openFolders.value));
 
 function isOpen(path: string): boolean {
   return openFolders.value.has(path);
@@ -589,7 +604,7 @@ function onNodeClick(node: FileNode) {
   }
 }
 
-openFolders.value = new Set(["src", "tests"]);
+openFolders.value = new Set(props.hideTests ? ["src"] : ["src", "tests"]);
 </script>
 
 <style>
