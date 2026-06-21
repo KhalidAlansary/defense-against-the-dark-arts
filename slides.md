@@ -760,14 +760,14 @@ MinIO versioning allows multiple versions of the same object to coexist.
 
 <div class="col-span-3">
 
-### Versioning Namespace
+## Versioning Namespace
 
 Versioning is scoped to a specific **user-project namespace**, ensuring that file versions are managed independently for each user within each project.
 
 
 <br/>
 
-### How it works
+## How it works
 
 - Initial upload creates the first version
 - Each update creates a new version
