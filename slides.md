@@ -302,7 +302,51 @@ layout: default
 
 # Cross-Service Communication
 
-<div class="text-sm opacity-80 mb-3">The <b>platform backend</b> (TypeScript) and the <b>AI backend</b> (Python) speak different languages — the stack is chosen for a <b>type-safe contract</b> across that boundary.</div>
+<div class="text-sm opacity-80 mb-3">The <b>platform backend</b> (TypeScript) and the <b>AI backend</b> (Python) speak different languages. The obvious choice — <b>REST + JSON</b> — quietly leaks bugs across that boundary.</div>
+
+<div class="text-[10px] uppercase tracking-wide opacity-50 mb-2">The problem with REST / JSON</div>
+
+<div class="grid grid-cols-2 gap-4 text-sm">
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">No shared contract</div>
+  <div class="text-xs opacity-80 mt-2">Request and response shapes are written <b>twice</b> — once in TypeScript, once in Python — by hand. The two definitions drift apart and nothing catches it.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">No compile-time safety</div>
+  <div class="text-xs opacity-80 mt-2">JSON is untyped on the wire. A renamed field or a <code>string</code> where a number was expected only blows up <b>at runtime</b>, in production.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">Hand-written glue</div>
+  <div class="text-xs opacity-80 mt-2">Every endpoint needs manual routing, (de)serialization, and validation on <b>both sides</b> — boilerplate that is easy to get subtly wrong.</div>
+</div>
+
+<div v-click class="p-3 rounded-lg bg-gray-400/10">
+  <div class="text-[#f9996c] font-semibold">Verbose & slow</div>
+  <div class="text-xs opacity-80 mt-2">Text-based payloads repeat every key, are larger on the wire, and parse slower — and versioning stays a manual, error-prone chore.</div>
+</div>
+
+</div>
+
+<!--
+Frame the next slide. Two backends in different languages. The default answer is
+REST + JSON, and it looks fine — until you notice the contract lives in two
+places. Walk the four problems: (1) no shared contract, types written by hand on
+both sides and they drift; (2) no compile-time safety, JSON is untyped so
+mistakes surface at runtime; (3) hand-written glue for routing / serialization /
+validation on both sides; (4) verbose text payloads, slower, and manual
+versioning. These are the bugs the next slide removes.
+-->
+
+---
+layout: default
+---
+
+# Protobuf + ConnectRPC
+
+<div class="text-sm opacity-80 mb-3">One <b>schema-first</b> contract solves all four: define it once in <code>.proto</code>, generate typed clients for both backends.</div>
 
 <div class="flex justify-center mb-3">
 
@@ -316,40 +360,34 @@ flowchart LR
 
 </div>
 
-<div class="grid grid-cols-3 gap-4 text-sm">
+<div class="grid grid-cols-2 gap-4 text-sm">
 
 <div v-click class="p-3 rounded-lg bg-gray-400/10">
   <div class="text-[#f9996c] font-semibold">Protocol Buffers</div>
   <div class="text-[10px] uppercase tracking-wide opacity-50">The contract</div>
-  <div class="text-xs opacity-80 mt-2">One language-neutral schema as the single source of truth — generated into typed clients for both backends, giving <b>compile-time safety</b> across the language boundary. Versioned and backward-compatible.</div>
+  <div class="text-xs opacity-80 mt-2">One language-neutral schema as the <b>single source of truth</b>. Generated into typed clients for both backends → no drift, compile-time safety across the boundary. Binary, compact, and <b>versioned with backward-compatibility</b> rules built in.</div>
 </div>
 
 <div v-click class="p-3 rounded-lg bg-gray-400/10">
   <div class="text-[#f9996c] font-semibold">ConnectRPC</div>
   <div class="text-[10px] uppercase tracking-wide opacity-50">Synchronous calls</div>
-  <div class="text-xs opacity-80 mt-2">Server and client are generated from that same schema and run over ordinary <b>HTTP/1.1</b> — no hand-written REST glue or manual validation, and no drift between the two services.</div>
-</div>
-
-<div v-click class="p-3 rounded-lg bg-gray-400/10">
-  <div class="text-[#f9996c] font-semibold">Message broker</div>
-  <div class="text-[10px] uppercase tracking-wide opacity-50">Asynchronous jobs</div>
-  <div class="text-xs opacity-80 mt-2">AI generation is long-running, so it's <b>decoupled</b> behind a queue: jobs survive restarts, retry on failure, and let AI workers <b>scale out</b> — the platform never blocks on a request.</div>
+  <div class="text-xs opacity-80 mt-2">Server and client stubs are generated from that same schema and run over ordinary <b>HTTP/1.1</b> — <b>no hand-written REST glue</b>, no manual (de)serialization or validation. The compiler enforces the contract end to end.</div>
 </div>
 
 </div>
 
 <div v-click class="mt-4 text-sm opacity-70 text-center">
-Why not plain REST / JSON? With two different-language backends, a schema-first generated contract removes a whole class of integration bugs.
+Schema → contract; ConnectRPC → calls. A whole class of integration bugs is removed before the code ever runs.
 </div>
 
 <!--
-This slide is about the technology decisions, not the request flow. Three
-choices: (1) Protocol Buffers as a language-neutral, schema-first contract
-generated for both backends — compile-time safety across TypeScript and Python.
-(2) ConnectRPC for synchronous calls, generated from that same schema, over
-plain HTTP/1.1. (3) a message broker for long-running AI jobs, so the platform
-stays responsive and AI workers scale independently. The thread: one schema, no
-drift, fewer integration bugs.
+This is the payoff slide — map each fix back to a problem. The schema is the
+single source of truth, so the "no shared contract" and "no compile-time safety"
+problems disappear: generate typed clients, drift becomes a compile error.
+Protobuf is binary and compact (vs verbose JSON) and has backward-compat rules,
+killing the versioning chore. ConnectRPC generates the server and client from
+the same schema over plain HTTP/1.1 — that removes the hand-written glue and
+manual validation. One schema in, two typed services out, no drift.
 -->
 
 ---
