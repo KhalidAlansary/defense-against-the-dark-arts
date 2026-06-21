@@ -792,6 +792,14 @@ graph TD
 </div>
 
 ---
+layout: section
+---
+
+# Storage & Version Management
+
+Objects Version control using MinIO
+
+---
 layout: default
 ---
 
