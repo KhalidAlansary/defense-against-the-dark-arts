@@ -131,7 +131,6 @@ layout: default
 # Context & Problem
 
 
-
 - Automotive software follows the **V-Cycle** and standards such as **ASPICE**, **ISO 26262**, and **ISO 21434**, which require strong **traceability** across requirements, code, and tests.
 
 - Generating and maintaining these artifacts manually remains **high-effort**, and manual processes often lead to inconsistent results and weak traceability.
@@ -141,7 +140,7 @@ layout: default
 - Introducing AI can create **data-governance concerns** for organizations working with proprietary code and confidential requirements.
 
 
-<div v-click class="mt-8 p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
+<div v-click class="p-4 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded">
 
 > **The need:** A platform that integrates AI agents into the software lifecycle, maintains end-to-end traceability, and supports flexible deployment from managed cloud services to fully self-hosted environments.
 
@@ -1390,9 +1389,9 @@ transition: view-switch
 </div>
 </div>
 
-<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/fibex1.png'" alt="communication matrix" class="w-[60%]" />
-  <img :src="'/images/fibex2.png'" alt="communication matrix bar chart" class="w-[40%]" />
+<div class="flex justify-start mt-6 gap-4" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/fibex1.png'" alt="communication matrix" class="w-[65%]" />
+  <img :src="'/images/fibex2.png'" alt="communication matrix bar chart" class="w-[28%]" />
 </div>
 
 ---
@@ -1407,18 +1406,20 @@ transition: view-switch
   </div>
 </div>
 
-<div style="animation: slide-up 0.8s ease both;">
+<div class="mt-8" style="animation: slide-up 0.8s ease both;">
 
-**Mapping Chunks to Requirements**
-<div class="grid grid-cols-2 gap-6 mt-4">
-<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
-  <li>Extract components from the validated network architecture</li>
-  <li>Automatically match each component to the corresponding requirements</li>
+<div class="grid grid-cols-6 gap-4 items-center mt-10">
+<div class="col-span-2">
+  <div class="font-semibold text-base">Mapping Chunks to Requirements</div>
+  <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+    <li>Extract components from the validated network architecture</li>
+    <li>Automatically match each component to the corresponding requirements</li>
     <li>Ensures every network element is justified by a requirement</li>
-  <li>Spot coverage gaps in the requirements</li>
-</ul>
-<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/mapping.png'" alt="mapping" class="w-[100%]" />
+    <li>Spot coverage gaps in the requirements</li>
+  </ul>
+</div>
+<div class="col-span-4 flex justify-center" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/mapping.png'" alt="mapping" class="w-full" />
 </div>
 </div>
 </div>
@@ -1445,7 +1446,7 @@ transition: view-switch
   <li>SWE.6: Validate software requirements (generated or uploaded)</li>
 </ul>
 </div>
-<div>
+<div class="ml-6">
 
 **User Control**
 <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
@@ -1459,7 +1460,7 @@ transition: view-switch
 </div>
 
 <div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/validation.jpeg'" alt="validation" class="w-[60%]" />
+  <img :src="'/images/validation.png'" alt="validation" class="w-[65%]" />
 </div>
 
 ---
