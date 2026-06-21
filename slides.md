@@ -220,7 +220,7 @@ layout: default
 
 <div class="grid grid-cols-3 gap-6 mt-6">
 
-<div v-click>
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 0, duration: 600, ease: 'easeOut' } }">
 
 **Language & Runtime**
 
@@ -230,18 +230,18 @@ layout: default
 
 </div>
 
-<div v-click>
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 150, duration: 600, ease: 'easeOut' } }">
 
 **API & Data**
 
 - oRPC + OpenAPI contracts
 - Drizzle ORM
 - Zod schema validation
-- Protobuf + ConnectRPC
+- <span class="accent">Protobuf + ConnectRPC</span>
 
 </div>
 
-<div v-click>
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 300, duration: 600, ease: 'easeOut' } }">
 
 **Frontend**
 
@@ -252,17 +252,16 @@ layout: default
 
 </div>
 
-<div v-click>
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 450, duration: 600, ease: 'easeOut' } }">
 
 **Auth & Gateway**
 
 - JWT-based auth
-- Angie gateway
-- RBAC + multi-tenancy
+- <span class="accent">Angie gateway</span>
 
 </div>
 
-<div v-click>
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 600, ease: 'easeOut' } }">
 
 **Infra & DevOps**
 
@@ -270,30 +269,31 @@ layout: default
 - Dev Containers
 - Turborepo monorepo
 - GitHub Actions CI
+- <span class="accent">OpenBao</span>
 
 </div>
 
-<div v-click>
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 750, duration: 600, ease: 'easeOut' } }">
 
 **Observability**
 
-- Grafana
-- Centralized aggregation
-- Langfuse AI tracing
-- Health checks
+- <span class="accent">Structured logging (pino/structlog)</span>
+- <span class="accent">Grafana Loki</span>
+- <span class="accent">Langfuse AI tracing</span>
+- <span class="accent">Profiling (pyinstrument)</span>
 
 </div>
 
 </div>
 
-<div v-click class="mt-6 text-sm opacity-70 text-center">
+<div v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { delay: 900, duration: 600, ease: 'easeOut' } }" class="mt-6 text-sm opacity-70 text-center">
 One type-safe contract from database → backend → frontend.
 </div>
 
 <!--
-The through-line: a single TypeScript type system, enforced at every boundary by
-oRPC, Drizzle, and Zod. Protocol Buffers carry the contract across the language
-boundary to the AI engine.
+full-stack typescript: e2e type-safety
+
+el technologies el highlighted zado in the second semester. hanetkalem 3anhom in detail in the next slides
 -->
 
 ---

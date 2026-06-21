@@ -66,6 +66,12 @@ html.dark .slidev-layout,
   text-decoration-color: rgba(249, 153, 108, 0.4);
 }
 
+/* Coral-edge accent for highlighting individual points */
+.slidev-layout .accent {
+  color: var(--coral-edge);
+  font-weight: 600;
+}
+
 /* Tables: warm borders + coral header, matching tara-report styling */
 .slidev-layout table {
   font-size: 0.95em;
