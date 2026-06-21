@@ -49,6 +49,12 @@ hideInToc: false
   <div>CairoMotive · {{ new Date().getFullYear() }}</div>
 </div>
 
+<style>
+h1 {
+  color: #fbae8c !important;
+}
+</style>
+
 <!--
 Presenter notes:
 - Welcome the audience.
