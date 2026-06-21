@@ -829,6 +829,8 @@ layout: section
 
 # User Management Service
 
+User management and organization control
+
 ---
 transition: fade-out
 ---
@@ -843,23 +845,22 @@ transition: fade-out
 
 **Platform-level roles**
 
-<v-clicks>
+<!-- <v-clicks> -->
 
 - Every account holds a **platform-level role** — either **Site Admin** or **User**
 - A **Site Admin** has authority across the entire platform
 - A **User** belongs to one or more **Organizations**
 
-</v-clicks>
-
-<div v-click class="mt-4 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
-An <b>Organization</b> represents a company — it is the primary multi-tenancy boundary in the system.
-</div>
+<!-- </v-clicks> -->
 
 </div>
 
 <div>
 
 **Organization-level roles**
+<div v-click class="mt-4 p-3 border-l-4 border-[#f9996c] bg-[#f9996c]/5 rounded text-sm">
+An <b>Organization</b> represents a company — it is the primary multi-tenancy boundary in the system.
+</div>
 
 <div v-click class="grid grid-cols-1 gap-2 mt-2 text-sm">
 
@@ -878,10 +879,10 @@ An <b>Organization</b> represents a company — it is the primary multi-tenancy 
   <div class="text-xs opacity-80 mt-1">Standard participant with scoped access</div>
 </div>
 
-<div class="p-3 rounded-lg bg-gray-400/10">
+<!-- <div class="p-3 rounded-lg bg-gray-400/10">
   <span class="text-[#f9996c] font-semibold">Custom Roles</span>
   <div class="text-xs opacity-80 mt-1">Configurable per organization</div>
-</div>
+</div> -->
 
 </div>
 
@@ -907,14 +908,14 @@ are the multi-tenancy boundary.
 
 **Site Admin** <span class="text-xs opacity-50 ml-1">platform-wide authority</span>
 
-<v-clicks>
+<!-- <v-clicks> -->
 
+- Full platform-level configuration
 - Create new **organizations** on the platform
 - Add **members or admins** to any organization
 - Assign and modify **platform-level roles**
-- Full platform-level configuration
 
-</v-clicks>
+<!-- </v-clicks> -->
 
 </div>
 
@@ -922,14 +923,14 @@ are the multi-tenancy boundary.
 
 **Org Admin** <span class="text-xs opacity-50 ml-1">organization-scoped authority</span>
 
-<v-clicks>
+<!-- <v-clicks> -->
 
 - Add new **members** to their organization
 - Assign and modify each member's **organization role**
 - View and manage the organization's **roster**
 - Cannot access or affect **other organizations**
 
-</v-clicks>
+<!-- </v-clicks> -->
 
 </div>
 
@@ -943,6 +944,43 @@ Access is enforced at <b>API layer</b> — roles are checked on every request, n
 RBAC: two roles, two scopes. Site Admin acts globally; Org Admin is strictly
 scoped to their own organization. Enforcement is at the API layer, not the UI.
 -->
+
+---
+transition: view-switch
+---
+
+# Admin Panel
+
+<div style="animation: slide-up 0.8s ease both;">
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div>
+
+- **Manage Organization Users**
+<!-- <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>View all users with status (Active, Pending)</li>
+  <li>Search and filter users</li>
+  <li>Assign roles and permissions</li>
+  <li>Track last active date</li>
+</ul> -->
+</div>
+<div>
+
+- **User Actions**
+<!-- <ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
+  <li>Add new users directly</li>
+  <li>Edit user details and roles</li>
+ <li>Delete users from organization</li>
+ <li>Send invitations for new team members</li>
+<li>Bulk operations support</li>
+</ul> -->
+
+</div>
+</div>
+</div>
+
+<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
+  <img :src="'/images/admin.png'" alt="admin" class="w-[80%]" />
+</div>
 
 ---
 layout: section
@@ -1380,51 +1418,6 @@ transition: view-switch
 
 <div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
   <img :src="'/images/validation.jpeg'" alt="validation" class="w-[60%]" />
-</div>
-
----
-layout: section
----
-
-# Admin Panel
-
-User management and organization control
-
----
-transition: view-switch
----
-
-# User Management
-
-<div style="animation: slide-up 0.8s ease both;">
-<div class="grid grid-cols-2 gap-6 mt-4">
-<div>
-
-**Manage Organization Users**
-<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
-  <li>View all users with status (Active, Pending)</li>
-  <li>Search and filter users</li>
-  <li>Assign roles and permissions</li>
-  <li>Track last active date</li>
-</ul>
-</div>
-<div>
-
-**User Actions**
-<ul class="list-disc list-inside opacity-80 space-y-1 mt-2 text-sm">
-  <li>Add new users directly</li>
-  <li>Edit user details and roles</li>
- <li>Delete users from organization</li>
- <li>Send invitations for new team members</li>
-<li>Bulk operations support</li>
-</ul>
-
-</div>
-</div>
-</div>
-
-<div class="flex justify-center mt-6" style="animation: slide-up 0.8s ease both; animation-delay: 0.6s">
-  <img :src="'/images/admin.png'" alt="admin" class="w-[80%]" />
 </div>
 
 ---
