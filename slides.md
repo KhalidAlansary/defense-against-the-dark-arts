@@ -117,7 +117,6 @@ layout: section
 
 What we built, and why it matters
 
-
 ---
 layout: default
 ---
@@ -145,7 +144,6 @@ layout: default
 <!--
 start with who is our main user (automotive software engineers), what is their problem (manual work, traceability, data governance), and what is the need (a platform that integrates AI agents into the software lifecycle, maintains end-to-end traceability, and supports flexible deployment from managed cloud services to fully self-hosted environments).
 -->
-
 
 ---
 layout: section
