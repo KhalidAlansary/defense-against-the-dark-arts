@@ -2,14 +2,14 @@
 # Deck-wide configuration. See https://sli.dev/custom/#headmatter
 theme: seriph
 title: "Web-based AI-powered SDLC Automation Platform"
-titleTemplate: "%s — CairoMotive"
+titleTemplate: "%s — Group 12"
 info: |
   ## A Platform for AI-Assisted Software Engineering
   Orchestrating autonomous AI agents across the V-Cycle (SWE.1 / SWE.4 / SWE.6)
   with cybersecurity (TARA, SECO) and functional safety (HARA, FMEA, FTA) analysis.
 
   Built with [Slidev](https://sli.dev).
-author: CairoMotive
+author: Group 12
 keywords: v-cycle,aspice,iso26262,iso21434,ai-agents,cairo-motive
 # Apply unocss classes to the current slide
 class: text-center
@@ -41,12 +41,12 @@ hideInToc: false
 # Web-based AI-powered SDLC Automation Platform
 
 <div class="pt-10 flex justify-center">
-  <img :src="'/images/cairomotive-logo.svg'" alt="CairoMotive" class="h-20" />
+  <img :src="'/images/asueng.jpeg'" alt="CairoMotive" class="h-20" />
 </div>
 
 <div class="abs-bl m-6 text-sm opacity-70 text-left">
   <div>Supervised by Prof. Dr. Hazem Abbas &amp; Eng. Mahmoud Soliman</div>
-  <div>CairoMotive · {{ new Date().getFullYear() }}</div>
+  <div>Group 12 · {{ new Date().getFullYear() }}</div>
 </div>
 
 <style>
