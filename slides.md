@@ -886,13 +886,16 @@ transition: fade-out
 
 **Platform-level roles**
 
-<!-- <v-clicks> -->
+<v-clicks>
+<div>
 
-- Every account holds a **platform-level role** — either **Site Admin** or **User**
-- A **Site Admin** has authority across the entire platform
-- A **User** belongs to one or more **Organizations**
+- Every account holds a <b>platform-level role</b> — either <b>Site Admin</b> or <b>User</b>
 
-<!-- </v-clicks> -->
+- A <b>Site Admin</b> has authority across the entire platform
+
+- A <b>User</b> belongs to one or more <b>Organizations</b>
+</div>
+</v-clicks>
 
 </div>
 
